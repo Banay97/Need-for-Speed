@@ -22,3 +22,7 @@ Driver Management: Admins can monitor driver availability, assign vehicles, and 
 
 User Notifications: Customers receive real-time notifications about their order status, including confirmations, dispatch updates, and delivery completion. Notifications are sent via email, SMS, or in-app messages, depending on user preferences.<br>
 Admin Notifications: Admins are notified of critical events such as new orders, driver issues, and customer feedback. Notifications help ensure timely responses to important tasks and customer inquiries. <br>
+
+## Front End and Back End:
+#### For the front-end side, we used HTML, CSS, Javascript, and Bootstrap.
+#### For the back-end side, we used Python-Django framework, API, and AJAX.
