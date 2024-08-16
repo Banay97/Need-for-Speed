@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Need For Speed Website">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/home.css'%}" type="text/css"> {% endcomment %}
+    <title>Contact Us Page</title>
+    {% comment %} <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #FAFAFA, #F5F5DC);
+
+        }
+        nav {
+            width: 100%;
+            background: linear-gradient(to right, #3cb371e0, #2E8B57);
+            height: 75px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .nav-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .nav-left h1 {
+            font-size: 32px;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-transform: uppercase;
+        }
+        .nav-left h1 a{
+            color: #fff;
+            text-decoration: none;
+        }
+        .nav-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+        .nav-center ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            
+        }
+        .nav-center ul li {
+            position: relative;
+        }
+        .nav-center ul li a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #fff;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+            display: block;
+        }
+        .nav-center ul li a:hover {
+            background-color: #66CDAA; 
+        }
+        .nav-center ul li ul {
+            position: absolute;
+            display: none;
+            background: linear-gradient(to right, #3cb371e0, #2E8B57);
+            border-radius: 0 0 5px 5px;
+        }
+        .nav-center ul li ul li {
+            line-height: 1;
+            width: 190px;
+            border-radius: 5px;
+            padding: 6px;
+        }
+        .nav-center ul li ul li a {
+            padding: 10px 16px;
+        }
+        .nav-center ul li ul li a:hover {
+            background-color: #66CDAA;
+        }
+        .nav-center ul li:hover ul {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .nav-right a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #fff;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        .nav-right a:hover {
+            background-color: #66CDAA;
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <h1><a href="#" >Need For Speed Express</a></h1>
+        </div>
+        <div class="nav-center">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a>
+                    <ul>
+                        <li><a href="#">Online Ordering System</a></li>
+                        <li><a href="#">Real-Time Tracking</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="#">Sign Up</a>
+            <a href="#">Sign In</a>
+        </div>
+    </nav>
+    <section>
+        <main>
+            <form method="post" action="">
+                <fieldset>
+                    <legend>Contact Us Form</legend>
+                    <div>
+                        <label for="first_name">First Name:</label>
+                        <input type="text" required>
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" required>
+                        <label for="email">Email:</label>
+                        <input type="email" required>
+                        <select>
+                            <option>Service Type ..</option>
+                            <option>How to create account?</option>
+                            <option>How to create an order?</option>
+                            <option>How to update an order?</option>
+                        </select>
+                        <label for="comment">Comment:</label>
+                        <textarea placeholder="Comment here ..."></textarea>
+
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+    </section>
+
+    <footer class="bg-dark text-white text-center text-lg-start">
+        <h3 class=" p-3 bg-secondary">Need For Speed</h3>
+        <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Need Assistance?</h4>
+            <p>Our friendly support team is here to help.</p>
+                <ul class="list-unstyled mb-0">
+                <li>
+                    <a href="#!" class="text-white">Call Us: 1-800-123-4567</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-white">Email Us: support@needforspeed.com</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-white">Address: Palestine, Ramallah</a>
+                </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Company</h5>
+            <ul class="list-unstyled mb-0">
+                <li>
+                <a href="#!" class="text-white">About Us</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Privacy Policy</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Terms of Service</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Cookie Policy</a>
+                </li>
+            </ul>
+            </div>
+    
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Social Media</h5>
+            <ul class="list-unstyled mb-0">
+                <li>
+                <a href="https://facebook.com" class="text-white"><i class="fab fa-facebook-f"></i> Facebook</a>
+                </li>
+                <li>
+                <a href="https://twitter.com" class="text-white"><i class="fab fa-twitter"></i> Twitter</a>
+                </li>
+                <li>
+                <a href="https://instagram.com" class="text-white"><i class="fab fa-instagram"></i> Instagram</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    
+        <div class="text-center p-3 bg-secondary">
+        <small> Copyright © Need For Speed - Where Speed Meets Excellence. All rights reserved.</small>
+        </div>
+    </footer>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+    {% comment %} <script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
+</body>
+</html>
