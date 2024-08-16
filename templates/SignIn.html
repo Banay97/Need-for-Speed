@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>  
+<html>  
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/SignInPage.css' %}">  -->
+    <title>Sign In Page</title> 
+    
+</head>  
+<body>  
+    <!-- <img src="https://img.freepik.com/premium-photo/fast-food-delivery-man-green-scooter-delivery-concept-online-order-food-delivery-last-mile-banner-template-3d-illustration-3d-render_99433-7138.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"> -->
+    <div>
+        <main>
+            <h1>Sign In</h1>
+            <form method="post" action="">
+                {% csrf_token %}
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+
+                <button type="submit" class="bg-dark text-white" >Sign in</button><br>
+                <p><a>Forget Password?</a></p>
+            </form>
+            <hr>
+                <p >I don't have an account yet! <a href="">Sign up</a></p>
+            </div>
+        </main>
+    </div>
+    <!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if 'sign_in' in message.tags %}
+                <li style="color:red; font-size: 15px;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %} -->
+</body>  
+</html> 

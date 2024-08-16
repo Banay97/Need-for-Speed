@@ -1,0 +1,63 @@
+{%load static%}
+<!DOCTYPE html>  
+<html>  
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/SignUpPage.css' %}">  -->
+    <title>Sign Up Page</title>  
+    
+</head>  
+<body>  
+    <div>
+        <main>
+            <h1>Sign Up</h1>
+            <form name="sign_up" method="post" action ="">
+                {%csrf_token%}
+                <label for="role">User Type:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select User Type..</option>
+                    <option value="writer">Admin</option>
+                    <option value="reader">Company User</option>
+                </select><br>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="f-name" name="first_name" required><br>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="l-name" name="last_name" required><br>
+                <label for="phone-number">Phone Number:</label>
+                <input type="number" id="phone-number" name="phone_number" required><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm_password" required><br>
+                <button type="submit" class="bg-dark text-white">Sign Up</button>
+            </form>
+            <hr>
+            <div class="form-link">
+                <p>Already have an account? <a href="">Sign in</a></p>
+            </div>
+        </main>
+    </div>
+    <!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if 'sign_up' in message.tags %}
+                <li style="color:red; font-size: 15px;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %} -->
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+</body>  
+</html> 
