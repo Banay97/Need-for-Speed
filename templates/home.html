@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Need For Speed Website">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/home.css'%}" type="text/css"> {% endcomment %}
+    <title>Need For Speed Home Page</title>
+    {% comment %} <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #FAFAFA, #F5F5DC);
+
+        }
+        nav {
+            width: 100%;
+            background: linear-gradient(to right, #3cb371e0, #2E8B57);
+            height: 75px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .nav-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .nav-left h1 {
+            font-size: 32px;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-transform: uppercase;
+        }
+        .nav-left h1 a{
+            color: #fff;
+            text-decoration: none;
+        }
+        .nav-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+        .nav-center ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            
+        }
+        .nav-center ul li {
+            position: relative;
+        }
+        .nav-center ul li a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #fff;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+            display: block;
+        }
+        .nav-center ul li a:hover {
+            background-color: #66CDAA; 
+        }
+        .nav-center ul li ul {
+            position: absolute;
+            display: none;
+            background: linear-gradient(to right, #3cb371e0, #2E8B57);
+            border-radius: 0 0 5px 5px;
+        }
+        .nav-center ul li ul li {
+            line-height: 1;
+            width: 190px;
+            border-radius: 5px;
+            padding: 6px;
+        }
+        .nav-center ul li ul li a {
+            padding: 10px 16px;
+        }
+        .nav-center ul li ul li a:hover {
+            background-color: #66CDAA;
+        }
+        .nav-center ul li:hover ul {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .nav-right a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #fff;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+        .nav-right a:hover {
+            background-color: #66CDAA;
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <h1><a href="#" >Need For Speed Express</a></h1>
+        </div>
+        <div class="nav-center">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a>
+                    <ul>
+                        <li><a href="#">Online Ordering System</a></li>
+                        <li><a href="#">Real-Time Tracking</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="#">Sign Up</a>
+            <a href="#">Sign In</a>
+        </div>
+    </nav>
+    <section>
+        <main>
+            <h1>Need For Speed</h1>
+            <p>Lightning-Fast Delivery at Your Fingertips</p>
+            <hr>
+            <h1>Welcome to Need For Speed!</h1>
+            <p>Experience delivery like never before—fast, reliable, and efficient. Whether you’re craving a late-night snack or need urgent documents delivered, we’ve got you covered with our ultra-speedy service.</p>
+            <button>Order Now</button> | <button>Track Your Delivery</button>
+            <hr>
+            <h1>How It Works</h1>
+            <ol>
+                <li>Place Your Order: Choose from a wide range of items and place your order directly on our website or app.</li>
+                <li>Fast Dispatch: We immediately process your order and dispatch it with our network of speedy couriers.</li>
+                <li>Real-Time Tracking: Monitor your delivery in real-time and get updates every step of the way.<li>
+                <li>Quick Delivery: Enjoy your items delivered straight to your door in under an hour!<li>
+            </ol>
+
+            <hr>
+            <h2> Why Choose Us?</h2>
+            <ul>
+                <li>24/7 Availability: Need something delivered at 3 AM? We’re here for you, around the clock.</li>
+                <li>Instant Updates: Track your delivery live and get notified as it approaches.</li>
+                <li>No Minimum Order: Order just one item or multiple—no minimum required.</li>
+                <li>Reliable Service: Our experienced couriers ensure your items are handled with care and arrive quickly.</li>
+            </ul>
+            <hr>
+
+            <div class="container mt-4">
+                <h2 class="large-heading text-center my-5"> Users Feedback </h2>
+                <div class="row">
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                    <img src="https://img.freepik.com/premium-photo/happy-joyful-smiling-young-indian-man-looking-aside-up-thinking-new-good-opportunities-dreaming_998240-1248.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" class="card-img-top" alt="Atlas Smith">
+                    <div class="card-body">
+                        <h5 class="card-title">Jamie R.</h5>
+                        <p class="card-text">'Need For Speed truly lives up to its name! I got my package in record time, and the process was so easy. </p>
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                    <img src="https://img.freepik.com/premium-photo/smiling-businessman-formal-wear-using-tablet-while-standing-rooftop_1289061-376.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"  class="card-img-top" alt="Mark Williams">
+                    <div class="card-body">
+                        <h5 class="card-title">Alex P.</h5>
+                        <p class="card-text">'I was amazed at how fast they delivered my food. Highly recommend for anyone in a hurry!'</p>
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                    <img src="https://img.freepik.com/premium-photo/man-with-glasses-blue-shirt-that-says-he-is-smiling_1257035-3299.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" class="card-img-top" alt="Emilly Miller">
+                    <div class="card-body">
+                        <h5 class="card-title">Taylor S.</h5>
+                        <p class="card-text">'From ordering to delivery, everything was seamless and fast. Highly recommend to anyone in need of quick service.'</p>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <hr>
+        </main>
+        
+
+    </section>
+
+    <footer class="bg-dark text-white text-center text-lg-start">
+        <h3 class=" p-3 bg-secondary">Need For Speed</h3>
+        <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Need Assistance?</h4>
+            <p>Our friendly support team is here to help.</p>
+                <ul class="list-unstyled mb-0">
+                <li>
+                    <a href="#!" class="text-white">Call Us: 1-800-123-4567</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-white">Email Us: support@needforspeed.com</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-white">Address: Palestine, Ramallah</a>
+                </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Company</h5>
+            <ul class="list-unstyled mb-0">
+                <li>
+                <a href="#!" class="text-white">About Us</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Privacy Policy</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Terms of Service</a>
+                </li>
+                <li>
+                <a href="#!" class="text-white">Cookie Policy</a>
+                </li>
+            </ul>
+            </div>
+    
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Social Media</h5>
+            <ul class="list-unstyled mb-0">
+                <li>
+                <a href="https://facebook.com" class="text-white"><i class="fab fa-facebook-f"></i> Facebook</a>
+                </li>
+                <li>
+                <a href="https://twitter.com" class="text-white"><i class="fab fa-twitter"></i> Twitter</a>
+                </li>
+                <li>
+                <a href="https://instagram.com" class="text-white"><i class="fab fa-instagram"></i> Instagram</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    
+        <div class="text-center p-3 bg-secondary">
+        <small> Copyright © Need For Speed - Where Speed Meets Excellence. All rights reserved.</small>
+        </div>
+    </footer>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+    {% comment %} <script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
+</body>
+</html>
