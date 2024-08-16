@@ -16,3 +16,6 @@ def sign_in(request):
 
 def sign_up(request):
     return render(request, 'SignUp.html') 
+
+def services(request):
+    return render(request, 'Services.html')    
