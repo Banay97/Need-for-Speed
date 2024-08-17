@@ -1,43 +1,183 @@
-{%load static%}
-<!DOCTYPE html>  
-<html>  
-<head> 
+<!DOCTYPE html>
+<html>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/SignInPage.css' %}">  -->
-    <title>Sign In Page</title> 
-    
-</head>  
-<body>  
-    <!-- <img src="https://img.freepik.com/premium-photo/fast-food-delivery-man-green-scooter-delivery-concept-online-order-food-delivery-last-mile-banner-template-3d-illustration-3d-render_99433-7138.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sign In Page</title>
+    <style>
+        :root {
+            --first-color: #1A4862;
+            --bg-color: #d9f39b;
+            --white-color: #FFFFFF;
+            --input-bg: #f9f9f9;
+            --input-border: #ccc;
+            --input-focus: #1A4862;
+            --button-bg: #1A4862;
+            --button-hover: #145f82;
+            --text-color: #555;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            border-radius: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: var(--bg-color);
+        }
+
+        .form-container {
+            position: relative;
+            width: 350px;
+            height: 700px;
+            background: var(--white-color);
+            border-radius: 30px;
+            box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .fluid-container {
+            position: relative;
+            bottom: 50px;
+            right: 37px;
+        }
+
+        .fluid-container .fluid-1 {
+            position: absolute;
+            top: -55px;
+            left: -50px;
+            width: 310px;
+            transform: rotate(120deg) scale(1);
+            z-index: 1;
+        }
+
+        .h1 {
+            position: relative;
+            top: 150px;
+            left: 50%;
+            font-size: 50px;
+            color: #d9f39b;
+            text-shadow: 6px -2px 2px #1A4862;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            z-index: 2;
+            margin-top: 175px;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 18px;
+            color: var(--text-color);
+            width: 100%;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid var(--input-border);
+            border-radius: 20px;
+            outline: none;
+            font-size: 16px;
+            background: var(--input-bg);
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--input-focus);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--button-bg);
+            color: var(--white-color);
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        a {
+            color: var(--first-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 1px solid var(--first-color);
+            margin: 20px0;
+            width: 100%;
+        }
+
+        .new-account {
+            padding: 5px 45px;
+        }
+    </style>
+
+</head>
+
+<body>
     <div>
         <main>
-            <h1>Sign In</h1>
-            <form method="post" action="">
-                {% csrf_token %}
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
+            <div class="form-container">
+                <div class="fluid-container">
+                    <img src="https://img.freepik.com/premium-vector/vector-watercolor-painted-blue-brush-stroke-hand-drawn-design-element-isolated-white-background_23785-22706.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="400" alt="image"
+                        id="fluid" class="fluid-1">
+                </div>
+                <div class="login-container">
+                    <h1 class="h1">Sign In</h1>
+                    <form method="post" action="">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required><br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required><br>
 
-                <button type="submit" class="bg-dark text-white" >Sign in</button><br>
-                <p><a>Forget Password?</a></p>
-            </form>
-            <hr>
-                <p >I don't have an account yet! <a href="">Sign up</a></p>
+                        <button type="submit" class="bg-dark text-white">Sign in</button><br>
+                        <p><a>Forget Password?</a></p>
+                    </form>
+                    <hr>
+                    <p class="new-account">I don't have an account yet! <a href="">Sign up</a></p>
+                </div>
             </div>
         </main>
     </div>
-    <!-- {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            {% if 'sign_in' in message.tags %}
-                <li style="color:red; font-size: 15px;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    {% endif %} -->
-</body>  
-</html> 
+
+</body>
+
+</html>

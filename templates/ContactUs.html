@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <meta name="description" content="Need For Speed Website">
     <meta name="keywords" content="HTML, CSS, JavaScript">
-    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> {% endcomment %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% comment %} <link rel="stylesheet" href="{% static 'css/home.css'%}" type="text/css"> {% endcomment %}
+     <!-- Bootstrap CSS -->
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Contact Us Page</title>
-    {% comment %} <style>
-        * {
+     <style>
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+      
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #FAFAFA, #F5F5DC);
+            justify-content: center;
+            align-items: center;
 
         }
+      
         nav {
             width: 100%;
-            background: linear-gradient(to right, #3cb371e0, #2E8B57);
+            background: #1A4862;
             height: 75px;
             display: flex;
             align-items: center;
             padding: 0 20px;
             justify-content: space-between;
+           
         }
         .nav-left {
             flex: 1;
             display: flex;
             align-items: center;
+            
         }
         .nav-left h1 {
             font-size: 32px;
@@ -40,7 +45,7 @@
             text-transform: uppercase;
         }
         .nav-left h1 a{
-            color: #fff;
+            color: #d9f39b;
             text-decoration: none;
         }
         .nav-center {
@@ -60,32 +65,35 @@
         .nav-center ul li a {
             text-decoration: none;
             font-family: sans-serif;
-            color: #fff;
+            color: #d9f39b;
             padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
             display: block;
         }
         .nav-center ul li a:hover {
-            background-color: #66CDAA; 
+            background-color:  #eff5e0; 
+            color: #1A4862;
         }
         .nav-center ul li ul {
             position: absolute;
             display: none;
-            background: linear-gradient(to right, #3cb371e0, #2E8B57);
-            border-radius: 0 0 5px 5px;
+            background: #1A4862;           
+             border-radius: 0 0 5px 5px;
         }
         .nav-center ul li ul li {
             line-height: 1;
             width: 190px;
             border-radius: 5px;
             padding: 6px;
+            
         }
         .nav-center ul li ul li a {
             padding: 10px 16px;
         }
         .nav-center ul li ul li a:hover {
-            background-color: #66CDAA;
+            background-color:  #eff5e0;
+            color: #1A4862;
         }
         .nav-center ul li:hover ul {
             display: block;
@@ -93,19 +101,99 @@
         .nav-right {
             display: flex;
             align-items: center;
+            
         }
         .nav-right a {
             text-decoration: none;
             font-family: sans-serif;
-            color: #fff;
+            color: #d9f39b;
             padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
         }
         .nav-right a:hover {
-            background-color: #66CDAA;
+            background-color:  #eff5e0;
+             color: #1A4862;
+        
         }
-    </style> {% endcomment %}
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            border: 3px solid #ece9e9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 20px 15px 1px rgba(0, 0, 0, 0.1);
+}
+        .form-card {
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-card legend {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-card label {
+            font-weight: 600;
+        }
+        .form-card input, 
+        .form-card select, 
+        .form-card textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .form-card textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .form-card button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1A4862; 
+            color: #d9f39b;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .form-card button:hover {
+            background-color: #053364;
+        }
+       
+
+        .bg-custom {
+            background-color: #1A4862!important;
+        }
+        .text-custom {
+            color: #d9f39b!important;
+        }
+        .footer-bottom {
+            background-color: #1A4862;
+            color: #d9f39b;
+            padding: 15px;
+            text-align: center;
+        }
+        .footer-bottom small {
+            color: #d9f39b;
+        }
+        .footer-contenta {
+            color: #d9f39b;
+        }
+        .footer-contenta:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        a{
+            color: #d9f39b!important;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -114,116 +202,94 @@
         </div>
         <div class="nav-center">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Services</a>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'services' %}">Services</a>
                     <ul>
                         <li><a href="#">Online Ordering System</a></li>
                         <li><a href="#">Real-Time Tracking</a></li>
                         <li><a href="#">Customer Support</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="{% url 'contact_us'%}">Contact Us</a></li>
             </ul>
         </div>
         <div class="nav-right">
-            <a href="#">Sign Up</a>
-            <a href="#">Sign In</a>
+            <a href="{% url 'sign_up'%}">Sign Up</a>
+            <a href="{% url 'sign_in'%}">Sign In</a>
         </div>
     </nav>
     <section>
         <main>
-            <form method="post" action="">
+            <div class="form-container">
+            <form method="post" action="" class="form-card">
                 <fieldset>
                     <legend>Contact Us Form</legend>
                     <div>
                         <label for="first_name">First Name:</label>
-                        <input type="text" required>
+                        <input type="text" id="first_name" required>
                         <label for="last_name">Last Name:</label>
-                        <input type="text" required>
+                        <input type="text" id="last_name" required>
                         <label for="email">Email:</label>
-                        <input type="email" required>
-                        <select>
-                            <option>Service Type ..</option>
-                            <option>How to create account?</option>
-                            <option>How to create an order?</option>
-                            <option>How to update an order?</option>
+                        <input type="email" id="email" required>
+                        <label for="service">Service Type:</label>
+                        <select id="service" required>
+                            <option value="" disabled selected>Select a service...</option>
+                            <option value="create_account">How to create an account?</option>
+                            <option value="create_order">How to create an order?</option>
+                            <option value="update_order">How to update an order?</option>
                         </select>
                         <label for="comment">Comment:</label>
-                        <textarea placeholder="Comment here ..."></textarea>
-
+                        <textarea id="comment" placeholder="Comment here ..."></textarea>
+                        <button type="submit">Submit</button>
                     </div>
                 </fieldset>
             </form>
+            </div>
         </main>
     </section>
 
-    <footer class="bg-dark text-white text-center text-lg-start">
-        <h3 class=" p-3 bg-secondary">Need For Speed</h3>
-        <div class="container p-4">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-            <h5 class="text-uppercase">Need Assistance?</h4>
-            <p>Our friendly support team is here to help.</p>
+    <footer class="bg-custom text-custom text-center text-lg-start">
+        <h3 class="p-3">Need For Speed</h3>
+        <div class="container p-4 footer-content">
+            <div class="row"><div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Need Assistance?</h5>
+                <p>Our friendly support team is here to help.</p>
                 <ul class="list-unstyled mb-0">
-                <li>
-                    <a href="#!" class="text-white">Call Us: 1-800-123-4567</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-white">Email Us: support@needforspeed.com</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-white">Address: Palestine, Ramallah</a>
-                </li>
+                    <li><a href="#!">Call Us: 1-800-123-4567</a></li>
+                    <li><a href="#!">Email Us: support@needforspeed.com</a></li>
+                    <li><a href="#!">Address: Palestine, Ramallah</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase">Company</h5>
-            <ul class="list-unstyled mb-0">
-                <li>
-                <a href="#!" class="text-white">About Us</a>
-                </li>
-                <li>
-                <a href="#!" class="text-white">Privacy Policy</a>
-                </li>
-                <li>
-                <a href="#!" class="text-white">Terms of Service</a>
-                </li>
-                <li>
-                <a href="#!" class="text-white">Cookie Policy</a>
-                </li>
-            </ul>
+                <h5 class="text-uppercase">Company</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="#!">About Us</a></li>
+                    <li><a href="#!">Privacy Policy</a></li>
+                    <li><a href="#!">Terms of Service</a></li>
+                    <li><a href="#!">Cookie Policy</a></li>
+                </ul>
             </div>
-    
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase">Social Media</h5>
-            <ul class="list-unstyled mb-0">
-                <li>
-                <a href="https://facebook.com" class="text-white"><i class="fab fa-facebook-f"></i> Facebook</a>
-                </li>
-                <li>
-                <a href="https://twitter.com" class="text-white"><i class="fab fa-twitter"></i> Twitter</a>
-                </li>
-                <li>
-                <a href="https://instagram.com" class="text-white"><i class="fab fa-instagram"></i> Instagram</a>
-                </li>
-            </ul>
+                <h5 class="text-uppercase">Social Media</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="https://facebook.com"><iclass="fab fa-facebook-f"></i> Facebook</a>
+                    </li><li><a href="https://twitter.com"><iclass="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://instagram.com"><iclass="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
             </div>
         </div>
-        </div>
-    
-        <div class="text-center p-3 bg-secondary">
-        <small> Copyright © Need For Speed - Where Speed Meets Excellence. All rights reserved.</small>
-        </div>
+    </div>
+    <div class="footer-bottom"><small> Copyright © Need For Speed - Where Speed Meets Excellence. All rights reserved.</small></div>
     </footer>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 
-    {% comment %} <script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
+       <!-- Bootstrap JS and dependencies -->
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

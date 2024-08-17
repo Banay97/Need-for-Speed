@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Need for Speed Express</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <script src="scripts.js" defer></script> <!-- Link to your JavaScript file -->
+    <style>
+        /* Basic styling for layout purposes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            /* background: linear-gradient(to left, #1c3e52, #EBE6E0); Linear gradient background */
+
+        }
+        .sidebar {
+            width: 200px;
+            background-color:#1A4862;
+            color: #d9f39b;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            font-size: 20px;
+            margin: 0 0 20px 0;
+        }
+        .sidebar a {
+            color: #d9f39b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .sidebar a:hover {
+            background-color: #eff5e0;
+            padding: 5px;
+            color: #1A4862;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color:	#d9f39b ;
+            color: #1A4862;
+        }
+        .notification {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #2196F3;
+        }
+        img{
+            padding-right: 10px;
+            padding-top: 5px;
+        }
+        h3{
+            color:#1A4862;
+        }
+        p{
+            color:#1A4862;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <a href="#orders"><img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Orders<img></a>
+        <a href="#tracking"><img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Tracking<img></a>
+        <a href="#customers"><img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Customers<img></a>
+        <a href="#reports"><img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Reports<img></a>
+        <a href="#notifications"><img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Notifications<img></a>
+        <a href="#settings"><img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Settings</img></a>
+    </div>
+    <div class="main-content">
+        <!-- Orders Section -->
+        <div id="orders" class="section">
+            <h3>Orders Management</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1234</td>
+                        <td>John Doe</td>
+                        <td>2024-08-15</td>
+                        <td>Shipped</td>
+                        <td>$150.00</td>
+                        <td><button>View</button></td>
+                    </tr>
+                    <!-- More rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tracking Section -->
+        <div id="tracking" class="section">
+            <h3>Order Tracking</h3>
+            <!-- Example Tracking Information -->
+            <p>Track orders using the following tracking numbers:</p>
+            <ul>
+                <li>Order #1234: <a href="#">Track here</a></li>
+                <!-- More tracking links -->
+            </ul>
+        </div>
+
+        <!-- Customers Section -->
+        <div id="customers" class="section">
+            <h3>Customer Profiles</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Order Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5678</td>
+                        <td>Jane Smith</td>
+                        <td>jane@example.com</td>
+                        <td>10</td>
+                        <td><button>View</button></td>
+                    </tr>
+                    <!-- More rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Notifications Section -->
+        <div id="notifications" class="section">
+            <h3>Notifications</h3>
+            <div class="notification">
+                <strong>New Order Alert:</strong> Order #1234 has been placed.
+            </div>
+            <!-- More notifications -->
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reports" class="section">
+            <h3>Sales Reports</h3>
+            <p>Generate and view sales reports here.</p>
+            <!-- Report generation tools and links -->
+        </div>
+
+        <!-- Inventory Section -->
+        <div id="inventory" class="section">
+            <h3>Inventory Management</h3>
+            <p>Manage product inventory levels and details.</p>
+            <!-- Inventory management tools -->
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <h3>Settings</h3>
+            <p>Manage system settings and user roles.</p>
+            <!-- Settings tools -->
+        </div>
+    </div>
+</body>
+</html>
