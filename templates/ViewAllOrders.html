@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -164,20 +165,79 @@
             padding-left: 20px;
             /* Indent sub-menu items */
         }
+
+
+        /* table style */
+        .form-container {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .styled-table thead tr {
+            background-color: #C04000;
+            color: #FFE5B4;
+        }
+
+        .styled-table th {
+            font-size: 20px;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            font-weight: bold;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .styled-table th {
+            font-weight: bold;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .styled-table td {
+            text-align: center;
+            color: rgb(70, 31, 31);
+            font-size: 20px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  sidebar">
                 <div class="sidebar-header">
-                    <h2><a href= "{% url 'admin_dashboard' %}">Admin Dashboard</a></h2>
+                    <h2><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></h2>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#orders">
-                            <img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Orders
+                            <img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Orders"> Orders
                         </a>
                         <ul class="nav flex-column ms-3 sub-menu">
                             <li class="nav-item">
@@ -191,15 +251,17 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="#tracking">
-                            <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
+                            <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Tracking"> Tracking
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#customers">
-                            <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
+                            <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Customers"> Customers
                         </a>
                         <ul class="nav flex-column ms-3 sub-menu">
                             <li class="nav-item">
@@ -215,17 +277,20 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#notifications">
-                            <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Notifications"> Notifications
+                            <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Notifications"> Notifications
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#reports">
-                            <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
+                            <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Reports"> Reports
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#settings">
-                            <img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Settings
+                            <img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
+                                width="20" alt="Settings"> Settings
                         </a>
                     </li>
                 </ul>
@@ -234,29 +299,35 @@
             <!-- Main content -->
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 <div class="form-container">
-                    <h2>Upadte an Order</h2>
+                    <h2>View All Orders</h2>
                     <form action="" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="company_name">Company Name:</label>
-                            <input type="text" id="company_name" name="company_name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="order_name">Order Name:</label>
-                            <input type="text" id="order_name" name="order_name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="order_code_number">Order Code Number:</label>
-                            <input type="number" id="order_code_number" name="order_code_number" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pickup_location">Pick Up Location:</label>
-                            <input type="text" id="pickup_location" name="pickup_location" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pickoff_location">Pick Off Location:</label>
-                            <input type="text" id="pickoff_location" name="pickoff_location" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <!-- <th>Check Order </th> -->
+                                    <th>Company Name</th>
+                                    <th>Order Name</th>
+                                    <th>Order Code Number</th>
+                                    <th>Pick Up Location</th>
+                                    <th>Pick Off Location</th>
+                                    <th>Order Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Example row -->
+                                <tr>
+                                    <!-- <th><input type="checkbox"></th> -->
+                                    <td>here goes the company name</td>
+                                    <td>order name</td>
+                                    <td>order code number</td>
+                                    <td>pick up location</td>
+                                    <td>pick off location</td>
+                                    <td><button type="submit" class="btn btn-dark">Edit</button> | <button type="submit"
+                                            class="btn btn-danger">Delete</button></td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </main>
@@ -268,4 +339,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
