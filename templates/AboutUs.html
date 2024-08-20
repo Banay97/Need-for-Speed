@@ -15,13 +15,14 @@
         }
       
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #FAFAFA, #F5F5DC);
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background: linear-gradient(to right, #FAFAFA, #FFE5B4);
 
         }
-        nav {
+       /* navigation part */
+       nav {
             width: 100%;
-            background: #1A4862;
+            background: #C04000;
             height: 75px;
             display: flex;
             align-items: center;
@@ -37,12 +38,12 @@
         }
         .nav-left h1 {
             font-size: 32px;
-            font-family: Arial, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: white;
             text-transform: uppercase;
         }
         .nav-left h1 a{
-            color: #d9f39b;
+            color: #FFE5B4;
             text-decoration: none;
         }
         .nav-center {
@@ -59,17 +60,20 @@
         .nav-center ul li {
             position: relative;
         }
+        a{
+           color: #FFE5B4;
+        }
         .nav-center ul li a {
             text-decoration: none;
             font-family: sans-serif;
-            color: #d9f39b;
+            color: #FFE5B4;
             padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
             display: block;
         }
         .nav-center ul li a:hover {
-            background-color:  #eff5e0; 
+            background-color:  #55371e;
             color: #1A4862;
         }
         .nav-center ul li ul {
@@ -89,7 +93,7 @@
             padding: 10px 16px;
         }
         .nav-center ul li ul li a:hover {
-            background-color:  #eff5e0;
+            background-color:  #55371e;
             color: #1A4862;
         }
         .nav-center ul li:hover ul {
@@ -103,44 +107,85 @@
         .nav-right a {
             text-decoration: none;
             font-family: sans-serif;
-            color: #d9f39b;
+            color: #FFE5B4;
             padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
         }
         .nav-right a:hover {
-            background-color:  #eff5e0;
-             color: #1A4862;
-        
+            background-color:  #55371e;
+             color: #FFE5B4;
         }
-       
-       
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #FFA000;
+        }
+        p{
+           color:#55371e;
+           font-size: 25px;
+        }
+        h4{
+            color:#C04000;
+        }
+        .container{
+            overflow: hidden;
+        }
 
-        .bg-custom {
-            background-color: #1A4862!important;
+         /* Footer part*/
+         .bg-custom {
+            background-color: #C04000!important;
         }
         .text-custom {
-            color: #d9f39b!important;
+            color: #FFE5B4!important;
         }
         .footer-bottom {
-            background-color: #1A4862;
-            color: #d9f39b;
+            background-color: #FFE5B4;
+            color: #C04000;
             padding: 15px;
             text-align: center;
         }
         .footer-bottom small {
-            color: #d9f39b;
+            color: #C04000;
         }
-        .footer-contenta {
-            color: #d9f39b;
+        .footer-contenta, .p {
+            color: #FFE5B4;
         }
         .footer-contenta:hover {
             color: #ffffff;
             text-decoration: underline;
         }
         a{
-            color: #d9f39b!important;
+            color: #FFE5B4!important;
         }
+        .fluid-container .fluid-1 {
+            position: absolute;
+            top: -104px;
+            right: 28px;
+            width: 227px;
+            transform: rotate(120deg) scale(1);
+            z-index: 1;
+        }
+        .container{
+            border: 0px solid white;
+        }
+        .card{
+            border: 0px solid rgba(0,0,0,.125)
+        }
+       h3, h5{
+            color: #FFA000;
+            font-size: 30px;
+        }
+        ul li{
+            font-size: 25px;
+        }
+        .p{
+            font-size: 25px;
+        }
+        .h3{
+            font-size: 40px;
+        }
+       
     </style>
 </head>
 <body>
@@ -153,11 +198,11 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
                 <li><a href="{% url 'services' %}">Services</a>
-                    <ul>
+                    <!-- <ul>
                         <li><a href="#">Online Ordering System</a></li>
                         <li><a href="#">Real-Time Tracking</a></li>
                         <li><a href="#">Customer Support</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li><a href="{% url 'contact_us'%}">Contact Us</a></li>
             </ul>
@@ -272,17 +317,21 @@
                         <p>If you need to update your delivery address, please do so through your account on our website or app before finalizing your order. If your order has already been placed, contact our customer support team as soon as possible to make changes.</p>
                     </details>
                 </div>
+                <div class="fluid-container">
+                    <img src="https://img.freepik.com/free-vector/hand-draw-orange-splash-watercolor-background_1035-17995.jpg?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="600" alt="image"
+                    id="fluid" class="fluid-1">
+                </div>
             </div>
         </div>
     </main>
 </section>
 
     <footer class="bg-custom text-custom text-center text-lg-start">
-        <h3 class="p-3">Need For Speed</h3>
+        <h3 class="p-3 h3">Need For Speed</h3>
         <div class="container p-4 footer-content">
             <div class="row"><div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Need Assistance?</h5>
-                <p>Our friendly support team is here to help.</p>
+                <p class="p">Our friendly support team is here to help.</p>
                 <ul class="list-unstyled mb-0">
                     <li><a href="#!">Call Us: 1-800-123-4567</a></li>
                     <li><a href="#!">Email Us: support@needforspeed.com</a></li>
