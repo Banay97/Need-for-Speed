@@ -1,4 +1,5 @@
 from django.db import models
+import re
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -81,7 +82,7 @@ class Delivery(User):
     def display_info(self):
         print(f"The driver {self.first_name} {self.last_name} with license number {self.license} is {self.status} and at {self.worklocation} this area now.")
 
-def Company(User):
+class Company(User):
     def __init__(self, first_name, last_name, phone_number, address):
         super().__init__(self, first_name, last_name, phone_number, address)
         self.company_name =company_name
@@ -97,6 +98,9 @@ class Order(models.Model):
     order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
     pickoff_location = models.CharField(max_length=255)
+    customer = models.ForeignKey(Customer, related_name ='customer_order', on_delete=models.CASCADE)
+    delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, related_name='order_from_company',  on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
