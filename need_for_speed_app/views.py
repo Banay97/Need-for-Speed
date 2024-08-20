@@ -93,6 +93,7 @@ def sign_out(request):
 
 def services(request):
     return render(request, 'Services.html')   
+    
 
 def admin_dashboard(request):
     return render(request, 'AdminDashboard.html')
