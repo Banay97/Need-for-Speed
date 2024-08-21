@@ -67,7 +67,10 @@ class User(models.Model):
 
 class Customer(User):
     status = models.CharField(max_length=50, default='active') 
-
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    address = models.TextField()
     def display_info(self):
         print(f"The customer {self.first_name} {self.last_name} with phone number {self.phone_number} located in {self.address} is {self.status}")
 
@@ -84,7 +87,9 @@ class Delivery(User):
 class Company(User):
     company_name = models.CharField(max_length=255)  
     number_of_workers = models.IntegerField() 
-
+    address = models.TextField()
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
     def display_info(self):
         print(f"The {self.company_name} Company has {self.number_of_workers} employees working in it.")
 
@@ -94,7 +99,7 @@ class Order(models.Model):
     order_code_number = models.IntegerField()
     order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
-    pickoff_location = models.CharField(max_length=255)
+    dropoff_location = models.CharField(max_length=255)
     customer = models.ForeignKey(Customer, related_name ='customer_order', on_delete=models.CASCADE,  null=True, blank=True)
     delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
