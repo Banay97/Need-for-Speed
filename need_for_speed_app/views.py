@@ -96,17 +96,17 @@ def services(request):
     return render(request, 'Services.html')   
     
 
-def admin_dashboard(request):
-    return render(request, 'AdminDashboard.html')
+# def admin_dashboard(request):
+#     return render(request, 'AdminDashboard.html')
 
-def  create_company(request):
-    return render(request, 'CreateComapny.html')
+# def  create_company(request):
+#     return render(request, 'CreateComapny.html')
 
-def  update_company(request):
-    return render(request, 'UpdateComapny.html')
+# def  update_company(request):
+#     return render(request, 'UpdateComapny.html')
 
-def  view_companies(request):
-    return render(request, 'ViewAllComapnies.html')
+# def  view_companies(request):
+#     return render(request, 'ViewAllComapnies.html')
 
 
 def company_dashboard(request):

@@ -10,10 +10,9 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'number_of_workers', 'phone', 'email')
-    search_fields = ('company_name', 'email')
+    list_display = ('company_name', 'phone_number','number_of_workers', 'email')
+    search_fields = ('company_name',  'phone_number','email')
     ordering = ('company_name',)
-
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):

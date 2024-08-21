@@ -85,6 +85,7 @@ class Company(User):
     company_name = models.CharField(max_length=255)  
     number_of_workers = models.IntegerField() 
 
+
     def display_info(self):
         print(f"The {self.company_name} Company has {self.number_of_workers} employees working in it.")
 
