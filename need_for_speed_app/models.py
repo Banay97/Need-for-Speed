@@ -12,24 +12,10 @@ class UserManager(models.Manager):
             errors['last_name'] = 'Last name should be at least 2 characters long'
 
         if len(postData['phone_number']) < 5:
-            errors['phone_number'] = 'Phone Number should be at least 5 characters long'   
+            errors['phone_number'] = 'Phone Number should be at least 5 characters long' 
+        return errors               
 
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if not EMAIL_REGEX.match(postData['email']):              
-            errors['email'] = "Invalid email address!"    
-
-        if len(postData['email']) < 10:
-            errors['email'] = 'Email should be at least 10 characters long'    
-
-        if is_creation:
-            if len(postData['password']) < 8:
-                errors['password'] = 'Password should be at least 8 characters long'
-
-            if postData['password'] != postData['confirm_password']:
-                errors['confirm_password'] = 'Passwords do not match'
-        
-        return errors
-
+  
 class OrderManager(models.Manager):
     def order_validator(self, postData):  
         errors = {}
@@ -54,12 +40,12 @@ class User(models.Model):
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)  
     address = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager()
+    objects = UserManager()
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -83,7 +69,7 @@ class Delivery(User):
 
 class Company(User):
     company_name = models.CharField(max_length=255)  
-    number_of_workers = models.IntegerField() 
+    number_of_workers = models.IntegerField(blank=True, null=True)  # Make this field optional
 
 
     def display_info(self):

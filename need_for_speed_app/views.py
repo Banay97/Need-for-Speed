@@ -52,7 +52,7 @@ def sign_in(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        errors = User.objects.user_validator(request.POST)
+        errors = User.objects.model.user_validator(request.POST)
         if errors:
             for key, value in errors.items():
                 messages.error(request, value, extra_tags='sign_up')
@@ -96,14 +96,14 @@ def services(request):
     return render(request, 'Services.html')   
     
 
-# def admin_dashboard(request):
-#     return render(request, 'AdminDashboard.html')
+#  def admin_dashboard(request):
+# #     return render(request, 'AdminDashboard.html')
 
 # def  create_company(request):
 #     return render(request, 'CreateComapny.html')
 
 # def  update_company(request):
-#     return render(request, 'UpdateComapny.html')
+#      return render(request, 'UpdateComapny.html')
 
 # def  view_companies(request):
 #     return render(request, 'ViewAllComapnies.html')
@@ -113,7 +113,32 @@ def company_dashboard(request):
     return render(request, 'CompanyDashboard.html')
 
 def create_order(request):
-    return render(request, 'CreateOrder.html')     
+    if request.method == 'POST':
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='create_order')
+            return redirect('create_order')
+        else:
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address =request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            phone_number = request.POST['phone_number']
+            order_name = request.POST['order_name']
+            order_code_number = request.POST['order_code_number']
+            order_price = request.POST['order_price']
+            pickup_location = request.POST['pickup_location']
+            pickoff_location = request.POST['pickoff_location']
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+            order = Order.objects.create(order_name=order_name, company=company, order_code_number=order_code_number, pickup_location=pickup_location, pickoff_location=pickoff_location)
+
+            messages.success(request, 'Your order has beed created successfully')
+            return redirect('create_order')  
+    else:
+        return render(request, 'CreateOrder.html')  
 
 def update_order(request):
     return render(request, 'UpdateOrder.html') 

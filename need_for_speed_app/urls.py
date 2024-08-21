@@ -14,19 +14,18 @@ urlpatterns = [
     path('sign-out', views.sign_out, name='sign_out'),
     
     #admin pages and CRUD operations
-    path('admin-dashboard', views.admin_dashboard, name='admin_dashboard'),
-    path('create-company', views.create_company, name='create_company'),
-    path('update-company', views.update_company, name='update_company'),
-    path('view-all-companies', views.view_companies, name='view_companies'),
+    path('company-dashboard', views.company_dashboard, name='company_dashboard'),
+    # path('create-company', views.create_company, name='create_company'),
+    # path('update-company', views.update_company, name='update_company'),
+    # path('view-all-companies', views.view_companies, name='view_companies'),
 
     #Company pages and CRUD operations
-    path('company-dashboard', views.company_dashboard, name='company_dashboard'),
     path('create-order', views.create_order, name='create_order'),
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),
  
      # Admin Dashboard
-    path('admin/dashboard/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('admindashboard/', views.admin_dashboard_view, name='admin_dashboard'),
 
     # User Management
     path('admin/users/', views.admin_users_view, name='admin_users'),
