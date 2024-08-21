@@ -174,7 +174,7 @@
                     {% for order in orders %}
                     <tr>
                         <td>{{ order.id }}</td>
-                        <td>{{ order.order_name }}</td>
+                        <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
                         <td>{{ order.Total }}</td>
                         <td>{{ order.pickup_location }}</td>
                         <td>{{ order.pickoff_location }}</td>

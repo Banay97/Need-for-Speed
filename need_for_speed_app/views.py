@@ -228,7 +228,6 @@ def admin_orders_view(request):
     return render(request, 'admin/admin_order.html', {'orders': orders})
 
 def admin_order_edit_view(request, order_id):
-    # Fetch the order object
     order = get_object_or_404(Order, id=order_id)
     
     if request.method == 'POST':
@@ -237,22 +236,30 @@ def admin_order_edit_view(request, order_id):
         order_status = request.POST.get('order_status')
         total_amount = request.POST.get('total_amount')
         
-        # Update the order object with the new data
-        order.customer.name = customer_name
-        order.status = order_status
-        order.Total = int(total_amount)  # Assuming total_amount is an integer
+        # Update the related customer object
+        if order.customer:
+            # Split the full name into first and last name
+            name_parts = customer_name.split(' ', 1)
+            if len(name_parts) == 2:
+                order.customer.first_name, order.customer.last_name = name_parts
+            else:
+                order.customer.first_name = name_parts[0]
+                order.customer.last_name = ''
+            order.customer.save()  # Save the related customer object
+        
+        # Update the order object
+        order.order_status = order_status
+        order.Total = int(total_amount)  # Ensure total_amount is an integer
         
         # Save the updated order
         order.save()
         
-        # Redirect to the order list or details page
-        return redirect(reverse('admin_orders'))
+        # Redirect to the order list page
+        return redirect('admin_orders')
 
-    # For GET request, render the edit form with the current order details
-    context = {
-        'order': order
-    }
-    return render(request, 'admin/admin_order_edit.html', context)
+    # Render the edit form with the current order details for GET requests
+    return render(request, 'admin/admin_order_edit.html', {'order': order})
+
 
 def admin_order_delete_view(request, order_id):
     order = get_object_or_404(Order, id=order_id)
