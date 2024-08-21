@@ -14,8 +14,9 @@ class UserManager(models.Manager):
         if len(postData['phone_number']) < 5:
             errors['phone_number'] = 'Phone Number should be at least 5 characters long'   
 
+    def user_email_validator(self, postData, is_creation=False):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if not EMAIL_REGEX.match(postData['email']):              
+        if not EMAIL_REGEX.match(postData['email']):                
             errors['email'] = "Invalid email address!"    
 
         if len(postData['email']) < 10:
@@ -26,7 +27,7 @@ class UserManager(models.Manager):
                 errors['password'] = 'Password should be at least 8 characters long'
 
             if postData['password'] != postData['confirm_password']:
-                errors['confirm_password'] = 'Passwords do not match'
+                errors['confirm_password'] = 'Passwords do not match'    
         
         return errors
 
@@ -54,12 +55,12 @@ class User(models.Model):
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)  
     address = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField('Email',unique=True)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager()
+    objects = UserManager()
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -100,7 +101,8 @@ class Order(models.Model):
     company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    order_price= models.CharField(max_length=255, null=True, blank=True)
+
     def __str__(self):
         return f'{self.order_name} - {self.order_code_number}'
 
