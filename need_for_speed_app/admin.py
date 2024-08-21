@@ -17,9 +17,9 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone','email', 'status','first_name','last_name')
-    search_fields = ('name', 'phone' ,'email')
-    ordering = ('name',)
+    list_display = ('first_name','last_name', 'phone_number','email', 'status')
+    search_fields = ('first_name','last_name' ,'name', 'phone_number' ,'email')
+    ordering = ('first_name','last_name',)
 
 @admin.register(Delivery)
 class DeliveryAdmin(admin.ModelAdmin):
@@ -32,15 +32,15 @@ class DeliveryAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_name', 'customer', 'company', 'pickup_location', 'dropoff_location', 'order_status', 'created_at')
+    list_display = ('order_name', 'customer', 'company', 'pickup_location', 'pickoff_location', 'order_status', 'created_at')
     search_fields = ('order_name', 'customer__name', 'company__name')
     list_filter = ('order_status',)
     ordering = ('-created_at',)
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'context', 'link', 'created_at')
-    search_fields = ('user__first_name', 'user__last_name', 'context')
+    list_display = ('first_name','last_name', 'status', 'context', 'link', 'created_at')
+    search_fields = ('first_name','last_name', 'context')
     list_filter = ('status',)
     ordering = ('-created_at',)
 
