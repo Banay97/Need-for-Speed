@@ -17,7 +17,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone','email', 'status','customer_address')
+    list_display = ('name', 'phone','email', 'status','first_name','last_name')
     search_fields = ('name', 'phone' ,'email')
     ordering = ('name',)
 

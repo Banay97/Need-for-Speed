@@ -67,10 +67,6 @@ class User(models.Model):
 
 class Customer(User):
     status = models.CharField(max_length=50, default='active') 
-    name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=20)
-    email = models.EmailField()
-    customer_address = models.TextField()
     def display_info(self):
         print(f"The customer {self.first_name} {self.last_name} with phone number {self.phone_number} located in {self.address} is {self.status}")
 
