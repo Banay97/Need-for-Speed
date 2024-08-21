@@ -9,113 +9,114 @@
     <title>Contact Us Page</title>
      <style>
          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-      
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #FAFAFA, #F5F5DC);
-            justify-content: center;
-            align-items: center;
-
-        }
-      
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+       
+         body {
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+             background: linear-gradient(to right, #FAFAFA, #FFE5B4);
+ 
+         }
+        /* navigation part */
         nav {
-            width: 100%;
-            background: #1A4862;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            justify-content: space-between;
-           
-        }
-        .nav-left {
-            flex: 1;
-            display: flex;
-            align-items: center;
+             width: 100%;
+             background: #C04000;
+             height: 75px;
+             display: flex;
+             align-items: center;
+             padding: 0 20px;
+             justify-content: space-between;
             
-        }
-        .nav-left h1 {
-            font-size: 32px;
-            font-family: Arial, sans-serif;
-            color: white;
-            text-transform: uppercase;
-        }
-        .nav-left h1 a{
-            color: #d9f39b;
-            text-decoration: none;
-        }
-        .nav-center {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-        }
-        .nav-center ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            
-        }
-        .nav-center ul li {
-            position: relative;
-        }
-        .nav-center ul li a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #d9f39b;
-            padding: 0 16px;
-            font-size: 17px;
-            font-weight: bold;
-            display: block;
-        }
-        .nav-center ul li a:hover {
-            background-color:  #eff5e0; 
-            color: #1A4862;
-        }
-        .nav-center ul li ul {
-            position: absolute;
-            display: none;
-            background: #1A4862;           
-             border-radius: 0 0 5px 5px;
-        }
-        .nav-center ul li ul li {
-            line-height: 1;
-            width: 190px;
-            border-radius: 5px;
-            padding: 6px;
-            
-        }
-        .nav-center ul li ul li a {
-            padding: 10px 16px;
-        }
-        .nav-center ul li ul li a:hover {
-            background-color:  #eff5e0;
-            color: #1A4862;
-        }
-        .nav-center ul li:hover ul {
-            display: block;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            
-        }
-        .nav-right a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #d9f39b;
-            padding: 0 16px;
-            font-size: 17px;
-            font-weight: bold;
-        }
-        .nav-right a:hover {
-            background-color:  #eff5e0;
+         }
+         .nav-left {
+             flex: 1;
+             display: flex;
+             align-items: center;
+             
+         }
+         .nav-left h1 {
+             font-size: 32px;
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+             color: white;
+             text-transform: uppercase;
+         }
+         .nav-left h1 a{
+             color: #FFE5B4;
+             text-decoration: none;
+         }
+         .nav-center {
+             flex: 2;
+             display: flex;
+             justify-content: center;
+         }
+         .nav-center ul {
+             display: flex;
+             align-items: center;
+             list-style: none;
+             
+         }
+         .nav-center ul li {
+             position: relative;
+         }
+         a{
+            color: #FFE5B4;
+         }
+         .nav-center ul li a {
+             text-decoration: none;
+             font-family: sans-serif;
+             color: #FFE5B4;
+             padding: 0 16px;
+             font-size: 17px;
+             font-weight: bold;
+             display: block;
+         }
+         .nav-center ul li a:hover {
+             background-color:  #55371e;
              color: #1A4862;
+         }
+         .nav-center ul li ul {
+             position: absolute;
+             display: none;
+             background: #1A4862;           
+              border-radius: 0 0 5px 5px;
+         }
+         .nav-center ul li ul li {
+             line-height: 1;
+             width: 190px;
+             border-radius: 5px;
+             padding: 6px;
+             
+         }
+         .nav-center ul li ul li a {
+             padding: 10px 16px;
+         }
+         .nav-center ul li ul li a:hover {
+             background-color:  #55371e;
+             color: #1A4862;
+         }
+         .nav-center ul li:hover ul {
+             display: block;
+         }
+         .nav-right {
+             display: flex;
+             align-items: center;
+             
+         }
+         .nav-right a {
+             text-decoration: none;
+             font-family: sans-serif;
+             color: #FFE5B4;
+             padding: 0 16px;
+             font-size: 17px;
+             font-weight: bold;
+         }
+         .nav-right a:hover {
+             background-color:  #55371e;
+              color: #1A4862;
+         }
         
-        }
         .form-container {
             max-width: 600px;
             margin: 50px auto;
@@ -133,12 +134,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .form-card legend {
-            font-size: 1.5rem;
+            font-size: 3.5rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
         .form-card label {
             font-weight: 600;
+            font-size: 20px;
         }
         .form-card input, 
         .form-card select, 
@@ -148,6 +150,7 @@
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ced4da;
+            
         }
         .form-card textarea {
             height: 100px;
@@ -158,41 +161,60 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
-            background-color: #1A4862; 
-            color: #d9f39b;
+            background-color: #C04000; 
+            color: #FFE5B4;
             font-weight: bold;
             font-size: 1rem;
+            font-size: 20px;
         }
         .form-card button:hover {
-            background-color: #053364;
+            background-color: #E25822;
         }
        
 
-        .bg-custom {
-            background-color: #1A4862!important;
+         /* Footer part*/
+         .bg-custom {
+             background-color: #C04000!important;
+         }
+         .text-custom {
+             color: #FFE5B4!important;
+         }
+         .footer-bottom {
+             background-color: #FFE5B4;
+             color: #C04000;
+             padding: 15px;
+             text-align: center;
+         }
+         .footer-bottom small {
+             color: #C04000;
+         }
+         .footer-contenta, .p {
+             color: #FFE5B4;
+         }
+         .footer-contenta:hover {
+             color: #ffffff;
+             text-decoration: underline;
+         }
+         a{
+             color: #FFE5B4!important;
+         }
+         ul li{
+            font-size: 25px;
         }
-        .text-custom {
-            color: #d9f39b!important;
+        .p{
+            font-size: 25px;
         }
-        .footer-bottom {
-            background-color: #1A4862;
-            color: #d9f39b;
-            padding: 15px;
-            text-align: center;
-        }
-        .footer-bottom small {
-            color: #d9f39b;
-        }
-        .footer-contenta {
-            color: #d9f39b;
-        }
-        .footer-contenta:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        a{
-            color: #d9f39b!important;
-        }
+        h3, h5{
+             color: #FFA000;
+             font-size: 30px;
+         }
+         .h3{
+             font-size: 40px;
+         }
+         legend{
+            color: #FFA000;
+            font-size: 50px;
+         }
     </style>
 </head>
 <body>
@@ -205,11 +227,11 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
                 <li><a href="{% url 'services' %}">Services</a>
-                    <ul>
+                    <!-- <ul>
                         <li><a href="#">Online Ordering System</a></li>
                         <li><a href="#">Real-Time Tracking</a></li>
                         <li><a href="#">Customer Support</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li><a href="{% url 'contact_us'%}">Contact Us</a></li>
             </ul>
@@ -222,25 +244,26 @@
     <section>
         <main>
             <div class="form-container">
-            <form method="post" action="" class="form-card">
+            <form method="post" action="{% url 'contact_us' %}" class="form-card">
+                {%csrf_token%}
                 <fieldset>
                     <legend>Contact Us Form</legend>
                     <div>
                         <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" required>
+                        <input type="text" id="first_name" name="first_name" required>
                         <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" required>
+                        <input type="text" id="last_name" name="last_name" required>
                         <label for="email">Email:</label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                         <label for="service">Service Type:</label>
-                        <select id="service" required>
+                        <select id="service" name="service_type" required>
                             <option value="" disabled selected>Select a service...</option>
                             <option value="create_account">How to create an account?</option>
                             <option value="create_order">How to create an order?</option>
                             <option value="update_order">How to update an order?</option>
                         </select>
                         <label for="comment">Comment:</label>
-                        <textarea id="comment" placeholder="Comment here ..."></textarea>
+                        <textarea id="comment" placeholder="Comment here ..." name="comment"></textarea>
                         <button type="submit">Submit</button>
                     </div>
                 </fieldset>
@@ -250,11 +273,11 @@
     </section>
 
     <footer class="bg-custom text-custom text-center text-lg-start">
-        <h3 class="p-3">Need For Speed</h3>
+        <h3 class="p-3 h3">Need For Speed</h3>
         <div class="container p-4 footer-content">
             <div class="row"><div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Need Assistance?</h5>
-                <p>Our friendly support team is here to help.</p>
+                <p class="p">Our friendly support team is here to help.</p>
                 <ul class="list-unstyled mb-0">
                     <li><a href="#!">Call Us: 1-800-123-4567</a></li>
                     <li><a href="#!">Email Us: support@needforspeed.com</a></li>

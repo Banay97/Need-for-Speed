@@ -9,7 +9,7 @@
     <style>
         /* Basic styling for layout purposes */
         body {
-            font-family: Arial, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,183 +17,131 @@
 
         }
         .sidebar {
-            width: 200px;
-            background-color:#1A4862;
-            color: #d9f39b;
+            width: 250px;
+            background-color:#C04000;
+            color: #FFE5B4;
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
-            padding: 20px;
+            padding: 25px;
         }
         .sidebar h2 {
-            font-size: 20px;
+            font-size: 25px;
             margin: 0 0 20px 0;
         }
         .sidebar a {
-            color: #d9f39b;
+            color: #FFE5B4;
             text-decoration: none;
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
         }
         .sidebar a:hover {
-            background-color: #eff5e0;
+            background-color: #55371e;
             padding: 5px;
-            color: #1A4862;
+            color: #FFE5B4;
         }
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            flex: 1;
+         /* Hide the sub-menu by default */
+         .sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 0;
         }
-        .section {
-            margin-bottom: 20px;
+
+        /* Show the sub-menu when hovering over the parent list item */
+        .nav-item:hover .sub-menu {
+            display: block;
         }
-        .section h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
+
+        /* Optional: Style for sub-menu items */
+        .sub-menu .nav-item {
+            margin: 0;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+
+        .sub-menu .nav-link {
+            padding-left: 20px; /* Indent sub-menu items */
         }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
+        ul li{
+            text-decoration: none!important;
             padding: 10px;
-            text-align: left;
+            font-size: 20px;
         }
-        th {
-            background-color:	#d9f39b ;
-            color: #1A4862;
-        }
-        .notification {
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-left: 5px solid #2196F3;
-        }
+            
         img{
             padding-right: 10px;
             padding-top: 5px;
         }
-        h3{
-            color:#1A4862;
-        }
-        p{
-            color:#1A4862;
-        }
-       
+
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Admin Dashboard</h2>
-        <a href="#orders"><img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Orders<img></a>
-        <a href="#tracking"><img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Tracking<img></a>
-        <a href="#customers"><img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Customers<img></a>
-        <a href="#reports"><img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Reports<img></a>
-        <a href="#notifications"><img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Notifications<img></a>
-        <a href="#settings"><img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20">Settings</img></a>
-    </div>
+    <nav class="sidebar">
+        <h2><a href= "{% url 'admin_dashboard' %}">Admin Dashboard</a></h2>
+        <ul class="nav flex-column">
+            <li class="nav-item" >
+                <a class="nav-link" href="#orders">
+                    <img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Companies
+                </a>
+                <ul class="nav flex-column ms-3 sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_company'%}">Create a Company</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'update_company'%}">Update a Company</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_companies'%}">View All Companies</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="#tracking">
+                    <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#customers">
+                    <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
+                </a>
+                <ul class="nav flex-column ms-3 sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#create-order">Create a Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#update-order">Update a Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#update-order">View All Customers</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="#notifications">
+                    <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Notifications"> Notifications
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reports">
+                    <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#settings">
+                    <img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sign_out'%}">
+                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Sign Out
+                </a>
+            </li>
+        </ul>
+    </nav>
     <div class="main-content">
         <!-- Orders Section -->
-        <div id="orders" class="section">
-            <h3>Orders Management</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#1234</td>
-                        <td>John Doe</td>
-                        <td>2024-08-15</td>
-                        <td>Shipped</td>
-                        <td>$150.00</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Tracking Section -->
-        <div id="tracking" class="section">
-            <h3>Order Tracking</h3>
-            <!-- Example Tracking Information -->
-            <p>Track orders using the following tracking numbers:</p>
-            <ul>
-                <li>Order #1234: <a href="#">Track here</a></li>
-                <!-- More tracking links -->
-            </ul>
-        </div>
-
-        <!-- Customers Section -->
-        <div id="customers" class="section">
-            <h3>Customer Profiles</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Order Count</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>5678</td>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>10</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Notifications Section -->
-        <div id="notifications" class="section">
-            <h3>Notifications</h3>
-            <div class="notification">
-                <strong>New Order Alert:</strong> Order #1234 has been placed.
-            </div>
-            <!-- More notifications -->
-        </div>
-
-        <!-- Reports Section -->
-        <div id="reports" class="section">
-            <h3>Sales Reports</h3>
-            <p>Generate and view sales reports here.</p>
-            <!-- Report generation tools and links -->
-        </div>
-
-        <!-- Inventory Section -->
-        <div id="inventory" class="section">
-            <h3>Inventory Management</h3>
-            <p>Manage product inventory levels and details.</p>
-            <!-- Inventory management tools -->
-        </div>
-
-        <!-- Settings Section -->
-        <div id="settings" class="section">
-            <h3>Settings</h3>
-            <p>Manage system settings and user roles.</p>
-            <!-- Settings tools -->
-        </div>
+        
     </div>
 </body>
 </html>

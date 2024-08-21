@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    #main website pages
+     #main website pages
     path('', views.home, name='home'),
     path('about-us', views.about_us, name='about_us'),
     path('services', views.services, name='services'),
@@ -13,17 +13,15 @@ urlpatterns = [
     path('sign-up', views.sign_up, name='sign_up'),
     path('sign-out', views.sign_out, name='sign_out'),
     
-    #admin pages and CRUD operations
-    path('company-dashboard', views.company_dashboard, name='company_dashboard'),
-    # path('create-company', views.create_company, name='create_company'),
-    # path('update-company', views.update_company, name='update_company'),
-    # path('view-all-companies', views.view_companies, name='view_companies'),
 
     #Company pages and CRUD operations
+    path('company-dashboard', views.company_dashboard, name='company_dashboard'),
     path('create-order', views.create_order, name='create_order'),
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),
- 
+
+
+
      # Admin Dashboard
     path('admindashboard/', views.admin_dashboard_view, name='admin_dashboard'),
 

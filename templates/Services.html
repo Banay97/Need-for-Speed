@@ -8,143 +8,190 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Services Page</title>
-   <style>
-       * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-      
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #FAFAFA, #F5F5DC);
-
-        }
-        nav {
-            width: 100%;
-            background: #1A4862;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            justify-content: space-between;
-           
-        }
-        .nav-left {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            
-        }
-        .nav-left h1 {
-            font-size: 32px;
-            font-family: Arial, sans-serif;
-            color: white;
-            text-transform: uppercase;
-        }
-        .nav-left h1 a{
-            color: #d9f39b;
-            text-decoration: none;
-        }
-        .nav-center {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-        }
-        .nav-center ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            
-        }
-        .nav-center ul li {
-            position: relative;
-        }
-        .nav-center ul li a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #d9f39b;
-            padding: 0 16px;
-            font-size: 17px;
-            font-weight: bold;
-            display: block;
-        }
-        .nav-center ul li a:hover {
-            background-color:  #eff5e0; 
-            color: #1A4862;
-        }
-        .nav-center ul li ul {
-            position: absolute;
-            display: none;
-            background: #1A4862;           
-             border-radius: 0 0 5px 5px;
-        }
-        .nav-center ul li ul li {
-            line-height: 1;
-            width: 190px;
-            border-radius: 5px;
-            padding: 6px;
-            
-        }
-        .nav-center ul li ul li a {
-            padding: 10px 16px;
-        }
-        .nav-center ul li ul li a:hover {
-            background-color:  #eff5e0;
-            color: #1A4862;
-        }
-        .nav-center ul li:hover ul {
-            display: block;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            
-        }
-        .nav-right a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #d9f39b;
-            padding: 0 16px;
-            font-size: 17px;
-            font-weight: bold;
-        }
-        .nav-right a:hover {
-            background-color:  #eff5e0;
-             color: #1A4862;
-        
-        }
+    <style>
+        * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
        
-       h1, h2, h4, p{
-        color: #1A4862;
-       }
-
-        .bg-custom {
-            background-color: #1A4862!important;
-        }
-        .text-custom {
-            color: #d9f39b!important;
-        }
-        .footer-bottom {
-            background-color: #1A4862;
-            color: #d9f39b;
-            padding: 15px;
-            text-align: center;
-        }
-        .footer-bottom small {
-            color: #d9f39b;
-        }
-        .footer-contenta {
-            color: #d9f39b;
-        }
-        .footer-contenta:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        a{
-            color: #d9f39b!important;
-        }
-    </style> 
+         body {
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
+ 
+         }
+        /* navigation part */
+        nav {
+             width: 100%;
+             background: #C04000;
+             height: 75px;
+             display: flex;
+             align-items: center;
+             padding: 0 20px;
+             justify-content: space-between;
+            
+         }
+         .nav-left {
+             flex: 1;
+             display: flex;
+             align-items: center;
+             
+         }
+         .nav-left h1 {
+             font-size: 32px;
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+             color: white;
+             text-transform: uppercase;
+         }
+         .nav-left h1 a{
+             color: #FFE5B4;
+             text-decoration: none;
+         }
+         .nav-center {
+             flex: 2;
+             display: flex;
+             justify-content: center;
+         }
+         .nav-center ul {
+             display: flex;
+             align-items: center;
+             list-style: none;
+             
+         }
+         .nav-center ul li {
+             position: relative;
+         }
+         a{
+            color: #FFE5B4;
+         }
+         .nav-center ul li a {
+             text-decoration: none;
+             font-family: sans-serif;
+             color: #FFE5B4;
+             padding: 0 16px;
+             font-size: 17px;
+             font-weight: bold;
+             display: block;
+         }
+         .nav-center ul li a:hover {
+             background-color:  #55371e;
+             color: #1A4862;
+         }
+         .nav-center ul li ul {
+             position: absolute;
+             display: none;
+             background: #1A4862;           
+              border-radius: 0 0 5px 5px;
+         }
+         .nav-center ul li ul li {
+             line-height: 1;
+             width: 190px;
+             border-radius: 5px;
+             padding: 6px;
+             
+         }
+         .nav-center ul li ul li a {
+             padding: 10px 16px;
+         }
+         .nav-center ul li ul li a:hover {
+             background-color:  #55371e;
+             color: #1A4862;
+         }
+         .nav-center ul li:hover ul {
+             display: block;
+         }
+         .nav-right {
+             display: flex;
+             align-items: center;
+             
+         }
+         .nav-right a {
+             text-decoration: none;
+             font-family: sans-serif;
+             color: #FFE5B4;
+             padding: 0 16px;
+             font-size: 17px;
+             font-weight: bold;
+         }
+         .nav-right a:hover {
+             background-color:  #55371e;
+              color: #1A4862;
+         }
+         h2 {
+             font-size: 2.5rem;
+             margin-bottom: 10px;
+             color: #FFA000;
+         }
+         p{
+            color:#55371e;
+            font-size: 25px;
+         }
+         h4{
+             color:#C04000;
+         }
+         .container{
+             overflow: hidden;
+         }
+ 
+          /* Footer part*/
+          .bg-custom {
+             background-color: #C04000!important;
+         }
+         .text-custom {
+             color: #FFE5B4!important;
+         }
+         .footer-bottom {
+             background-color: #FFE5B4;
+             color: #C04000;
+             padding: 15px;
+             text-align: center;
+         }
+         .footer-bottom small {
+             color: #C04000;
+         }
+         .footer-contenta, .p {
+             color: #FFE5B4;
+         }
+         .footer-contenta:hover {
+             color: #ffffff;
+             text-decoration: underline;
+         }
+         a{
+             color: #FFE5B4!important;
+         }
+         .fluid-container .fluid-1 {
+             position: absolute;
+             top: -104px;
+             right: 28px;
+             width: 227px;
+             transform: rotate(120deg) scale(1);
+             z-index: 1;
+         }
+         .container{
+             border: 0px solid white;
+         }
+         .card{
+             border: 0px solid rgba(0,0,0,.125)
+         }
+         h3, h5{
+             color: #FFA000;
+             font-size: 30px;
+         }
+         ul li{
+             font-size: 25px;
+         }
+         h1{
+            color: #FFA000;
+             font-size: 50px;
+         }
+         p{
+             font-size: 20px;
+         }
+         .h3{
+             font-size: 40px;
+         }
+        
+     </style>
 </head>
 <body>
     <nav>
@@ -156,11 +203,11 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
                 <li><a href="{% url 'services' %}">Services</a>
-                    <ul>
+                    <!-- <ul>
                         <li><a href="#">Online Ordering System</a></li>
                         <li><a href="#">Real-Time Tracking</a></li>
                         <li><a href="#">Customer Support</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li><a href="{% url 'contact_us'%}">Contact Us</a></li>
             </ul>
@@ -220,7 +267,7 @@
                                         <h2 class="card-title">Customer Support</h2>
                                         <h4>Here to Help You, Anytime</h4>
                                         <p class="card-text">At Need for Speed Express, we pride ourselves on our exceptional Customer Support. Our dedicated team is available to assist you with any inquiries, issues, or special requests you may have. Whether you need help with an order, have questions about our services, or require assistance with tracking, our knowledgeable support staff is here to provide prompt and effective solutions. Reach out to us via phone, email, or live chat, and experience the superior customer care that sets us apart.</p>
-                                    
+                                    <br>
                                     </div>
                                 </div>
                             </div>

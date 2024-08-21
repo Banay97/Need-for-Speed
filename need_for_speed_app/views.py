@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse , JsonResponse
 import bcrypt
-from .models import *
+from .models import User
 
 # Create your views here.
 def home(request):
@@ -52,7 +51,7 @@ def sign_in(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        errors = User.objects.model.user_validator(request.POST)
+        errors = User.objects.user_validator(request.POST)
         if errors:
             for key, value in errors.items():
                 messages.error(request, value, extra_tags='sign_up')
@@ -94,19 +93,17 @@ def sign_out(request):
 
 def services(request):
     return render(request, 'Services.html')   
-    
 
-#  def admin_dashboard(request):
-# #     return render(request, 'AdminDashboard.html')
 
-# def  create_company(request):
-#     return render(request, 'CreateComapny.html')
 
-# def  update_company(request):
-#      return render(request, 'UpdateComapny.html')
+def  create_company(request):
+     return render(request, 'CreateComapny.html')
 
-# def  view_companies(request):
-#     return render(request, 'ViewAllComapnies.html')
+def  update_company(request):
+      return render(request, 'UpdateComapny.html')
+
+def  view_companies(request):
+    return render(request, 'ViewAllComapnies.html')
 
 
 def company_dashboard(request):
