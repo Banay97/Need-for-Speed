@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse , JsonResponse
 import bcrypt
+from django.urls import reverse
+from django.db.models import Count
+from datetime import timedelta
+from django.utils import timezone
 from .models import *
 
 # Create your views here.
@@ -108,35 +112,48 @@ def  view_companies(request):
 
 def company_dashboard(request):
     return render(request, 'store/CompanyDashboard.html')
-
 def create_order(request):
     if request.method == 'POST':
+        # Validate the input data (assuming you have a user_validator in User model)
         errors = User.objects.user_validator(request.POST)
         if errors:
             for key, value in errors.items():
                 messages.error(request, value, extra_tags='create_order')
             return redirect('create_order')
         else:
+            # Get the data from the POST request
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
-            address =request.POST['address']
+            address = request.POST['address']
             phone_number = request.POST['phone_number']
             company_name = request.POST['company_name']
-            phone_number = request.POST['phone_number']
             order_name = request.POST['order_name']
             order_code_number = request.POST['order_code_number']
-            order_price = request.POST['order_price']
+            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
             pickup_location = request.POST['pickup_location']
             pickoff_location = request.POST['pickoff_location']
-            Customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number)
-            order = Order.objects.create(order_name=order_name, company=company, order_code_number=order_code_number, pickup_location=pickup_location, pickoff_location=pickoff_location)
 
-            messages.success(request, 'Your order has beed created successfully')
-            return redirect('create_order')  
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  # Correct field name
+                customer=customer  # Assuming there's a relationship to the customer
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('create_order')
     else:
-        return render(request, 'store/CreateOrder.html')  
-
+        return render(request, 'store/CreateOrder.html')
+    
 def update_order(request):
     return render(request, 'store/UpdateOrder.html') 
 
@@ -210,12 +227,55 @@ def admin_orders_view(request):
     orders = Order.objects.all()
     return render(request, 'admin/admin_order.html', {'orders': orders})
 
-def admin_order_detail_view(request, order_id):
+def admin_order_edit_view(request, order_id):
+    # Fetch the order object
     order = get_object_or_404(Order, id=order_id)
-    return render(request, 'admin/admin_order_detail.html', {'order': order})
+    
+    if request.method == 'POST':
+        # Get the data from the form
+        customer_name = request.POST.get('customer_name')
+        order_status = request.POST.get('order_status')
+        total_amount = request.POST.get('total_amount')
+        
+        # Update the order object with the new data
+        order.customer.name = customer_name
+        order.status = order_status
+        order.Total = int(total_amount)  # Assuming total_amount is an integer
+        
+        # Save the updated order
+        order.save()
+        
+        # Redirect to the order list or details page
+        return redirect(reverse('admin_orders'))
+
+    # For GET request, render the edit form with the current order details
+    context = {
+        'order': order
+    }
+    return render(request, 'admin/admin_order_edit.html', context)
 
 def admin_order_delete_view(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.delete()
     return redirect('admin_orders')
 
+
+def sales_data(request):
+    # Group orders by status and count them
+    orders_by_status = Order.objects.values('order_status').annotate(count=Count('order_status'))
+
+    # Prepare data for the chart
+    labels = [order['order_status'] for order in orders_by_status]
+    data = [order['count'] for order in orders_by_status]
+
+    response_data = {
+        "labels": labels,
+        "datasets": [{
+            "label": "Order Distribution by Status",
+            "data": data,
+            "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+            "borderColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+            "borderWidth": 1
+        }]
+    }
+    return JsonResponse(response_data)

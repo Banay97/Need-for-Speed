@@ -104,9 +104,11 @@ class Order(models.Model):
     order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
     pickoff_location = models.CharField(max_length=255)
-    customer = models.ForeignKey(Customer, related_name ='customer_order', on_delete=models.CASCADE,  null=True, blank=True)
+    Total = models.IntegerField(default=0)  # Set default value to 0 for new orders
+    customer = models.ForeignKey(User, related_name ='user_order', on_delete=models.CASCADE,  null=True, blank=True)
     delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
+    order_status = models.CharField(max_length=100, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

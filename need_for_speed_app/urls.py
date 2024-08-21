@@ -31,6 +31,8 @@ urlpatterns = [
     path('admincompanies/edit/<int:company_id>/', views.admin_company_edit_view, name='admin_company_edit'),
     path('admincompanies/delete/<int:company_id>/', views.admin_company_delete_view, name='admin_company_delete'),
     path('adminorders/', views.admin_orders_view, name='admin_orders'),
-    path('adminorders/detail/<int:order_id>/', views.admin_order_detail_view, name='admin_order_detail'),
+    path('adminorders/edit/<int:order_id>/', views.admin_order_edit_view, name='admin_order_edit'),
     path('adminorders/delete/<int:order_id>/', views.admin_order_delete_view, name='admin_order_delete'),
+    path('salesdata/', views.sales_data, name='sales_data'),
+
 ]
