@@ -1,4 +1,5 @@
 from django.db import models
+import re
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -14,7 +15,7 @@ class UserManager(models.Manager):
             errors['phone_number'] = 'Phone Number should be at least 5 characters long'   
 
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern            
+        if not EMAIL_REGEX.match(postData['email']):              
             errors['email'] = "Invalid email address!"    
 
         if len(postData['email']) < 10:
@@ -30,17 +31,17 @@ class UserManager(models.Manager):
         return errors
 
 class OrderManager(models.Manager):
-    def order_validator(self, postDate):
-        errors ={}
+    def order_validator(self, postData):  
+        errors = {}
         if len(postData['order_name']) < 4:
             errors['order_name'] = 'Order name should be at least 4 characters long'
-        if len['order_code_number'] < 10:
-            errors['order_code_number'] ='Order Code Number should be at least 10 numbers'
-        if len(postDate['pickup_location']):
-            errors['pickup_location'] ='Pick up location should be valid'
-        if len(postData['pickoff_location']):
+        if len(postData['order_code_number']) < 10:  
+            errors['order_code_number'] = 'Order Code Number should be at least 10 characters long'
+        if len(postData['pickup_location']) < 5:  
+            errors['pickup_location'] = 'Pick up location should be valid'
+        if len(postData['pickoff_location']) < 5:
             errors['pickoff_location'] = 'Pick off location should be valid'
-        return errors                
+        return errors               
 
 
 class User(models.Model):
@@ -51,44 +52,41 @@ class User(models.Model):
     
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    phone_number =models.IntegerField()
-    address= models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=20)  
+    address = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = UserManager()
+    objects = models.Manager()
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
 
 class Customer(User):
-    def __init__(self, first_name, last_name, phone_number, address):
-        super().__init__(self, first_name, last_name, phone_number, address)
-        self.status = status
+    status = models.CharField(max_length=50, default='active') 
+
     def display_info(self):
         print(f"The customer {self.first_name} {self.last_name} with phone number {self.phone_number} located in {self.address} is {self.status}")
 
 
 class Delivery(User):
-    def __init__(self, first_name, last_name, phone_number, address):
-        super().__init__(self, first_name, last_name, phone_number, address)
-        self.license =license
-        self.status =status
-        self.worklocation = worklocation
-    def display_info(self):
-        print(f"The driver {self.first_name} {self.last_name} with license number {self.license} is {self.status} and at {self.worklocation} this area now.")
-
-def Company(User):
-    def __init__(self, first_name, last_name, phone_number, address):
-        super().__init__(self, first_name, last_name, phone_number, address)
-        self.company_name =company_name
-        self.number_of_workers = number_of_workers
+    license = models.CharField(max_length=50, default='N/A')  
+    status = models.CharField(max_length=50, default='active')  
+    worklocation = models.CharField(max_length=255, default='Unknown')  
 
     def display_info(self):
-        print(f"The {self.company_name} Company has {self.number_of_workers} employee work in it.")
+        print(f"The driver {self.first_name} {self.last_name} with license number {self.license} is {self.status} and at {self.work_location} this area now.")
+
+
+class Company(User):
+    company_name = models.CharField(max_length=255)  
+    number_of_workers = models.IntegerField() 
+
+    def display_info(self):
+        print(f"The {self.company_name} Company has {self.number_of_workers} employees working in it.")
 
 
 class Order(models.Model):
@@ -97,11 +95,14 @@ class Order(models.Model):
     order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
     pickoff_location = models.CharField(max_length=255)
+    customer = models.ForeignKey(Customer, related_name ='customer_order', on_delete=models.CASCADE,  null=True, blank=True)
+    delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE, null=True, blank=True)
+    company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f'{self.order_name} - {self.order_number}'
+        return f'{self.order_name} - {self.order_code_number}'
 
 
 class Notification(models.Model):

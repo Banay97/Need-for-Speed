@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from need_for_speed_app.models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):

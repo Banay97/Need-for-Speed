@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse , JsonResponse
 import bcrypt
-from ..models import *
+from need_for_speed_app.models import *
 
 # Create your views here.
 def home(request):
