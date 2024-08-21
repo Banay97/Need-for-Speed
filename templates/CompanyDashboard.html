@@ -15,11 +15,11 @@
             display: flex;
         }
         .sidebar {
-            width: 200px;
+            width: 400px;
             background-color:#C04000;
             color: #FFE5B4;
             height: 100vh;
-            position: fixed;
+            /* position: fixed; */
             top: 0;
             left: 0;
             padding: 20px;
@@ -84,7 +84,7 @@
 </head>
 <body>
     <div class="sidebar">
-        <h2>Company Dashboard</h2>
+        <h2><a href= "{% url 'company_dashboard' %}">Company Dashboard</a></h2>
         <ul class="nav flex-column">
             <li class="nav-item" >
                 <a class="nav-link" href="#orders">
@@ -147,100 +147,7 @@
         </ul>
     </div>
     <div class="main-content">
-        <!-- Orders Section -->
-        <div id="orders" class="section">
-            <h3>Orders Management</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#1234</td>
-                        <td>John Doe</td>
-                        <td>2024-08-15</td>
-                        <td>Shipped</td>
-                        <td>$150.00</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Tracking Section -->
-        <div id="tracking" class="section">
-            <h3>Order Tracking</h3>
-            <!-- Example Tracking Information -->
-            <p>Track orders using the following tracking numbers:</p>
-            <ul>
-                <li>Order #1234: <a href="#">Track here</a></li>
-                <!-- More tracking links -->
-            </ul>
-        </div>
-
-        <!-- Customers Section -->
-        <div id="customers" class="section">
-            <h3>Customer Profiles</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Order Count</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>5678</td>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>10</td>
-                        <td><button>View</button></td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Notifications Section -->
-        <div id="notifications" class="section">
-            <h3>Notifications</h3>
-            <div class="notification">
-                <strong>New Order Alert:</strong> Order #1234 has been placed.
-            </div>
-            <!-- More notifications -->
-        </div>
-
-        <!-- Reports Section -->
-        <div id="reports" class="section">
-            <h3>Sales Reports</h3>
-            <p>Generate and view sales reports here.</p>
-            <!-- Report generation tools and links -->
-        </div>
-
-        <!-- Inventory Section -->
-        <div id="inventory" class="section">
-            <h3>Inventory Management</h3>
-            <p>Manage product inventory levels and details.</p>
-            <!-- Inventory management tools -->
-        </div>
-
-        <!-- Settings Section -->
-        <div id="settings" class="section">
-            <h3>Settings</h3>
-            <p>Manage system settings and user roles.</p>
-            <!-- Settings tools -->
-        </div>
+        
     </div>
 </body>
 </html>
