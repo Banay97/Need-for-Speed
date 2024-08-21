@@ -6,10 +6,10 @@ from .models import *
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'store/home.html')
 
 def about_us(request):
-    return render(request, 'AboutUs.html')
+    return render(request, 'store/AboutUs.html')
 
 def contact_us(request):
     if request.method == 'POST':
@@ -26,7 +26,7 @@ def contact_us(request):
             'comment': comment
         }
 
-    return render(request, 'ContactUs.html', {}) 
+    return render(request, 'store/ContactUs.html', {}) 
 
 def sign_in(request):
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def sign_in(request):
             messages.error(request, 'Invalid email or password', extra_tags='sign_in')
             return redirect('sign_in')
         
-    return render(request, 'SignIn.html')     
+    return render(request, 'store/SignIn.html')     
 
 
 def sign_up(request):
@@ -81,7 +81,7 @@ def sign_up(request):
                 messages.success(request, 'Registration successful! Please log in.')
                 return render(request, 'CompanyDashboard.html', {'user': user})
     else:
-        return render(request, 'SignUp.html') 
+        return render(request, 'store/SignUp.html') 
 
 def sign_out(request):
     if request.method == 'POST':
@@ -92,22 +92,22 @@ def sign_out(request):
     
 
 def services(request):
-    return render(request, 'Services.html')   
+    return render(request, 'store/Services.html')   
 
 
 
 def  create_company(request):
-     return render(request, 'CreateComapny.html')
+     return render(request, 'store/CreateComapny.html')
 
 def  update_company(request):
-      return render(request, 'UpdateComapny.html')
+      return render(request, 'store/UpdateComapny.html')
 
 def  view_companies(request):
-    return render(request, 'ViewAllComapnies.html')
+    return render(request, 'store/ViewAllComapnies.html')
 
 
 def company_dashboard(request):
-    return render(request, 'CompanyDashboard.html')
+    return render(request, 'store/CompanyDashboard.html')
 
 def create_order(request):
     if request.method == 'POST':
@@ -135,13 +135,13 @@ def create_order(request):
             messages.success(request, 'Your order has beed created successfully')
             return redirect('create_order')  
     else:
-        return render(request, 'CreateOrder.html')  
+        return render(request, 'store/CreateOrder.html')  
 
 def update_order(request):
-    return render(request, 'UpdateOrder.html') 
+    return render(request, 'store/UpdateOrder.html') 
 
 def view_orders(request):
-    return render(request, 'ViewAllOrders.html') 
+    return render(request, 'store/ViewAllOrders.html') 
 
 def admin_dashboard(request):
     return render(request, 'admin/index.html')
@@ -158,7 +158,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
-    return render(request, 'Admin/AdminDashboard.html', context)
+    return render(request, 'admin/AdminDashboard.html', context)
 
 # User Management Views
 def admin_users_view(request):
@@ -167,21 +167,20 @@ def admin_users_view(request):
 
 def admin_user_edit_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
-
     if request.method == 'POST':
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.email = request.POST.get('email')
         user.role = request.POST.get('role')
         user.save()
-        return redirect('admin/admin_users')
+        return redirect('admin_users')
 
-    return render(request, 'admin_user_edit.html', {'user': user})
+    return render(request, 'admin/admin_user_edit.html', {'user': user})
 
 def admin_delete_user_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.delete()
-    return redirect('admin/admin_users')
+    return redirect('admin_users')
 
 # Company Management Views
 def admin_companies_view(request):
@@ -213,9 +212,10 @@ def admin_orders_view(request):
 
 def admin_order_detail_view(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    return render(request, 'admin_order_detail.html', {'order': order})
+    return render(request, 'admin/admin_order_detail.html', {'order': order})
 
 def admin_order_delete_view(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     order.delete()
     return redirect('admin_orders')
+

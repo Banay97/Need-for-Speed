@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="User Management - Need For Speed Admin">
+    <meta name="description" content="Edit User - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>User Management - Need For Speed Admin</title>
+    <title>Edit User - Need For Speed Admin</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -98,21 +98,22 @@
             margin-bottom: 40px;
         }
 
-        table th, table td {
+        label {
             font-weight: bold;
-            color: #d38808;
-            text-align: center;
-            padding: 15px;
-        }
-        table th {
-            background-color: #FFE5B4;
             color: #C04000;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #C04000;
         }
 
         .btn-primary {
             background-color: #C04000;
             border-color: #C04000;
             font-weight: bold;
+            padding: 10px 20px;
         }
         .btn-primary:hover {
             background-color:  #E25822;
@@ -147,32 +148,30 @@
     </nav>
 
     <main class="container">
-        <h1>User Management</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>
-                        <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h1>Edit User</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select class="form-control" id="role" name="role" required>
+                    <option value="admin" {% if user.role == "admin" %}selected{% endif %}>Admin</option>
+                    <option value="user" {% if user.role == "user" %}selected{% endif %}>User</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
     </main>
 
     <footer class="footer-bottom">

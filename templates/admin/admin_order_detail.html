@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="User Management - Need For Speed Admin">
+    <meta name="description" content="Order Management - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>User Management - Need For Speed Admin</title>
+    <title>Order Management - Need For Speed Admin</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -147,27 +147,24 @@
     </nav>
 
     <main class="container">
-        <h1>User Management</h1>
+        <h1>Order Management</h1>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Order Name</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for user in users %}
+                {% for order in orders %}
                 <tr>
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
+                    <td>{{ order.order_name }}</td>
+                    <td>{{ order.customer.name }}</td>
+                    <td>{{ order.status }}</td>
                     <td>
-                        <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -176,7 +173,7 @@
     </main>
 
     <footer class="footer-bottom">
-        <small>&copy; Need For Speed - User Management. All rights reserved.</small>
+        <small>&copy; Need For Speed - Order Management. All rights reserved.</small>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
