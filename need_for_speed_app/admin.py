@@ -39,8 +39,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('first_name','last_name', 'status', 'context', 'link', 'created_at')
-    search_fields = ('first_name','last_name', 'context')
+    list_display = ('user', 'status', 'context', 'link', 'created_at')
+    search_fields = ('user', 'context')
     list_filter = ('status',)
     ordering = ('-created_at',)
 
