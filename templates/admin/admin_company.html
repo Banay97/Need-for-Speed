@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Company Management">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Insert the styles from your provided code here */
+        /* ... */
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <h1><a href="#">Need For Speed Admin</a></h1>
+        </div>
+        <div class="nav-center">
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">Orders</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="#">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h1 class="text-center mb-4">Company Management</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for company in companies %}
+                <tr>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address }}</td>
+                    <td>{{ company.phone }}</td>
+                    <td>{{ company.email }}</td>
+                    <td>
+                        <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <footer class="bg-custom text-custom text-center text-lg-start">
+        <div class="footer-bottom">
+            <small>&copy; Need For Speed - Company Management. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
