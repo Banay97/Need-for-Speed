@@ -169,6 +169,7 @@
 </head>
 
 <body>
+
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -250,6 +251,14 @@
                     <h2>Create an Order</h2>
                     <form action="{% url 'create_order'%}" method="POST" enctype="multipart/form-data">
                         {%csrf_token%}
+                        {% if messages %}
+                        <ul class="messages list-group">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-danger m-1" {% endif %}>
+                                {{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
                         <div class="form-group">
                             <label for="first_name">First Name:</label>
                             <input type="text" id="first_name" name="first_name" class="form-control" required>

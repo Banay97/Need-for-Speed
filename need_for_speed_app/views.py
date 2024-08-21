@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse , JsonResponse
 import bcrypt
-from .models import User
+from .models import *
 
 # Create your views here.
 def home(request):
@@ -128,7 +128,7 @@ def create_order(request):
             order_price = request.POST['order_price']
             pickup_location = request.POST['pickup_location']
             pickoff_location = request.POST['pickoff_location']
-            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            Customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number)
             order = Order.objects.create(order_name=order_name, company=company, order_code_number=order_code_number, pickup_location=pickup_location, pickoff_location=pickoff_location)
 
@@ -158,7 +158,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
-    return render(request, 'admin/AdminDashboard.html', context)
+    return render(request, 'Admin/AdminDashboard.html', context)
 
 # User Management Views
 def admin_users_view(request):
