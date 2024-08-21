@@ -10,8 +10,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+      
         body {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
         }
         nav {
@@ -23,90 +29,123 @@
             padding: 0 20px;
             justify-content: space-between;
         }
+        .nav-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .nav-left h1 {
+            font-size: 32px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: white;
+            text-transform: uppercase;
+        }
         .nav-left h1 a {
             color: #FFE5B4;
             text-decoration: none;
         }
-        .nav-center ul li a, .nav-right a {
-            color: #FFE5B4;
-            font-weight: bold;
+        .nav-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
         }
-        .nav-center ul li a:hover, .nav-right a:hover {
-            background-color: #55371e;
-            color: #1A4862;
+        .nav-center ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
         }
-        .sidebar {
-            background: #C04000;
-            color: #FFE5B4;
-            height: 100vh;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
+        .nav-center ul li {
+            position: relative;
         }
-        .sidebar a {
+        a {
             color: #FFE5B4;
+        }
+        .nav-center ul li a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #FFE5B4;
+            padding: 0 16px;
+            font-size: 17px;
             font-weight: bold;
             display: block;
-            margin-bottom: 20px;
-            text-decoration: none;
         }
-        .sidebar a:hover {
-            background-color: #55371e;
+        .nav-center ul li a:hover, .nav-right a:hover {
+            background-color:  #55371e;
             color: #1A4862;
         }
-        .main-content {
-            margin-left: 270px;
-            padding: 20px;
+        .nav-right {
+            display: flex;
+            align-items: center;
         }
-        h3 {
-            color: #FFA000;
-            margin-bottom: 20px;
+        .nav-right a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #FFE5B4;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
         }
+
+        .container {
+            margin-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 85px;
+            color: #C04000;
+            text-shadow: #FF6347 3px 0 15px;
+            margin-bottom: 40px;
+        }
+
         table th, table td {
+            font-weight: bold;
             color: #d38808;
+            text-align: center;
+            padding: 15px;
         }
-        .table th {
+        table th {
             background-color: #FFE5B4;
             color: #C04000;
         }
+
         .btn-primary {
             background-color: #C04000;
             border-color: #C04000;
+            font-weight: bold;
         }
         .btn-primary:hover {
-            background-color: #E25822;
+            background-color:  #E25822;
             color: #FFE5B4;
+        }
+
+        .footer-bottom {
+            background-color: #FFE5B4;
+            color: #C04000;
+            padding: 15px;
+            text-align: center;
+            margin-top: 50px;
         }
     </style>
 </head>
-<body>
+<body>   
     <nav>
         <div class="nav-left">
-            <h1><a href="#">Need For Speed Express</a></h1>
+            <h1><a href="#">Need For Speed Admin</a></h1>
         </div>
         <div class="nav-center">
-            <ul class="d-flex list-unstyled mb-0">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'services' %}">Services</a></li>
-                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            <ul>
+                <li><a href="/admindashboard">Admin Dashboard</a></li>
+                <li><a href="/adminusers">Users</a></li>
+                <li><a href="/admincompanies">Companies</a></li>
+                <li><a href="/adminorders">Orders</a></li>
             </ul>
         </div>
         <div class="nav-right">
-            <a href="{% url 'sign_up' %}">Sign Up</a>
-            <a href="{% url 'sign_in' %}">Sign In</a>
+            <a href="#">Logout</a>
         </div>
     </nav>
-
-    <div class="sidebar">
-        <h2>Admin Dashboard</h2>
-        <a href="#orders">Orders</a>
-        <a href="#users">Users</a>
-        <a href="#companies">Companies</a>
-        <a href="#settings">Settings</a>
-    </div>
 
     <div class="main-content">
         <!-- Orders Section -->
@@ -146,8 +185,8 @@
                     <tr>
                         <th>User ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Customer Address</th>
+                        <th>Customer Phone</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -156,11 +195,10 @@
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.first_name }} {{ user.last_name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.role }}</td>
+                        <td>{{ user.address }}</td>
+                        <td>{{ user.phone_number }}</td>
                         <td>
-                            <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                            <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'admin_users' %}" class="btn btn-primary">Vew</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -183,7 +221,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for company in companies %}
+                    {% for company in company %}
                     <tr>
                         <td>{{ company.id }}</td>
                         <td>{{ company.company_name }}</td>
@@ -199,8 +237,7 @@
                 </tbody>
             </table>
         </section>
-
-  
+    </div>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

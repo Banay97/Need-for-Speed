@@ -119,6 +119,16 @@
             color: #FFE5B4;
         }
 
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            font-weight: bold;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: #FFE5B4;
+        }
+
         .footer-bottom {
             background-color: #FFE5B4;
             color: #C04000;
@@ -151,19 +161,24 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Order Name</th>
-                    <th scope="col">Customer</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Total Amount</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for order in orders %}
                 <tr>
-                    <td>{{ order.order_name }}</td>
+                    <td>{{ order.id }}</td>
                     <td>{{ order.customer.name }}</td>
+                    <td>{{ order.date }}</td>
                     <td>{{ order.status }}</td>
+                    <td>{{ order.total }}</td>
                     <td>
+                        <a href="{% url 'admin_order_detail' order.id %}" class="btn btn-primary">View</a>
                         <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>

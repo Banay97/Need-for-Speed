@@ -184,8 +184,8 @@ def admin_delete_user_view(request, user_id):
 
 # Company Management Views
 def admin_companies_view(request):
-    companies = Company.objects.all()
-    return render(request, 'admin/admin_company.html', {'companies': companies})
+    company = Company.objects.all()
+    return render(request, 'admin/admin_company.html', {'company': company})
 
 def admin_company_edit_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)

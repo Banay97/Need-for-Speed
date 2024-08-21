@@ -2,12 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Company Management">
-    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="Company Management - Need For Speed Admin">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
+    <title>Company Management - Need For Speed Admin</title>
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Insert the styles from your provided code here */
-        /* ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+      
+        body {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background: linear-gradient(to left, #FAFAFA, #FFE5B4);
+        }
+        nav {
+            width: 100%;
+            background: #C04000;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        .nav-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .nav-left h1 {
+            font-size: 32px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: white;
+            text-transform: uppercase;
+        }
+        .nav-left h1 a {
+            color: #FFE5B4;
+            text-decoration: none;
+        }
+        .nav-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+        .nav-center ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        .nav-center ul li {
+            position: relative;
+        }
+        a {
+            color: #FFE5B4;
+        }
+        .nav-center ul li a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #FFE5B4;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+            display: block;
+        }
+        .nav-center ul li a:hover, .nav-right a:hover {
+            background-color:  #55371e;
+            color: #1A4862;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .nav-right a {
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #FFE5B4;
+            padding: 0 16px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 85px;
+            color: #C04000;
+            text-shadow: #FF6347 3px 0 15px;
+            margin-bottom: 40px;
+        }
+
+        table th, table td {
+            font-weight: bold;
+            color: #d38808;
+            text-align: center;
+            padding: 15px;
+        }
+        table th {
+            background-color: #FFE5B4;
+            color: #C04000;
+        }
+
+        .btn-primary {
+            background-color: #C04000;
+            border-color: #C04000;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color:  #E25822;
+            color: #FFE5B4;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            font-weight: bold;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: #FFE5B4;
+        }
+
+        .footer-bottom {
+            background-color: #FFE5B4;
+            color: #C04000;
+            padding: 15px;
+            text-align: center;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
@@ -17,10 +145,10 @@
         </div>
         <div class="nav-center">
             <ul>
-                <li><a href="/ad">Dashboard</a></li>
-                <li><a href="#">Users</a></li>
-                <li><a href="#">Companies</a></li>
-                <li><a href="#">Orders</a></li>
+                <li><a href="/admindashboard">Admin Dashboard</a></li>
+                <li><a href="/adminusers">Users</a></li>
+                <li><a href="/admincompanies">Companies</a></li>
+                <li><a href="/adminorders">Orders</a></li>
             </ul>
         </div>
         <div class="nav-right">
@@ -28,10 +156,10 @@
         </div>
     </nav>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4">Company Management</h1>
-        <table class="table">
-            <thead class="thead-dark">
+    <main class="container">
+        <h1>Company Management</h1>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Address</th>
@@ -57,10 +185,8 @@
         </table>
     </main>
 
-    <footer class="bg-custom text-custom text-center text-lg-start">
-        <div class="footer-bottom">
-            <small>&copy; Need For Speed - Company Management. All rights reserved.</small>
-        </div>
+    <footer class="footer-bottom">
+        <small>&copy; Need For Speed - Company Management. All rights reserved.</small>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
