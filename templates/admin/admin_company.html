@@ -166,6 +166,13 @@
             text-align: center;
             margin-top: 50px;
         }
+        h3{
+            color: #b97350;
+            text-shadow: #FF6347 3px 0 15px;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -252,34 +259,42 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
         <h1>Company Management</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Company Address</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for company in companies %}
-                <tr>
-                    <td>{{ company.company_name }}</td>
-                    <td>{{ company.address }}</td>
-                    <td>{{ company.phone_number }}</td>
-                    <td>{{ company.email }}</td>
-                    <td>
-                        <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header">
+                <h3>Companies List</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Company Address</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for company in companies %}
+                        <tr>
+                            <td>{{ company.company_name }}</td>
+                            <td>{{ company.address }}</td>
+                            <td>{{ company.phone_number }}</td>
+                            <td>{{ company.email }}</td>
+                            <td>
+                                <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
+    
 
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - Company Management. All rights reserved.</small>

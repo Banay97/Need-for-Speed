@@ -244,11 +244,11 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
         <h1>Update Customer Information</h1>
         <div class="card">
             <div class="card-body">
-                <form method="POST">
+                <form action="{% url 'admin_user_edit' user.id %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="first_name">First Name</label>
@@ -264,13 +264,17 @@
                     </div>
                     <div class="form-group">
                         <label for="phone_number">Phone Number</label>
-                        <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{ user.phone_number }}" required>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ user.phone_number }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button> |<a href="{% url 'admin_users' %}" class="btn btn-primary">View</a>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="{% url 'admin_users' %}" class="btn btn-secondary">View All Users</a>
+                    </div>
                 </form>
             </div>
         </div>
     </main>
+    
 
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - User Management. All rights reserved.</small>

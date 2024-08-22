@@ -166,6 +166,13 @@
             text-align: center;
             margin-top: 50px;
         }
+        h3{
+            color: #b97350;
+            text-shadow: #FF6347 3px 0 15px;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -252,47 +259,48 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
         <h1>Order Management</h1>
-        <table class="table table-bordered">
-            <thead>
-                    <!-- Orders Section -->
-        <section id="orders">
-            <h3>Orders</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Total</th>
-                        <th>Created Date</th>
-                        <th>Pick up </th>
-                        <th>Drop off </th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                    <tr>
-                        <td>{{ order.id }}</td>
-                        <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                        <td>{{ order.Total }}</td>
-                        <td>{{ order.created_at }}</td>
-                        <td>{{ order.pickup_location }}</td>
-                        <td>{{ order.pickoff_location }}</td>
-                        <td>{{ order.order_status }}</td>
-                        <td>
-                            <a href="{% url 'admin_order_edit' order.id %}" class="btn btn-primary">edit</a>
-                            <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger">Delete</a>
-                        </td>       
-                                 </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </section>
-
+        <div class="card">
+            <div class="card-header">
+                <h3>Orders</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                            <th>Created Date</th>
+                            <th>Pick Up</th>
+                            <th>Drop Off</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.Total }}</td>
+                            <td>{{ order.created_at }}</td>
+                            <td>{{ order.pickup_location }}</td>
+                            <td>{{ order.pickoff_location }}</td>
+                            <td>{{ order.order_status }}</td>
+                            <td>
+                                <a href="{% url 'admin_order_edit' order.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
+    
 
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - Order Management. All rights reserved.</small>

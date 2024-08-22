@@ -258,21 +258,21 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
         <h1>Order Management</h1>
         <div class="card">
             <div class="card-header">
-                <h3>Order List</h3>
+                <h3>Orders List</h3>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Order ID</th>
                             <th>Customer</th>
                             <th>Created Date</th>
-                            <th>Pick up </th>
-                            <th>Drop off </th>
+                            <th>Pick Up</th>
+                            <th>Drop Off</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -282,13 +282,13 @@
                         <tr>
                             <td>{{ order.id }}</td>
                             <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                            <td>{{ order.Total }}</td>
+                            <td>{{ order.created_date }}</td>
                             <td>{{ order.pickup_location }}</td>
                             <td>{{ order.pickoff_location }}</td>
                             <td>{{ order.order_status }}</td>
                             <td>
-                                <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                                <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'admin_order_edit' order.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -297,6 +297,7 @@
             </div>
         </div>
     </main>
+    
 
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - User Management. All rights reserved.</small>
