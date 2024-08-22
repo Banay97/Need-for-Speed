@@ -346,6 +346,65 @@ def sales_data(request):
     }
     return JsonResponse(response_data)    
 
+#Admin Create Company Function:
+def admin_create_comapny(request):
+    if request.method == 'POST':
+         # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='admin_create_comapny')
+            return redirect('admin_create_comapny')
+        else:
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            number_of_workers = request.POST['number_of_workers']
+            email= request.POST['email']
+
+            # Create a company
+            
+            company = Company.objects.create(first_name=first_name, last_name=last_name, address=address,company_name=company_name, phone_number=phone_number, number_of_workers =number_of_workers, email= email )
+
+             # Send a success message and redirect
+            messages.success(request, 'Your Company has been created successfully')
+            return redirect('admin_create_comapny')
+    else:
+        return render(request, 'admin/admin_create_comapny.html')
+
+#Admin Create Customer Function:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -353,7 +412,7 @@ def sales_data(request):
 
 def company_create_order(request): 
     if request.method == 'POST':
-        # Validate the input data (assuming you have a user_validator in User model)
+        # Validate the input data 
         errors = User.objects.user_validator(request.POST)
         if errors:
             for key, value in errors.items():

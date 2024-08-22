@@ -44,5 +44,10 @@ urlpatterns = [
 
 
 
+    #create company from the admin side:
+    path('admin-create-company', views.admin_create_comapny , name="admin_create_comapny"),
+
+
+
     
 ]
