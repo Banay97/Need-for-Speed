@@ -13,17 +13,30 @@ urlpatterns = [
     path('sign-up', views.sign_up, name='sign_up'),
     path('sign-out', views.sign_out, name='sign_out'),
     
-    #admin pages and CRUD operations
-    path('admin-dashboard', views.admin_dashboard, name='admin_dashboard'),
-    path('create-company', views.create_company, name='create_company'),
-    path('update-company', views.update_company, name='update_company'),
-    path('view-all-companies', views.view_companies, name='view_companies'),
+    # #admin pages and CRUD operations
+    # path('admin-dashboard', views.admin_dashboard, name='admin_dashboard'),
+    # path('create-company', views.create_company, name='create_company'),
+    # path('update-company', views.update_company, name='update_company'),
+    # path('view-all-companies', views.view_companies, name='view_companies'),
 
     #Company pages and CRUD operations
     path('company-dashboard', views.company_dashboard, name='company_dashboard'),
     path('create-order', views.create_order, name='create_order'),
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),
+
+    
+     # Admin Dashboard
+     path('admindashboard/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('adminusers/', views.admin_users_view, name='admin_users'),
+    path('adminusers/edit/<int:user_id>/', views.admin_user_edit_view, name='admin_user_edit'),
+    path('adminusers/delete/<int:user_id>/', views.admin_delete_user_view, name='admin_delete_user'),
+    path('admincompanies/', views.admin_companies_view, name='admin_companies'),
+    path('admincompanies/edit/<int:company_id>/', views.admin_company_edit_view, name='admin_company_edit'),
+    path('admincompanies/delete/<int:company_id>/', views.admin_company_delete_view, name='admin_company_delete'),
+    path('adminorders/', views.admin_orders_view, name='admin_orders'),
+    path('adminorders/detail/<int:order_id>/', views.admin_order_detail_view, name='admin_order_detail'),
+    path('adminorders/delete/<int:order_id>/', views.admin_order_delete_view, name='admin_order_delete'),
 
 
     

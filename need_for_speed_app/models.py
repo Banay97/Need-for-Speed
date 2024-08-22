@@ -7,12 +7,10 @@ class UserManager(models.Manager):
         errors = {}
         if len(postData['first_name']) < 2:
             errors['first_name'] = 'First name should be at least 2 characters long'
-
         if len(postData['last_name']) < 2:
             errors['last_name'] = 'Last name should be at least 2 characters long'
-
         if len(postData['phone_number']) < 5:
-            errors['phone_number'] = 'Phone Number should be at least 5 characters long'   
+            errors['phone_number'] = 'Phone Number should be at least 5 characters long'
 
     def user_email_validator(self, postData, is_creation=False):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -55,7 +53,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)  
     address = models.CharField(max_length=255)
-    email = models.EmailField('Email',unique=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,30 +63,53 @@ class User(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-
 class Customer(User):
+
     status = models.CharField(max_length=50, default='active') 
 
     def display_info(self):
+
         print(f"The customer {self.first_name} {self.last_name} with phone number {self.phone_number} located in {self.address} is {self.status}")
 
+    
+
+    def __str__(self):
+
+        return f'{self.first_name} {self.last_name}'    
+
+ 
 
 class Delivery(User):
+
     license = models.CharField(max_length=50, default='N/A')  
+
     status = models.CharField(max_length=50, default='active')  
+
     worklocation = models.CharField(max_length=255, default='Unknown')  
 
     def display_info(self):
+
         print(f"The driver {self.first_name} {self.last_name} with license number {self.license} is {self.status} and at {self.work_location} this area now.")
 
+    def __str__(self):
+
+        return f'{self.first_name} {self.last_name}'
 
 class Company(User):
+
     company_name = models.CharField(max_length=255)  
-    number_of_workers = models.IntegerField() 
+
+    number_of_workers = models.IntegerField(blank=True, null= True)
+
+   
 
     def display_info(self):
-        print(f"The {self.company_name} Company has {self.number_of_workers} employees working in it.")
 
+        print(f"The {self.company_name}Company has {self.number_of_workers}employees working in it.")
+
+    def __str__(self):
+
+        return self.company_name
 
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
@@ -96,13 +117,14 @@ class Order(models.Model):
     order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
     pickoff_location = models.CharField(max_length=255)
-    customer = models.ForeignKey(Customer, related_name ='customer_order', on_delete=models.CASCADE,  null=True, blank=True)
+    Total = models.IntegerField(default=0)  # Set default value to 0 for new orders
+    customer = models.ForeignKey(User, related_name ='user_order', on_delete=models.CASCADE,  null=True, blank=True)
     delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
+    order_status = models.CharField(max_length=100, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    order_price= models.CharField(max_length=255, null=True, blank=True)
-
+    
     def __str__(self):
         return f'{self.order_name} - {self.order_code_number}'
 
