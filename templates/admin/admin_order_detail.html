@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Admin Dashboard - Need For Speed Express">
-    <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap, Admin Dashboard">
-    <title>Admin Dashboard - Need For Speed Express</title>
+    <meta name="description" content="User Management - Need For Speed Admin">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
+    <title>User Management - Need For Speed Admin</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -87,59 +87,6 @@
             font-size: 17px;
             font-weight: bold;
         }
-
-        .container {
-            margin-top: 40px;
-            padding-bottom: 40px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 85px;
-            color: #C04000;
-            text-shadow: #FF6347 3px 0 15px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            margin: 20px auto;
-            max-width: 800px;
-        }
-
-        .card-header {
-            background-color: #C04000;
-            color: #FFE5B4;
-            text-align: center;
-        }
-
-        .card-body {
-            background-color: #FFE5B4;
-            color: #C04000;
-        }
-
-        .form-control {
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        .btn-primary {
-            background-color: #C04000;
-            border-color: #C04000;
-            font-weight: bold;
-        }
-        .btn-primary:hover {
-            background-color: #E25822;
-            color: #FFE5B4;
-        }
-
-        .footer-bottom {
-            background-color: #FFE5B4;
-            color: #C04000;
-            padding: 15px;
-            text-align: center;
-            margin-top: 50px;
-        }
-
         /* Ensure dropdown menus are hidden by default */
         .nav-center ul .sub-menu {
             display: none;
@@ -168,11 +115,61 @@
             background-color: #55371e;
             color: #1A4862;
         }
-        
-        h2 {
-            color: #d8c1b5;
+
+        .container {
+            margin-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 85px;
+            color: #C04000;
             text-shadow: #FF6347 3px 0 15px;
-            font-size: 30px;
+            margin-bottom: 40px;
+        }
+
+        table th, table td {
+            font-weight: bold;
+            color: #d38808;
+            text-align: center;
+            padding: 15px;
+        }
+        table th {
+            background-color: #FFE5B4;
+            color: #C04000;
+        }
+
+        .btn-primary {
+            background-color: #C04000;
+            border-color: #C04000;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #E25822;
+            color: #FFE5B4;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            font-weight: bold;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: #fff;
+        }
+
+        .footer-bottom {
+            background-color: #FFE5B4;
+            color: #C04000;
+            padding: 15px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h3{
+            color: #b97350;
+            text-shadow: #FF6347 3px 0 15px;
+            font-size: 50px;
             font-weight: bold;
             text-align: center;
         }
@@ -261,66 +258,50 @@
         </div>
     </nav>
 
-    <!-- Main content -->
-    <main role="main" class="container">
+    <main class="container">
+        <h1>Order Management</h1>
         <div class="card">
             <div class="card-header">
-                <h2>Create an Order</h2>
+                <h3>Order List</h3>
             </div>
             <div class="card-body">
-                <form action="{% url 'create_order' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Customer Address</label>
-                        <input type="text" id="address" name="address" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" id="phone_number" name="phone_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company_name">Company Name:</label>
-                        <input type="text" id="company_name" name="company_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company_phone_number">Company Phone Number:</label>
-                        <input type="text" id="company_phone_number" name="company_phone_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="order_name">Order Name:</label>
-                        <input type="text" id="order_name" name="order_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="order_code_number">Order Serial Number:</label>
-                        <input type="number" id="order_code_number" name="order_code_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Total">Order Price:</label>
-                        <input type="number" id="Total" name="Total" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickup_location">Pick Up Location:</label>
-                        <input type="text" id="pickup_location" name="pickup_location" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickoff_location">Pick Off Location:</label>
-                        <input type="text" id="pickoff_location" name="pickoff_location" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Created Date</th>
+                            <th>Pick up </th>
+                            <th>Drop off </th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.Total }}</td>
+                            <td>{{ order.pickup_location }}</td>
+                            <td>{{ order.pickoff_location }}</td>
+                            <td>{{ order.order_status }}</td>
+                            <td>
+                                <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
+                                <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
 
-    <!-- Bootstrap JS and dependencies -->
+    <footer class="footer-bottom">
+        <small>&copy; Need For Speed - User Management. All rights reserved.</small>
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

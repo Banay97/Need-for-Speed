@@ -181,23 +181,10 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></h1>
+            <h1><a href="{% url 'company_dashboard' %}">Company Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
-                <li><a href="/adminusers"><img src="https://cdn-icons-png.freepik.com/256/746/746914.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Companies"> Companies</a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#create-customer">Create a Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#view-customers">View All Customers</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#customers">
                         <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
@@ -220,7 +207,7 @@
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
+                            <a class="nav-link" href="{% url 'company_create_order' %}">Create an Order</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
@@ -268,7 +255,7 @@
                 <h2>Create an Order</h2>
             </div>
             <div class="card-body">
-                <form action="{% url 'create_order' %}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'company_create_order'%}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="first_name">First Name:</label>

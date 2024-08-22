@@ -2,23 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Company Management - Need For Speed Admin">
+    <meta name="description" content="Edit Order - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>Company Management - Need For Speed Admin</title>
+    <title>Edit Order - Need For Speed Admin</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-      
         body {
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
         }
+
         nav {
             width: 100%;
             background: #C04000;
@@ -122,20 +117,14 @@
 
         h1 {
             text-align: center;
-            font-size: 85px;
+            font-size: 65px;
             color: #C04000;
             text-shadow: #FF6347 3px 0 15px;
             margin-bottom: 40px;
         }
 
-        table th, table td {
+        .form-group label {
             font-weight: bold;
-            color: #d38808;
-            text-align: center;
-            padding: 15px;
-        }
-        table th {
-            background-color: #FFE5B4;
             color: #C04000;
         }
 
@@ -144,19 +133,16 @@
             border-color: #C04000;
             font-weight: bold;
         }
+
         .btn-primary:hover {
-            background-color:  #E25822;
+            background-color: #E25822;
             color: #FFE5B4;
         }
 
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
             font-weight: bold;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-            color: #FFE5B4;
         }
 
         .footer-bottom {
@@ -171,23 +157,10 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard'%}">Admin Dashboard</a></h1>
+            <h1><a href="{% url 'company_dashboard'%}">Company Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
-                <li><a href="/adminusers"><img src="https://cdn-icons-png.freepik.com/256/746/746914.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Companies"> Companies</a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#create-customer">Create a Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#view-customers">View All Customers</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#customers">
                         <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
@@ -210,10 +183,10 @@
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
+                            <a class="nav-link" href="{% url 'company_create_order' %}">Create an Order</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
+                            <a class="nav-link" href="{% url 'company_edit_order' %}">Update an Order</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'view_orders' %}">View All Orders</a>
@@ -253,36 +226,34 @@
     </nav>
 
     <main class="container">
-        <h1>Company Management</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Company Address</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for company in companies %}
-                <tr>
-                    <td>{{ company.company_name }}</td>
-                    <td>{{ company.address }}</td>
-                    <td>{{ company.phone_number }}</td>
-                    <td>{{ company.email }}</td>
-                    <td>
-                        <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h1>Update Order Information</h1>
+        <form method="post" action="{% url 'company_order_edit' order.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="customer_name">Customer Name</label>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ order.customer.first_name }} {{ order.customer.last_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="order_status">Order Status</label>
+                <select class="form-control" id="order_status" name="order_status" required>
+                    <option value="Pending" {% if order.order_status == "Pending" %}selected{% endif %}>Pending</option>
+                    <option value="Processing" {% if order.order_status == "Processing" %}selected{% endif %}>Processing</option>
+                    <option value="Shipped" {% if order.order_status == "Shipped" %}selected{% endif %}>Shipped</option>
+                    <option value="Delivered" {% if order.order_status == "Delivered" %}selected{% endif %}>Delivered</option>
+                    <option value="Cancelled" {% if order.order_status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="total_amount">Total Amount</label>
+                <input type="number" class="form-control" id="total_amount" name="total_amount" value="{{ order.Total }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="{% url 'admin_orders' %}" class="btn btn-secondary">Cancel</a>
+        </form>
     </main>
 
     <footer class="footer-bottom">
-        <small>&copy; Need For Speed - Company Management. All rights reserved.</small>
+        <small>&copy; Need For Speed - Order Management. All rights reserved.</small>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -195,7 +195,7 @@
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
+                            <a class="nav-link" href="{% url 'company_create_order' %}">Create an Order</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
@@ -314,44 +314,6 @@
                                 <td>{{ user.phone_number }}</td>
                                 <td>
                                     <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Companies Section -->
-        <section id="companies" class="mt-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Companies</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Company ID</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for company in companies %}
-                            <tr>
-                                <td>{{ company.id }}</td>
-                                <td>{{ company.company_name }}</td>
-                                <td>{{ company.address }}</td>
-                                <td>{{ company.phone_number }}</td>
-                                <td>{{ company.email }}</td>
-                                <td>
-                                    <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary">View</a>
-                                    <!-- <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a> -->
                                 </td>
                             </tr>
                             {% endfor %}

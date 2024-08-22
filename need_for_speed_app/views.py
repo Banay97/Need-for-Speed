@@ -9,11 +9,17 @@ from django.utils import timezone
 from .models import User, Customer, Company, Delivery, Order, Notification
 
 # Create your views here.
+
+
+#main project nav pages
 def home(request):
     return render(request, 'main/home.html')
 
 def about_us(request):
     return render(request, 'main/AboutUs.html')
+
+def services(request):
+    return render(request, 'main/Services.html')   
 
 def contact_us(request):
     if request.method == 'POST':
@@ -32,6 +38,8 @@ def contact_us(request):
 
     return render(request, 'main/ContactUs.html', {}) 
 
+
+#Sign in , Sign up, and Sign out Functions
 def sign_in(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -95,8 +103,6 @@ def sign_out(request):
     return redirect('home')     
     
 
-def services(request):
-    return render(request, 'main/Services.html')   
 
 
 def admin_dashboard(request):
@@ -113,6 +119,15 @@ def  view_companies(request):
 
 
 def company_dashboard(request):
+    users = User.objects.all()
+    companies = Company.objects.all()
+    orders = Order.objects.all()
+
+    context = {
+        'users': users,
+        'companies': companies,
+        'orders': orders,
+    }
     return render(request, 'company/CompanyDashboard.html')
 
 # def create_order(request):
@@ -146,31 +161,45 @@ def company_dashboard(request):
 
 def create_order(request):
     if request.method == 'POST':
+        # Validate the input data (assuming you have a user_validator in User model)
         errors = User.objects.user_validator(request.POST)
         if errors:
             for key, value in errors.items():
                 messages.error(request, value, extra_tags='create_order')
             return redirect('create_order')
         else:
+            # Get the data from the POST request
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
-            address =request.POST['address']
+            address = request.POST['address']
             phone_number = request.POST['phone_number']
             company_name = request.POST['company_name']
             order_name = request.POST['order_name']
             order_code_number = request.POST['order_code_number']
-            order_price = request.POST['order_price']
+            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
             pickup_location = request.POST['pickup_location']
             pickoff_location = request.POST['pickoff_location']
 
-            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number)
-            order = Order.objects.create(order_name=order_name, company=company, order_code_number=order_code_number,order_price=order_price, pickup_location=pickup_location, pickoff_location=pickoff_location, customer=customer)
 
-            messages.success(request, 'Your order has beed created successfully')
-            return redirect('create_order')  
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  
+                customer=customer  # Assuming there's a relationship to the customer
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('create_order')
     else:
-        return render(request, 'admin/CreateOrder.html') 
+        return render(request, 'admin/CreateOrder.html')
 
 def update_order(request):
     return render(request, 'admin/UpdateOrder.html') 
@@ -316,3 +345,53 @@ def sales_data(request):
         }]
     }
     return JsonResponse(response_data)    
+
+
+
+
+#Company Functions:
+
+def company_create_order(request): 
+    if request.method == 'POST':
+        # Validate the input data (assuming you have a user_validator in User model)
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_order')
+            return redirect('company_create_order')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            order_name = request.POST['order_name']
+            order_code_number = request.POST['order_code_number']
+            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
+            pickup_location = request.POST['pickup_location']
+            pickoff_location = request.POST['pickoff_location']
+
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  
+                customer=customer  # Assuming there's a relationship to the customer
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('company_create_order')
+    else:
+        return render(request, 'company/company_create_order.html')
+
+def company_edit_order(request):
+    return render(request , 'company_edit_order.html')

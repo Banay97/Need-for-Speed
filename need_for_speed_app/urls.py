@@ -24,6 +24,8 @@ urlpatterns = [
     path('create-order', views.create_order, name='create_order'),
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),
+    path('company-create-order', views.company_create_order, name='company_create_order'),
+    path('company-update-order', views.company_edit_order, name='company_edit_order'),
 
     
      # Admin Dashboard
@@ -37,6 +39,8 @@ urlpatterns = [
     path('adminorders/', views.admin_orders_view, name='admin_orders'),
     path('adminorders/detail/<int:order_id>/', views.admin_order_detail_view, name='admin_order_detail'),
     path('adminorders/delete/<int:order_id>/', views.admin_order_delete_view, name='admin_order_delete'),
+    path('salesdata/', views.sales_data, name='sales_data'),
+
 
 
     
