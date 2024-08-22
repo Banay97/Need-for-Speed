@@ -243,9 +243,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'create_order'%}">Create an Order</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{% url 'update_order'%}">Update an Order</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'view_orders'%}">View All Orders</a>
                             </li>
@@ -259,19 +259,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#customers">
-                            <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid"
-                                width="20" alt="Customers"> Customers
+                        <a class="nav-link" href="#orders">
+                            <img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Orders
                         </a>
                         <ul class="nav flex-column ms-3 sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="#create-order">Create a Customer</a>
+                                <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
                             </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
+                            </li> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="#update-order">Update a Customer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#update-order">View All Customers</a>
+                                <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
                             </li>
                         </ul>
                     </li>
