@@ -376,6 +376,31 @@ def admin_create_comapny(request):
 
 #Admin Create Customer Function:
 
+def admin_create_customer(request):
+    if request.method == 'POST':
+         # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='admin_create_comapny')
+            return redirect('admin_create_comapny')
+        else:
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            status = request.POST['status']
+
+            # Create a customer
+            
+            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number, status=status )
+
+             # Send a success message and redirect
+            messages.success(request, 'Your Company has been created successfully')
+            return redirect('admin_create_customer')
+    else:
+        return render(request, 'admin/admin_create_customer.html')
+
 
 
 
