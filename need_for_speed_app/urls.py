@@ -47,6 +47,12 @@ urlpatterns = [
     #create company and customer from the admin side:
     path('admin-create-company', views.admin_create_comapny , name="admin_create_comapny"),
     path('admin-create-customer', views.admin_create_customer , name="admin_create_customer"),
+    
+
+    #Tracking Order Map:
+    path('tracking-order', views.tracking_order, name="tracking_order"),
+
+
 
 
 
