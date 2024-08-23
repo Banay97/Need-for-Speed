@@ -72,7 +72,7 @@
             display: block;
         }
         .nav-center ul li a:hover, .nav-right a:hover {
-            background-color:  #55371e;
+            background-color: #55371e;
             color: #1A4862;
         }
         .nav-right {
@@ -101,15 +101,25 @@
             margin-bottom: 40px;
         }
 
-        table th, table td {
-            font-weight: bold;
-            color: #d38808;
-            text-align: center;
-            padding: 15px;
+        .card {
+            margin: 20px auto;
+            max-width: 800px;
         }
-        table th {
+
+        .card-header {
+            background-color: #C04000;
+            color: #FFE5B4;
+            text-align: center;
+        }
+
+        .card-body {
             background-color: #FFE5B4;
             color: #C04000;
+        }
+
+        .form-control {
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .btn-primary {
@@ -118,7 +128,7 @@
             font-weight: bold;
         }
         .btn-primary:hover {
-            background-color:  #E25822;
+            background-color: #E25822;
             color: #FFE5B4;
         }
 
@@ -158,15 +168,17 @@
             background-color: #55371e;
             color: #1A4862;
         }
-        h3{
-            color: #55371e;
-            font-size: 50px;
+        
+        h2 {
+            color: #d8c1b5;
+            text-shadow: #FF6347 3px 0 15px;
+            font-size: 30px;
             font-weight: bold;
             text-align: center;
         }
     </style>
 </head>
-<body>   
+<body>
     <nav>
         <div class="nav-left">
             <h1><a href="{% url 'company_dashboard'%}">Company Dashboard</a></h1>
@@ -253,188 +265,53 @@
         </div>
     </nav>
 
-    <div class="main-content container">
-
-          <!-- Chart Section -->
-          <section id="orders" class="mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Orders Management Chart</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-container" style="width: 100%; height: 200px;">
-                        <canvas id="ordersChart"></canvas>
+    <!-- Main content -->
+    <main role="main" class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Create Delivery Driver</h2>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'company_create_driver' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control" required>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address"> Address</label>
+                        <input type="text" id="address" name="address" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="license"> License</label>
+                        <input type="text" id="license" name="license" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <input type="text" id="status" name="status" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="worklocation"> Working Location</label>
+                        <input type="text" id="worklocation" name="worklocation" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </div>
-        </section>
-
-        <!-- Orders Section -->
-        <section id="orders" class="mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Orders</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Customer</th>
-                                <th>Total</th>
-                                <th>Created Date</th>
-                                <th>Pick Up</th>
-                                <th>Drop Off</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for order in orders %}
-                            <tr>
-                                <td>{{ order.id }}</td>
-                                <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                                <td>{{ order.Total }}</td>
-                                <td>{{ order.created_at }}</td>
-                                <td>{{ order.pickup_location }}</td>
-                                <td>{{ order.pickoff_location }}</td>
-                                <td>{{ order.order_status }}</td>
-                                <td><a href="{% url 'company_orders'%}" class="btn btn-primary">View</a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Users Section -->
-        <section id="users" class="mt-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Customers</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Customer ID</th>
-                                <th>Customer Name</th>
-                                <th>Customer Address</th>
-                                <th>Customer Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for customer in customers %}
-                            <tr>
-                                <td>{{ customer.id }}</td>
-                                <td>{{ customer.first_name }} {{ customer.last_name }}</td>
-                                <td>{{ customer.address }}</td>
-                                <td>{{ customer.phone_number }}</td>
-                                <td>
-                                    <a href="{% url 'company_customers' %}" class="btn btn-primary">View</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-          <!-- Users Section -->
-          <section id="users" class="mt-5">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Delivery Driver</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Delivery ID</th>
-                                <th>Name</th>
-                                <th>Driver Address</th>
-                                <th>Driver Phone Number</th>
-                                <th>Driver license</th>
-                                <th>Working Location</th>
-                                <th>Status </th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for driver in drivers %}
-                            <tr>
-                                <td>{{ driver.id }}</td>
-                                <td>{{ driver.first_name }} {{ driver.last_name }}</td>
-                                <td>{{ driver.address }}</td>
-                                <td>{{ driver.phone_number }}</td>
-                                <td>{{ driver.license }}</td>
-                                <td>{{ driver.worklocation }}</td>
-                                <td>{{ driver.Status }}</td>
-                                <td>
-                                    <a href="{% url 'company_drivers' %}" class="btn btn-primary">View</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </div>
+        </div>
+    </main>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('ordersChart').getContext('2d');
-        
-        // Fetch data from the Django backend
-        fetch('/salesdata/')
-            .then(response => response.json())
-            .then(data => {
-                const chart = new Chart(ctx, {
-                    type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
-                    data: {
-                        labels: data.labels,
-                        datasets: [{
-                            label: data.datasets[0].label,
-                            data: data.datasets[0].data,
-                            backgroundColor: data.datasets[0].backgroundColor,
-                            borderColor: data.datasets[0].borderColor,
-                            borderWidth: data.datasets[0].borderWidth
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.label || '';
-                                        if (context.parsed !== null) {
-                                            label += `: ${context.parsed}`;
-                                        }
-                                        return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
 </body>
 </html>
