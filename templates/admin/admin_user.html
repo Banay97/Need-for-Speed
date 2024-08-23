@@ -8,6 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert Bootstrap and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -259,10 +262,10 @@
     </nav>
 
     <main class="container">
-        <h1>User Management</h1>
+        <h1>Customer Management</h1>
         <div class="card">
             <div class="card-header">
-                <h3>User List</h3>
+                <h3>Customers List</h3>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -301,5 +304,48 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to handle the delete button click
+        function handleDeleteClick(event) {
+          event.preventDefault(); // Prevent the default link behavior
+      
+          const deleteUrl = this.getAttribute('href'); // Get the URL from the href attribute
+      
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+      
+          swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Redirect to the delete URL if confirmed
+              window.location.href = deleteUrl;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+              });
+            }
+          });
+        }
+      
+        // Attach the click event handler to all delete buttons
+        document.querySelectorAll('.btn-danger').forEach(button => {
+          button.addEventListener('click', handleDeleteClick);
+        });
+      </script>
 </body>
 </html>
