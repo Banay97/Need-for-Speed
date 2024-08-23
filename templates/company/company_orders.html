@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Edit Order - Need For Speed Admin">
+    <meta name="description" content="Order Management - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>Edit Order - Need For Speed Admin</title>
+    <title>Order Management - Need For Speed Admin</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+      
         body {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
         }
-
         nav {
             width: 100%;
             background: #C04000;
@@ -117,14 +122,20 @@
 
         h1 {
             text-align: center;
-            font-size: 65px;
+            font-size: 85px;
             color: #C04000;
             text-shadow: #FF6347 3px 0 15px;
             margin-bottom: 40px;
         }
 
-        .form-group label {
+        table th, table td {
             font-weight: bold;
+            color: #d38808;
+            text-align: center;
+            padding: 15px;
+        }
+        table th {
+            background-color: #FFE5B4;
             color: #C04000;
         }
 
@@ -133,16 +144,19 @@
             border-color: #C04000;
             font-weight: bold;
         }
-
         .btn-primary:hover {
-            background-color: #E25822;
+            background-color:  #E25822;
             color: #FFE5B4;
         }
 
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
             font-weight: bold;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: #FFE5B4;
         }
 
         .footer-bottom {
@@ -151,6 +165,13 @@
             padding: 15px;
             text-align: center;
             margin-top: 50px;
+        }
+        h3{
+            color: #b97350;
+            text-shadow: #FF6347 3px 0 15px;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
@@ -242,50 +263,47 @@
     </nav>
 
     <main class="container mt-4">
-        <h1>Update Order Information</h1>
+        <h1>Order Management</h1>
         <div class="card">
+            <div class="card-header">
+                <h3>Orders</h3>
+            </div>
             <div class="card-body">
-                <form method="post" action="{% url 'company_edit_order' order.id %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="customer_name">Customer Name</label>
-                        <input type="text" class="form-control" id="customer_name" name="customer_name" value="{% if order.customer %}{{ order.customer.first_name }} {{ order.customer.last_name }}{% endif %}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="total_amount">Total Amount</label>
-                        <input type="number" class="form-control" id="total_amount" name="total_amount" value="{{ order.Total }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="pickup_location">Pick Up</label>
-                        <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="{{ order.pickup_location }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="pickoff_location">Pick Off</label>
-                        <input type="text" class="form-control" id="pickoff_location" name="pickoff_location" value="{{ order.pickoff_location }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="order_status">Order Status</label>
-                        <select class="form-control" id="order_status" name="order_status" required>
-                            <option value="Pending" {% if order.order_status == "Pending" %}selected{% endif %}>Pending</option>
-                            <option value="Processing" {% if order.order_status == "Processing" %}selected{% endif %}>Processing</option>
-                            <option value="Shipped" {% if order.order_status == "Shipped" %}selected{% endif %}>Shipped</option>
-                            <option value="Delivered" {% if order.order_status == "Delivered" %}selected{% endif %}>Delivered</option>
-                            <option value="Cancelled" {% if order.order_status == "Cancelled" %}selected{% endif %}>Cancelled</option>
-                        </select>
-                    </div>
-                    
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <a href="{% url 'company_orders' %}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                            <th>Created Date</th>
+                            <th>Pick Up</th>
+                            <th>Drop Off</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.Total }}</td>
+                            <td>{{ order.created_at }}</td>
+                            <td>{{ order.pickup_location }}</td>
+                            <td>{{ order.pickoff_location }}</td>
+                            <td>{{ order.order_status }}</td>
+                            <td>
+                                <a href="{% url 'company_edit_order' order.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'company_delete_order' order.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
+    
 
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - Order Management. All rights reserved.</small>

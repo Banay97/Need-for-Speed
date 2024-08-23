@@ -169,7 +169,7 @@
 <body>   
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard'%}">Company Dashboard</a></h1>
+            <h1><a href="{% url 'company_dashboard'%}">Company Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
@@ -185,7 +185,7 @@
                             <a class="nav-link" href="#update-customer">Update a Customer</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'company_users' %}">View All Customers</a>
+                            <a class="nav-link" href="{%url 'company_customers' %}">View All Customers</a>
                         </li>
                     </ul>
                 </li>
@@ -202,6 +202,22 @@
                         </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'company_orders' %}">View All Orders</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#orders">
+                        <img src="https://cdn-icons-png.freepik.com/256/16006/16006280.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Delivery Driver
+                    </a>
+                    <ul class="nav flex-column ms-3 sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_create_driver' %}">Create a Delivery Driver</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_drivers' %}">View All Delivery Driver</a>
                         </li>
                     </ul>
                 </li>
@@ -279,7 +295,7 @@
                                 <td>{{ order.date }}</td>
                                 <td>{{ order.status }}</td>
                                 <td>{{ order.total }}</td>
-                                <td><a href="{% url 'admin_order_detail' order.id %}" class="btn btn-primary">View</a></td>
+                                <td><a href="{% url 'compnay_order_detail' order.id %}" class="btn btn-primary">View</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -292,14 +308,14 @@
         <section id="users" class="mt-5">
             <div class="card">
                 <div class="card-header">
-                    <h3>Users</h3>
+                    <h3>Customers</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>User ID</th>
-                                <th>Name</th>
+                                <th>Customer ID</th>
+                                <th>Customer Name</th>
                                 <th>Customer Address</th>
                                 <th>Customer Phone</th>
                                 <th>Actions</th>
@@ -313,7 +329,47 @@
                                 <td>{{ user.address }}</td>
                                 <td>{{ user.phone_number }}</td>
                                 <td>
-                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a>
+                                    <a href="{% url 'company_users' %}" class="btn btn-primary">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+          <!-- Users Section -->
+          <section id="users" class="mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Delivery Driver</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Delivery ID</th>
+                                <th>Name</th>
+                                <th>Driver Address</th>
+                                <th>Driver Phone Number</th>
+                                <th>Driver license</th>
+                                <th>Working Location</th>
+                                <th>Status </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for delivery in deliveries %}
+                            <tr>
+                                <td>{{ delivery.id }}</td>
+                                <td>{{ delivery.first_name }} {{ delivery.last_name }}</td>
+                                <td>{{ delivery.address }}</td>
+                                <td>{{ delivery.phone_number }}</td>
+                                <td>{{ delivery.license }}</td>
+                                <td>{{ delivery.worklocation }}</td>
+                                <td>{{ delivery.Status }}</td>
+                                <td>
+                                    <a href="{% url 'company_drivers' %}" class="btn btn-primary">View</a>
                                 </td>
                             </tr>
                             {% endfor %}

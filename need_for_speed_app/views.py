@@ -241,8 +241,8 @@ def admin_user_edit_view(request, user_id):
     if request.method == 'POST':
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
-        user.email = request.POST.get('email')
-        user.role = request.POST.get('role')
+        user.adress = request.POST.get('address')
+        user.phone_number = request.POST.get('phone_number')
         user.save()
         return redirect('admin_users')
 
@@ -411,7 +411,23 @@ def admin_create_customer(request):
     else:
         return render(request, 'admin/admin_create_customer.html')
 
-#Company Functions:
+
+
+
+# Company Dashboard View
+def company_dashboard_view(request):
+    users = User.objects.all()
+    companies = Company.objects.all()
+    orders = Order.objects.all()
+
+    context = {
+        'users': users,
+        'companies': companies,
+        'orders': orders,
+    }
+    return render(request, 'company/CompanyDashboard.html', context)
+
+#Company order Functions:
 
 def company_create_order(request): 
     if request.method == 'POST':
@@ -455,8 +471,164 @@ def company_create_order(request):
     else:
         return render(request, 'company/company_create_order.html')
 
-def company_edit_order(request):
+def company_orders_view(request):
+    orders = Order.objects.all()
+    return render(request, 'company/company_orders.html', {'orders': orders})
+
+def company_edit_order(request, order_id):
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        messages.error(request, 'Order not found.')
+        return redirect('company_orders')
+
+    if request.method == 'POST':
+        # errors = Order.objects.order_validator(request.POST)
+        # if errors:
+        #     for key, value in errors.items():
+        #         messages.error(request, value, extra_tags='company_edit_order')
+        #     return redirect('company_edit_order', order_id=order_id)
+
+        customer_name = request.POST.get('customer_name', '')
+        total_amount = request.POST.get('total_amount', 0)
+        pickup_location = request.POST.get('pickup_location', '')
+        pickoff_location = request.POST.get('pickoff_location', '')
+        order_status = request.POST.get('order_status', order.order_status)
+
+        # Update the related customer object
+        if order.customer:
+            name_parts = customer_name.split(' ', 1)
+            if len(name_parts) == 2:
+                order.customer.first_name, order.customer.last_name = name_parts
+            else:
+                order.customer.first_name = name_parts[0]
+                order.customer.last_name = ''
+                order.customer.save()
+        
+        # Update the order object
+        order.order_status = order_status
+        order.Total = int(total_amount) 
+        order.pickup_location = pickup_location
+        order.pickoff_location = pickoff_location
+
+        order.save()
+
+        messages.success(request, 'Order updated successfully')
+        return redirect('company_orders')
+
+    return render(request, 'company/company_edit_order.html', {'order': order})
+
+
+def company_delete_order_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delete()
+    return redirect('company_orders')    
+
+def company_orders(request):
+    return render(request , 'company/company_orders.html')  
+
+  
+
+
+#Company customer Functions:
+
+def company_create_customer(request): 
+    if request.method == 'POST':
+        # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_order')
+            return redirect('company_create_order')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            order_name = request.POST['order_name']
+            order_code_number = request.POST['order_code_number']
+            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
+            pickup_location = request.POST['pickup_location']
+            pickoff_location = request.POST['pickoff_location']
+
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  
+                customer=customer  # Assuming there's a relationship to the customer
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('company_create_order')
+    else:
+        return render(request, 'company/company_create_order.html')
+
+def company_edit_customer(request):
     return render(request , 'company_edit_order.html')
+
+def company_customers(request):
+    return render(request , 'company/company_customers.html')  
+
+#Company driver Functions:
+
+def company_create_driver(request): 
+    if request.method == 'POST':
+        # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_order')
+            return redirect('company_create_order')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            order_name = request.POST['order_name']
+            order_code_number = request.POST['order_code_number']
+            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
+            pickup_location = request.POST['pickup_location']
+            pickoff_location = request.POST['pickoff_location']
+
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  
+                customer=customer  # Assuming there's a relationship to the customer
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('company_create_order')
+    else:
+        return render(request, 'company/company_create_order.html')
+
+def company_edit_driver(request):
+    return render(request , 'company_edit_order.html')
+
+def company_drivers(request):
+    return render(request , 'company/company_drivers.html')          
 
 
 

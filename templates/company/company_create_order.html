@@ -181,7 +181,7 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'company_dashboard' %}">Company Dashboard</a></h1>
+            <h1><a href="{% url 'company_dashboard'%}">Company Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
@@ -191,13 +191,13 @@
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="#create-customer">Create a Customer</a>
+                            <a class="nav-link" href="{% url 'company_create_customer'%}">Create a Customer</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#view-customers">View All Customers</a>
+                            <a class="nav-link" href="{%url 'company_customers' %}">View All Customers</a>
                         </li>
                     </ul>
                 </li>
@@ -209,18 +209,35 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'company_create_order' %}">Create an Order</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'view_orders' %}">View All Orders</a>
+                            <a class="nav-link" href="{% url 'company_orders' %}">View All Orders</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#customers">
+                    <a class="nav-link" href="#orders">
+                        <img src="https://cdn-icons-png.freepik.com/256/16006/16006280.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Delivery Driver
+                    </a>
+                    <ul class="nav flex-column ms-3 sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_create_driver' %}">Create a Delivery Driver</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_drivers' %}">View All Delivery Driver</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tracking_order'%}">
                         <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
                     </a>
+                   
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#notifications">
@@ -241,8 +258,8 @@
         </div>
         <div class="nav-right">
             <li class="nav-item" style="list-style: none;">
-                <a class="nav-link" href="{% url 'sign_out' %}">
-                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Sign Out"> Sign Out
+                <a class="nav-link" href="{% url 'sign_out'%}">
+                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Sign Out
                 </a>
             </li>
         </div>

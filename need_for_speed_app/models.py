@@ -114,7 +114,6 @@ class Company(User):
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
     order_code_number = models.IntegerField()
-    order_status = models.CharField(max_length=255)
     pickup_location =models.CharField(max_length=255)
     pickoff_location = models.CharField(max_length=255)
     Total = models.IntegerField(default=0)  # Set default value to 0 for new orders
