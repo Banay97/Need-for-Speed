@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="description" content="Admin Dashboard - Need For Speed Express">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap, Admin Dashboard">
-    <title>Admin Dashboard - Need For Speed Express</title>
+    <title>Create Customer - Need For Speed Express Company</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 Bootstrap and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -268,42 +271,104 @@
     <!-- Main content -->
     <main role="main" class="container">
         <div class="card">
-            <div class="card-header">
-                <h2>Create Customer</h2>
-            </div>
-            <div class="card-body">
-                <form action="{% url 'company_create_customer' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address"> Address</label>
-                        <input type="text" id="address" name="address" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" id="phone_number" name="phone_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status:</label>
-                        <input type="text" id="status" name="status" class="form-control" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-            </div>
+          <div class="card-header">
+            <h2>Create Customer</h2>
+          </div>
+          <div class="card-body">
+            <form action="{% url 'company_create_customer' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" class="form-control" required>
+              </div>
+      
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
         </div>
-    </main>
+      </main>
+      
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // Handle form submission
+          const form = document.querySelector('form');
+        
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+        
+            Swal.fire({
+              title: 'Do you want to save the changes?',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Save',
+              denyButtonText: `Don't save`
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                // Collect form data
+                const formData = new FormData(form);
+        
+                // Use fetch API to submit the form asynchronously
+                try {
+                  const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                      'X-Requested-With': 'XMLHttpRequest', // To handle the request properly in Django
+                    },
+                  });
+        
+                  if (response.ok) {
+                    // Show success alert
+                    Swal.fire('Saved!', '', 'success').then(() => {
+                      window.location.href = '{% url "company_customers" %}'; // Redirect to customers page
+                    });
+                  } else {
+                    // Handle errors if necessary
+                    Swal.fire('Error', 'There was a problem saving your changes.', 'error');
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                  Swal.fire('Error', 'There was a problem saving your changes.', 'error');
+                }
+        
+              } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info');
+                // Redirect to the same page if changes are not saved
+                window.location.href = '{% url "company_create_customer" %}';
+              }
+            });
+          });
+        
+          // Handle cancel button click
+          document.querySelector('.btn-secondary').addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default action
+            window.location.href = '{% url "company_customers" %}'; // Redirect to customers page
+          });
+        });
+        </script> -->
+        
 </body>
 </html>

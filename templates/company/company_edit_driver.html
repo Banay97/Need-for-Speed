@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="Edit Company - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>Edit Company - Need For Speed Admin</title>
+    <title>Edit Driver - Need For Speed Company</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert Bootstrap and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -295,5 +298,65 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // Handle form submission
+          const form = document.querySelector('form');
+          
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+        
+            Swal.fire({
+              title: 'Do you want to save the changes?',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Save',
+              denyButtonText: `Don't save`
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                // Collect form data
+                const formData = new FormData(form);
+                
+                // Use fetch API to submit the form asynchronously
+                try {
+                  const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                      'X-Requested-With': 'XMLHttpRequest', // To handle the request properly in Django
+                    },
+                  });
+                  
+                  if (response.ok) {
+                    // Show success alert
+                    Swal.fire('Saved!', '', 'success').then(() => {
+                      window.location.href = '{% url "company_drivers" %}'; // Redirect to driver page
+                    });
+                  } else {
+                    // Handle errors if necessary
+                    Swal.fire('Error', 'There was a problem saving your changes.', 'error');
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                  Swal.fire('Error', 'There was a problem saving your changes.', 'error');
+                }
+        
+              } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info');
+                // Redirect to orders page if changes are not saved
+                window.location.href = '{% url "company_edit_driver" driver.id %}';
+              }
+            });
+          });
+        
+          // Handle cancel button click
+          document.querySelector('.btn-secondary').addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default action
+            window.location.href = '{% url "company_drivers" %}'; // Redirect to orders page
+          });
+        });
+        </script>
+        
 </body>
 </html>
