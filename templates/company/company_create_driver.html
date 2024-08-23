@@ -364,7 +364,7 @@
               } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info');
                 // Redirect to orders page if changes are not saved
-                window.location.href = '{% url "company_edit_driver" driver.id %}';
+                window.location.href = '{% url "company_create_driver" %}';
               }
             });
           });
