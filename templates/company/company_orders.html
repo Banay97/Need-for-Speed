@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="description" content="Order Management - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>Order Management - Need For Speed Admin</title>
+    <title>Order Management - Need For Speed Company</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 Bootstrap and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <style>
         * {
@@ -265,46 +269,45 @@
     <main class="container mt-4">
         <h1>Order Management</h1>
         <div class="card">
-            <div class="card-header">
-                <h3>Orders</h3>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Total</th>
-                            <th>Created Date</th>
-                            <th>Pick Up</th>
-                            <th>Drop Off</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for order in orders %}
-                        <tr>
-                            <td>{{ order.id }}</td>
-                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                            <td>{{ order.Total }}</td>
-                            <td>{{ order.created_at }}</td>
-                            <td>{{ order.pickup_location }}</td>
-                            <td>{{ order.pickoff_location }}</td>
-                            <td>{{ order.order_status }}</td>
-                            <td>
-                                <a href="{% url 'company_edit_order' order.id %}" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="{% url 'company_delete_order' order.id %}" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+          <div class="card-header">
+            <h3>Orders</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Total</th>
+                  <th>Created Date</th>
+                  <th>Pick Up</th>
+                  <th>Drop Off</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                <tr>
+                  <td>{{ order.id }}</td>
+                  <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                  <td>{{ order.Total }}</td>
+                  <td>{{ order.created_at }}</td>
+                  <td>{{ order.pickup_location }}</td>
+                  <td>{{ order.pickoff_location }}</td>
+                  <td>{{ order.order_status }}</td>
+                  <td>
+                    <a href="{% url 'company_edit_order' order.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'company_delete_order' order.id %}" class="btn btn-danger btn-sm">Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
-    </main>
-    
-
+      </main>
+      
     <footer class="footer-bottom">
         <small>&copy; Need For Speed - Order Management. All rights reserved.</small>
     </footer>
@@ -312,5 +315,51 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        // Function to handle the delete button click
+        function handleDeleteClick(event) {
+          event.preventDefault(); // Prevent the default link behavior
+      
+          const deleteUrl = this.getAttribute('href'); // Get the URL from the href attribute
+      
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+      
+          swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Redirect to the delete URL if confirmed
+              window.location.href = deleteUrl;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+              });
+            }
+          });
+        }
+      
+        // Attach the click event handler to all delete buttons
+        document.querySelectorAll('.btn-danger').forEach(button => {
+          button.addEventListener('click', handleDeleteClick);
+        });
+      </script>
+      
+
 </body>
 </html>

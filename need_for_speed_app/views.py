@@ -437,7 +437,7 @@ def company_create_order(request):
 
             # Send a success message and redirect
             messages.success(request, 'Your order has been created successfully')
-            return redirect('company_create_order')
+            return redirect('company_orders')
     else:
         return render(request, 'company/company_create_order.html')
 
@@ -464,6 +464,7 @@ def company_edit_order(request, order_id):
         pickup_location = request.POST.get('pickup_location', '')
         pickoff_location = request.POST.get('pickoff_location', '')
         order_status = request.POST.get('order_status', order.order_status)
+        
 
         # Update the related customer object
         if order.customer:
@@ -518,12 +519,12 @@ def company_create_customer(request):
            
 
             # Create the customer and company
-            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
 
-        
+            customer.save()
             # Send a success message and redirect
             messages.success(request, 'Your order has been created successfully')
-            return redirect('company_create_customer')
+            return redirect('company_customers')
     else:
         return render(request, 'company/company_create_customer.html')
 
@@ -550,6 +551,7 @@ def company_delete_customer_view(request, customer_id):
     return redirect('company_customers')     
 
 def company_customers(request):
+    
     return render(request , 'company/company_customers.html')  
 
 #Company driver Functions:
@@ -578,7 +580,7 @@ def company_create_driver(request):
 
             # Send a success message and redirect
             messages.success(request, 'Your Delivery Driver has been created successfully')
-            return redirect('company_create_driver')
+            return redirect('company_drivers')
     else:
         return render(request, 'company/company_create_driver.html')
 
