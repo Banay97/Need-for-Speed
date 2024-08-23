@@ -321,8 +321,8 @@ def sales_data(request):
         "datasets": [{
             "label": "Order Distribution by Status",
             "data": data,
-            "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
-            "borderColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+            "backgroundColor": ["#D74F28 ", "#FF6F00 ", "#F5A623 ", "#8C5E3C ", "#6D4C41 "],
+            "borderColor": ["#D74F28 ", "#FF6F00 ", "#F5A623 ", "#8C5E3C ", "#6D4C41 "],
             "borderWidth": 1
         }]
     }
@@ -416,7 +416,7 @@ def company_create_order(request):
             company_name = request.POST['company_name']
             order_name = request.POST['order_name']
             order_code_number = request.POST['order_code_number']
-            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
+            total = request.POST['Total']  
             pickup_location = request.POST['pickup_location']
             pickoff_location = request.POST['pickoff_location']
 
@@ -432,7 +432,7 @@ def company_create_order(request):
                 pickup_location=pickup_location,
                 pickoff_location=pickoff_location,
                 Total=total,  
-                customer=customer  # Assuming there's a relationship to the customer
+                customer=customer  
             )
 
             # Send a success message and redirect
