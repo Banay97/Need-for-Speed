@@ -281,9 +281,11 @@
                             <tr>
                                 <th>Order ID</th>
                                 <th>Customer</th>
-                                <th>Date</th>
-                                <th>Status</th>
                                 <th>Total</th>
+                                <th>Created Date</th>
+                                <th>Pick Up</th>
+                                <th>Drop Off</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -291,11 +293,13 @@
                             {% for order in orders %}
                             <tr>
                                 <td>{{ order.id }}</td>
-                                <td>{{ order.customer.name }}</td>
-                                <td>{{ order.date }}</td>
-                                <td>{{ order.status }}</td>
-                                <td>{{ order.total }}</td>
-                                <td><a href="{% url 'compnay_order_detail' order.id %}" class="btn btn-primary">View</a></td>
+                                <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                                <td>{{ order.Total }}</td>
+                                <td>{{ order.created_at }}</td>
+                                <td>{{ order.pickup_location }}</td>
+                                <td>{{ order.pickoff_location }}</td>
+                                <td>{{ order.order_status }}</td>
+                                <td><a href="{% url 'company_orders'%}" class="btn btn-primary">View</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -322,14 +326,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for user in users %}
+                            {% for customer in customers %}
                             <tr>
-                                <td>{{ user.id }}</td>
-                                <td>{{ user.first_name }} {{ user.last_name }}</td>
-                                <td>{{ user.address }}</td>
-                                <td>{{ user.phone_number }}</td>
+                                <td>{{ customer.id }}</td>
+                                <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                                <td>{{ customer.address }}</td>
+                                <td>{{ customer.phone_number }}</td>
                                 <td>
-                                    <a href="{% url 'company_users' %}" class="btn btn-primary">View</a>
+                                    <a href="{% url 'company_customers' %}" class="btn btn-primary">View</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -359,15 +363,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for delivery in deliveries %}
+                            {% for driver in drivers %}
                             <tr>
-                                <td>{{ delivery.id }}</td>
-                                <td>{{ delivery.first_name }} {{ delivery.last_name }}</td>
-                                <td>{{ delivery.address }}</td>
-                                <td>{{ delivery.phone_number }}</td>
-                                <td>{{ delivery.license }}</td>
-                                <td>{{ delivery.worklocation }}</td>
-                                <td>{{ delivery.Status }}</td>
+                                <td>{{ driver.id }}</td>
+                                <td>{{ driver.first_name }} {{ driver.last_name }}</td>
+                                <td>{{ driver.address }}</td>
+                                <td>{{ driver.phone_number }}</td>
+                                <td>{{ driver.license }}</td>
+                                <td>{{ driver.worklocation }}</td>
+                                <td>{{ driver.Status }}</td>
                                 <td>
                                     <a href="{% url 'company_drivers' %}" class="btn btn-primary">View</a>
                                 </td>

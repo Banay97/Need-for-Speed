@@ -20,7 +20,7 @@ urlpatterns = [
     # path('view-all-companies', views.view_companies, name='view_companies'),
 
     #Company pages and CRUD operations
-    path('company-dashboard', views.company_dashboard, name='company_dashboard'),
+    path('company-dashboard', views.company_dashboard_view, name='company_dashboard'),
     path('create-order', views.create_order, name='create_order'),
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),

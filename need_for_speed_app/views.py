@@ -128,45 +128,17 @@ def  view_companies(request):
 
 
 def company_dashboard(request):
-    users = User.objects.all()
-    companies = Company.objects.all()
+    customers = Customer.objects.all()
     orders = Order.objects.all()
+    drivers = Delivery.objects.all()
 
     context = {
-        'users': users,
-        'companies': companies,
+        'customers': customers,
+        'drivers': drivers,
         'orders': orders,
     }
     return render(request, 'company/CompanyDashboard.html')
 
-# def create_order(request):
-#     if request.method == 'POST':
-#         errors = User.objects.user_validator(request.POST)
-#         if errors:
-#             for key, value in errors.items():
-#                 messages.error(request, value, extra_tags='create_order')
-#             return redirect('create_order')
-#         else:
-#             first_name = request.POST['first_name']
-#             last_name = request.POST['last_name']
-#             address =request.POST['address']
-#             phone_number = request.POST['phone_number']
-#             company_name = request.POST['company_name']
-#             phone_number = request.POST['phone_number']
-#             order_name = request.POST['order_name']
-#             order_code_number = request.POST['order_code_number']
-#             order_price = request.POST['order_price']
-#             pickup_location = request.POST['pickup_location']
-#             pickoff_location = request.POST['pickoff_location']
-
-#             customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
-#             company = Company.objects.create(company_name=company_name, phone_number=phone_number)
-#             order = Order.objects.create(order_name=order_name, company=company, order_code_number=order_code_number, pickup_location=pickup_location, pickoff_location=pickoff_location)
-
-#             messages.success(request, 'Your order has beed created successfully')
-#             return redirect('create_order')  
-#     else:
-#         return render(request, 'CreateOrder.html') 
 
 def create_order(request):
     if request.method == 'POST':
@@ -228,7 +200,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
-    return render(request, 'admin/AdminDashboard.html', context)
+    return render(request, 'admin/CompanyDashboard.html', context)
 
 # User Management Views
 def admin_users_view(request):
@@ -385,7 +357,6 @@ def admin_create_comapny(request):
         return render(request, 'admin/admin_create_comapny.html')
 
 #Admin Create Customer Function:
-
 def admin_create_customer(request):
     if request.method == 'POST':
          # Validate the input data 
@@ -413,16 +384,15 @@ def admin_create_customer(request):
 
 
 
-
 # Company Dashboard View
 def company_dashboard_view(request):
-    users = User.objects.all()
-    companies = Company.objects.all()
+    customers = Customer.objects.all()
     orders = Order.objects.all()
+    drivers = Delivery.objects.all()
 
     context = {
-        'users': users,
-        'companies': companies,
+        'customers': customers,
+        'drivers': drivers,
         'orders': orders,
     }
     return render(request, 'company/CompanyDashboard.html', context)
@@ -640,6 +610,7 @@ def company_delete_driver_view(request, driver_id):
 
 def company_drivers(request):
     return render(request , 'company/company_drivers.html')          
+
 
 
 
