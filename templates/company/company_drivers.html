@@ -263,10 +263,10 @@
     </nav>
 
     <main class="container">
-        <h1>User Management</h1>
+        <h1>Deliver Driver Management</h1>
         <div class="card">
             <div class="card-header">
-                <h3>User List</h3>
+                <h3>Deliver Drivers List</h3>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -276,19 +276,25 @@
                             <th scope="col">Last Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">Phone Number</th>
+                            <th scope="col">License</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Working Location</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for driver in drivers %}
                         <tr>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.address }}</td>
-                            <td>{{ user.phone_number }}</td>
+                            <td>{{ driver.first_name }}</td>
+                            <td>{{ driver.last_name }}</td>
+                            <td>{{ driver.address }}</td>
+                            <td>{{ driver.phone_number }}</td>
+                            <td>{{ driver.license }}</td>
+                            <td>{{ driver.status }}</td>
+                            <td>{{ driver.worklocation }}</td>
                             <td>
-                                <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                                <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'company_edit_driver' driver.id %}" class="btn btn-primary">Edit</a>
+                                <a href="{% url 'company_delete_driver' driver.id %}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}

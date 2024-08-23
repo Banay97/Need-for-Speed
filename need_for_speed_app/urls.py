@@ -42,13 +42,16 @@ urlpatterns = [
 
     #CRUD operations for Delivery Drivers
     path('company-create-driver', views.company_create_driver, name='company_create_driver'),
-    path('company-update-driver', views.company_edit_driver, name='company_edit_driver'),
+    path('company-update-driver/edit/<int:driver_id>', views.company_edit_driver, name='company_edit_driver'),
     path('compant-driver', views.company_drivers, name='company_drivers'),
+    path('company-drivers/', views.company_drivers_view, name='company_drivers'),
+    path('company-drivers/delete/<int:driver_id>/', views.company_delete_driver_view, name='company_delete_driver'),
+
 
 
     
      # Admin Dashboard
-     path('admindashboard/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('admindashboard/', views.admin_dashboard_view, name='admin_dashboard'),
     path('adminusers/', views.admin_users_view, name='admin_users'),
     path('adminusers/edit/<int:user_id>/', views.admin_user_edit_view, name='admin_user_edit'),
     path('adminusers/delete/<int:user_id>/', views.admin_delete_user_view, name='admin_delete_user'),

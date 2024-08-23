@@ -568,7 +568,7 @@ def company_edit_customer(request, customer_id):
     if request.method == 'POST':
         customer.first_name = request.POST.get('first_name')
         customer.last_name = request.POST.get('last_name')
-        customer.adress = request.POST.get('address')
+        customer.address = request.POST.get('address')
         customer.phone_number = request.POST.get('phone_number')
         customer.save()
         return redirect('company_customers')
@@ -590,44 +590,53 @@ def company_create_driver(request):
         errors = User.objects.user_validator(request.POST)
         if errors:
             for key, value in errors.items():
-                messages.error(request, value, extra_tags='company_create_order')
-            return redirect('company_create_order')
+                messages.error(request, value, extra_tags='company_create_driver')
+            return redirect('company_create_driver')
         else:
             # Get the data from the POST request
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
             address = request.POST['address']
             phone_number = request.POST['phone_number']
-            company_name = request.POST['company_name']
-            order_name = request.POST['order_name']
-            order_code_number = request.POST['order_code_number']
-            total = request.POST['Total']  # Use 'Total' instead of 'order_price'
-            pickup_location = request.POST['pickup_location']
-            pickoff_location = request.POST['pickoff_location']
+            license =request.POST['license']
+            status =request.POST['status']
+            worklocation = request.POST['worklocation']
 
-            # Create the customer and company
-            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
-            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+            # Create the Delivery Driver
+            driver = Delivery.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number, license=license, status=status,worklocation=worklocation)
 
-            # Create the order and associate it with the customer and company
-            order = Order.objects.create(
-                order_name=order_name,
-                company=company,
-                order_code_number=order_code_number,
-                pickup_location=pickup_location,
-                pickoff_location=pickoff_location,
-                Total=total,  
-                customer=customer  # Assuming there's a relationship to the customer
-            )
 
             # Send a success message and redirect
-            messages.success(request, 'Your order has been created successfully')
-            return redirect('company_create_order')
+            messages.success(request, 'Your Delivery Driver has been created successfully')
+            return redirect('company_create_driver')
     else:
-        return render(request, 'company/company_create_order.html')
+        return render(request, 'company/company_create_driver.html')
 
-def company_edit_driver(request):
-    return render(request , 'company_edit_order.html')
+def company_drivers_view(request):
+    drivers = Delivery.objects.all()
+    return render(request, 'company/company_drivers.html', {'drivers': drivers}) 
+
+
+def company_edit_driver(request, driver_id):
+    driver = get_object_or_404(Delivery, id=driver_id)
+
+    if request.method == 'POST':
+        driver.first_name = request.POST.get('first_name')
+        driver.last_name = request.POST.get('last_name')
+        driver.address = request.POST.get('address')
+        driver.phone_number = request.POST.get('phone_number')
+        driver.license = request.POST.get('license')
+        driver.status = request.POST.get('status')
+        driver.worklocation = request.POST.get('worklocation')
+
+        driver.save()
+        return redirect('company_drivers')
+    return render(request , 'company/company_edit_driver.html', {'driver': driver})
+
+def company_delete_driver_view(request, driver_id):
+    driver = get_object_or_404(Delivery, id=driver_id)
+    driver.delete()
+    return redirect('company_drivers')        
 
 def company_drivers(request):
     return render(request , 'company/company_drivers.html')          

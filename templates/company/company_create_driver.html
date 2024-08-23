@@ -272,7 +272,7 @@
                 <h2>Create Delivery Driver</h2>
             </div>
             <div class="card-body">
-                <form action="{% url 'admin_create_customer' %}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'company_create_driver' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="first_name">First Name:</label>
@@ -291,8 +291,16 @@
                         <input type="text" id="phone_number" name="phone_number" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="license"> License</label>
+                        <input type="text" id="license" name="license" class="form-control" required>
+                    </div>
+                    <div class="form-group">
                         <label for="status">Status:</label>
                         <input type="text" id="status" name="status" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="worklocation"> Working Location</label>
+                        <input type="text" id="worklocation" name="worklocation" class="form-control" required>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Save</button>
