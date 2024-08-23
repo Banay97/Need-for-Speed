@@ -311,11 +311,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <!-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
           // Handle form submission
           const form = document.querySelector('form');
-        
+          
           form.addEventListener('submit', async (event) => {
             event.preventDefault(); // Prevent the default form submission
         
@@ -329,7 +329,7 @@
               if (result.isConfirmed) {
                 // Collect form data
                 const formData = new FormData(form);
-        
+                
                 // Use fetch API to submit the form asynchronously
                 try {
                   const response = await fetch(form.action, {
@@ -339,11 +339,11 @@
                       'X-Requested-With': 'XMLHttpRequest', // To handle the request properly in Django
                     },
                   });
-        
+                  
                   if (response.ok) {
                     // Show success alert
                     Swal.fire('Saved!', '', 'success').then(() => {
-                      window.location.href = '{% url "company_customers" %}'; // Redirect to customers page
+                      window.location.href = '{% url "company_customers" %}'; // Redirect to orders page
                     });
                   } else {
                     // Handle errors if necessary
@@ -356,7 +356,7 @@
         
               } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info');
-                // Redirect to the same page if changes are not saved
+                // Redirect to orders page if changes are not saved
                 window.location.href = '{% url "company_create_customer" %}';
               }
             });
@@ -365,10 +365,10 @@
           // Handle cancel button click
           document.querySelector('.btn-secondary').addEventListener('click', (event) => {
             event.preventDefault(); // Prevent the default action
-            window.location.href = '{% url "company_customers" %}'; // Redirect to customers page
+            window.location.href = '{% url "company_customers" %}'; // Redirect to orders page
           });
         });
-        </script> -->
+        </script>
         
 </body>
 </html>
