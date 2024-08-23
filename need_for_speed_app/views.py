@@ -45,6 +45,15 @@ def sign_in(request):
         email = request.POST['email']
         password = request.POST['password']
         user = User.objects.filter(email=email).first()
+        # users = User.objects.all()
+        # companies = Company.objects.all()
+        # orders = Order.objects.all()
+
+        # context = {
+        #     'users': users,
+        #     'companies': companies,
+        #     'orders': orders,
+        # }
     
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['email'] = email
@@ -228,6 +237,7 @@ def admin_users_view(request):
 
 def admin_user_edit_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
+
     if request.method == 'POST':
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
@@ -401,38 +411,6 @@ def admin_create_customer(request):
     else:
         return render(request, 'admin/admin_create_customer.html')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Company Functions:
 
 def company_create_order(request): 
@@ -479,3 +457,25 @@ def company_create_order(request):
 
 def company_edit_order(request):
     return render(request , 'company_edit_order.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Tracting Order On Google Map:
+def tracking_order(request):
+    return render(request, 'admin/TrackingPage.html')    
