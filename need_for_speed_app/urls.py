@@ -25,6 +25,7 @@ urlpatterns = [
     path('update-order', views.update_order, name='update_order'),
     path('view-all-orders', views.view_orders, name='view_orders'),
 
+    # CRUD operation for Orders
     path('company-create-order', views.company_create_order, name='company_create_order'),
     path('company-update-order/edit/<int:order_id>', views.company_edit_order, name='company_edit_order'),
     path('company-orders', views.company_orders, name='company_orders'),
@@ -32,14 +33,18 @@ urlpatterns = [
     path('company-orders/delete/<int:order_id>/', views.company_delete_order_view, name='company_delete_order'),
 
 
-
+    #CRUD operations for Customers
     path('company-create-customer', views.company_create_customer, name='company_create_customer'),
-    path('company-update-customer', views.company_edit_customer, name='company_edit_customer'),
+    path('company-update-customer/edit/<int:customer_id>', views.company_edit_customer, name='company_edit_customer'),
     path('compant-customers', views.company_customers, name='company_customers'),
+    path('company-customers/', views.company_customers_view, name='company_customers'),
+    path('company-customers/delete/<int:customer_id>/', views.company_delete_customer_view, name='company_delete_customer'),
 
+    #CRUD operations for Delivery Drivers
     path('company-create-driver', views.company_create_driver, name='company_create_driver'),
     path('company-update-driver', views.company_edit_driver, name='company_edit_driver'),
     path('compant-driver', views.company_drivers, name='company_drivers'),
+
 
     
      # Admin Dashboard

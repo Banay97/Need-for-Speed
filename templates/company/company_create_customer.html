@@ -272,7 +272,7 @@
                 <h2>Create Customer</h2>
             </div>
             <div class="card-body">
-                <form action="{% url 'admin_create_customer' %}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'company_create_customer' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="first_name">First Name:</label>
