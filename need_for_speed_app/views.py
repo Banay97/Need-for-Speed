@@ -45,19 +45,12 @@ def sign_in(request):
         email = request.POST['email']
         password = request.POST['password']
         user = User.objects.filter(email=email).first()
-        # users = User.objects.all()
-        # companies = Company.objects.all()
-        # orders = Order.objects.all()
-
-        # context = {
-        #     'users': users,
-        #     'companies': companies,
-        #     'orders': orders,
-        # }
+        
     
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['email'] = email
             if user.role == 'admin':
+               
                 messages.success(request, 'Welcome!')
                 return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
@@ -100,7 +93,7 @@ def sign_up(request):
                 return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
                 messages.success(request, 'Registration successful! Please log in.')
-                return render(request, 'CompanyDashboard.html', {'user': user})
+                return render(request, 'company/CompanyDashboard.html', {'user': user})
     else:
         return render(request, 'main/SignUp.html') 
 
@@ -200,7 +193,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
-    return render(request, 'admin/CompanyDashboard.html', context)
+    return render(request, 'admin/AdminDashboard.html', context)
 
 # User Management Views
 def admin_users_view(request):
@@ -633,5 +626,8 @@ def company_drivers(request):
 
 
 #Tracting Order On Google Map:
-def tracking_order(request):
-    return render(request, 'admin/TrackingPage.html')    
+def admin_tracking_order(request):
+    return render(request, 'admin/AdminTrackingPage.html') 
+
+def company_tracking_order(request):
+    return render(request, 'company/CompanyTrackingPage.html')        

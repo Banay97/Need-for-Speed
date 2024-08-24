@@ -2,6 +2,9 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="description" content="Need For Speed Website">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <!-- Bootstrap CSS -->
@@ -332,8 +335,8 @@
             <h1 class="text-center mb-4">Welcome to Need For Speed!</h1>
             <p class="text-center mb-4">Experience delivery like never before—fast, reliable, and efficient. Whether you’re craving a late-night snack or need urgent documents delivered, we’ve got you covered with our ultra-speedy service.</p>
             <div class="text-center mb-4">
-                <a href="#" class="btn btn-primary mr-2">Order Now</a>
-                <a href="#" class="btn btn-primary">Track Your Delivery</a>
+                <a href="{% url 'sign_in'%}" class="{btn btn-primary mr-2}">Order Now</a>
+                <a href="{% url 'sign_in'%}" class="btn btn-primary">Track Your Delivery</a>
             </div>
             <hr>
             <h3 class="my-4 h3">How It Works</h3>
@@ -440,10 +443,10 @@
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Company</h5>
                 <ul class="list-unstyled mb-0">
-                    <li><a href="#!">About Us</a></li>
-                    <li><a href="#!">Privacy Policy</a></li>
-                    <li><a href="#!">Terms of Service</a></li>
-                    <li><a href="#!">Cookie Policy</a></li>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'about_us'%}">About Us</a></li>
+                    <li><a href="{% url 'services'%}">Services</a></li>
+                    <li><a href="{% url 'contact_us'%}">Contact Us</a></li>  
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">

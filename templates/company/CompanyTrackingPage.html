@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="description" content="Admin Dashboard - Need For Speed Express">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap, Admin Dashboard">
-    <title>Admin Dashboard - Need For Speed Express</title>
+    <title>Company Dashboard - Need For Speed Express</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-     <!-- SweetAlert Bootstrap and JS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -75,7 +72,7 @@
             display: block;
         }
         .nav-center ul li a:hover, .nav-right a:hover {
-            background-color: #55371e;
+            background-color:  #55371e;
             color: #1A4862;
         }
         .nav-right {
@@ -104,25 +101,15 @@
             margin-bottom: 40px;
         }
 
-        .card {
-            margin: 20px auto;
-            max-width: 800px;
-        }
-
-        .card-header {
-            background-color: #C04000;
-            color: #FFE5B4;
+        table th, table td {
+            font-weight: bold;
+            color: #d38808;
             text-align: center;
+            padding: 15px;
         }
-
-        .card-body {
+        table th {
             background-color: #FFE5B4;
             color: #C04000;
-        }
-
-        .form-control {
-            border-radius: 0;
-            box-shadow: none;
         }
 
         .btn-primary {
@@ -131,7 +118,7 @@
             font-weight: bold;
         }
         .btn-primary:hover {
-            background-color: #E25822;
+            background-color:  #E25822;
             color: #FFE5B4;
         }
 
@@ -171,49 +158,34 @@
             background-color: #55371e;
             color: #1A4862;
         }
-        
-        h2 {
-            color: #d8c1b5;
-            text-shadow: #FF6347 3px 0 15px;
-            font-size: 30px;
+        h3{
+            color: #55371e;
+            font-size: 50px;
             font-weight: bold;
             text-align: center;
         }
     </style>
 </head>
-<body>
+<body>   
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></h1>
+            <h1><a href="{% url 'company_dashboard'%}">Company Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/746/746914.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Companies"> Companies</a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_create_comapny' %}">Create a Company</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_companies' %}">View All Companies</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#customers">
                         <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_create_customer'%}">Create a Customer</a>
+                            <a class="nav-link" href="{% url 'company_create_customer'%}">Create a Customer</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="#update-customer">Update a Customer</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'admin_users' %}">View All Customers</a>
+                            <a class="nav-link" href="{%url 'company_customers' %}">View All Customers</a>
                         </li>
                     </ul>
                 </li>
@@ -223,18 +195,34 @@
                     </a>
                     <ul class="nav flex-column ms-3 sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
+                            <a class="nav-link" href="{% url 'company_create_order' %}">Create an Order</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
+                            <a class="nav-link" href="{% url 'company_orders' %}">View All Orders</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_tracking_order'%}">
+                    <a class="nav-link" href="#orders">
+                        <img src="https://cdn-icons-png.freepik.com/256/16006/16006280.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Delivery Driver
+                    </a>
+                    <ul class="nav flex-column ms-3 sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_create_driver' %}">Create a Delivery Driver</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'company_drivers' %}">View All Delivery Driver</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'company_tracking_order' %}">
                         <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
                     </a>
                 </li>
@@ -257,119 +245,24 @@
         </div>
         <div class="nav-right">
             <li class="nav-item" style="list-style: none;">
-                <a class="nav-link" href="{% url 'sign_out' %}">
-                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Sign Out"> Sign Out
+                <a class="nav-link" href="{% url 'sign_out'%}">
+                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Sign Out
                 </a>
             </li>
         </div>
     </nav>
 
-    <!-- Main content -->
-    <main role="main" class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Create Company</h2>
-            </div>
-            <div class="card-body">
-                <form action="{% url 'admin_create_comapny' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company_name">Company Name:</label>
-                        <input type="text" id="company_name" name="company_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address"> Address</label>
-                        <input type="text" id="address" name="address" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" id="phone_number" name="phone_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="number_of_workers">Number of Workers:</label>
-                        <input type="number" id="number_of_workers" name="number_of_workers" class="form-control" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-            </div>
-        </div>
-    </main>
+    <div class="main-content container">
+
+    </div>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          // Handle form submission
-          const form = document.querySelector('form');
-          
-          form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
-        
-            Swal.fire({
-              title: 'Do you want to save the changes?',
-              showDenyButton: true,
-              showCancelButton: true,
-              confirmButtonText: 'Save',
-              denyButtonText: `Don't save`
-            }).then(async (result) => {
-              if (result.isConfirmed) {
-                // Collect form data
-                const formData = new FormData(form);
-                
-                // Use fetch API to submit the form asynchronously
-                try {
-                  const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                      'X-Requested-With': 'XMLHttpRequest', // To handle the request properly in Django
-                    },
-                  });
-                  
-                  if (response.ok) {
-                    // Show success alert
-                    Swal.fire('Saved!', '', 'success').then(() => {
-                      window.location.href = '{% url "admin_companies" %}'; // Redirect to orders page
-                    });
-                  } else {
-                    // Handle errors if necessary
-                    Swal.fire('Error', 'There was a problem saving your changes.', 'error');
-                  }
-                } catch (error) {
-                  console.error('Error:', error);
-                  Swal.fire('Error', 'There was a problem saving your changes.', 'error');
-                }
-        
-              } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info');
-                // Redirect to orders page if changes are not saved
-                window.location.href = '{% url "admin_create_comapny" %}';
-              }
-            });
-          });
-        
-          // Handle cancel button click
-          document.querySelector('.btn-secondary').addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default action
-            window.location.href = '{% url "admin_companies" %}'; // Redirect to orders page
-          });
-        });
-        </script>
+
+  
 </body>
 </html>
