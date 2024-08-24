@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Order, Notification, Customer, Delivery, Company
+from .models import User, Order, Notification, Customer, Delivery, Company, Location
 # Register your models here.
 
 # admin.site.register(User)
@@ -50,6 +50,14 @@ class NotificationAdmin(admin.ModelAdmin):
     search_fields = ('user', 'context')
     list_filter = ('status',)
     ordering = ('-created_at',)
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ('house', 'name', 'zipcode', 'city', 'country', 'address', 'created_at', 'updated_at')
+    search_fields = ('name', 'city', 'country', 'address')
+    list_filter = ('city', 'country', 'address')
+    ordering = ('-created_at',)
+    
 
 # Customizing the admin site's appearance
 admin.site.site_header = "Need for Speed Admin"

@@ -111,6 +111,19 @@ class Company(User):
 
         return self.company_name
 
+class Location(models.Model):
+    house = models.CharField(max_length =500, null=True)
+    name = models.CharField(max_length=500)
+    zipcode = models.CharField(max_length=200, blank=True, null=True)
+    city =  models.CharField(max_length=200, blank=True, null=True) 
+    country =  models.CharField(max_length=200, blank=True, null=True) 
+    address =  models.CharField(max_length=200, blank=True, null=True) 
+    created_at =  models.DateTimeField(auto_now_add=True, blank=True, null = True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
 class Order(models.Model):
     order_name = models.CharField(max_length=255)
     order_code_number = models.IntegerField()
@@ -119,7 +132,8 @@ class Order(models.Model):
     Total = models.IntegerField(default=0)  # Set default value to 0 for new orders
     customer = models.ForeignKey(User, related_name ='user_order', on_delete=models.CASCADE,  null=True, blank=True)
     delivery = models.ForeignKey(Delivery, related_name='delivering_order', on_delete=models.CASCADE, null=True, blank=True)
-    company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)   
+    company = models.ForeignKey(Company, related_name='order_from_company', on_delete=models.CASCADE, null=True, blank=True)
+    location = models.ForeignKey(Location, related_name='order_location', on_delete=models.CASCADE, null=True, blank=True)  
     order_status = models.CharField(max_length=100, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -136,7 +150,12 @@ class Notification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) 
 
     def __str__(self):
-        return self.user.company_name   
+        return self.user.company_name  
+
+
+
+
+
 
 
             

@@ -158,11 +158,19 @@
             background-color: #55371e;
             color: #1A4862;
         }
-        h3{
-            color: #55371e;
+        h2{
+            color: #cabdb6;
+            text-shadow: #c57a6c 3px 0 15px;
             font-size: 50px;
             font-weight: bold;
             text-align: center;
+        }
+        #map {
+            height: 800px; /* Adjust as needed */
+            width: 100%;
+        }
+        .card-header{
+            background-color: #C04000;
         }
     </style>
 </head>
@@ -252,9 +260,71 @@
         </div>
     </nav>
 
-    <div class="main-content container">
+    <div class="container mt-4">
+        <h1 class="mb-4">Order Tracking</h1>
+        
+        <!-- Order Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Order Information</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Order Name:</strong> {{ order.order_name }}</p>
+                <p><strong>Order Code:</strong> {{ order.order_code_number }}</p>
+                <p><strong>Pickup Location:</strong> {{ order.pickup_location }}</p>
+                <p><strong>Delivery Location:</strong> {{ order.pickoff_location }}</p>
+                <p><strong>Total:</strong> {{ order.Total }}</p>
+                <p><strong>Status:</strong> {{ order.order_status }}</p>
+            </div>
+        </div>
 
+        <!-- Map Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Map</h2>
+            </div>
+            <div class="card-body p-0">
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQYO7oiwB59UL533ix5ZLc1zxz5-sjXM&callback=initMap"></script>
+
+
+    <script>
+        function initMap() {
+            // Coordinates for Palestine
+            var palestineCenter = { lat: 31.9474, lng: 35.3026 };
+            
+            var mapOptions = {
+                zoom: 8, // Adjust zoom level as needed
+                center: palestineCenter
+            };
+            
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            
+            // Example marker
+            var marker = new google.maps.Marker({
+                position: palestineCenter,
+                map: map,
+                title: 'Center of Palestine'
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '<div><strong>Center of Palestine</strong></div>'
+            });
+
+            marker.addListener('click', function() {
+                infoWindow.open(map, marker);
+            });
+        }
+    </script>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
