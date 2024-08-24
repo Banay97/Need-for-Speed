@@ -52,10 +52,12 @@ def sign_in(request):
             if user.role == 'admin':
                
                 messages.success(request, 'Welcome!')
-                return render(request, 'admin/AdminDashboard.html', {'user': user})
+                return redirect('admin_dashboard')
+                # return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
                 messages.success(request, 'Welcome!')
-                return render(request, 'company/CompanyDashboard.html', {'user': user})
+                return redirect('company_dashboard')
+                # return render(request, 'company/CompanyDashboard.html', {'user': user})
         else:
             messages.error(request, 'Invalid email or password', extra_tags='sign_in')
             return redirect('sign_in')
@@ -63,6 +65,7 @@ def sign_in(request):
     return render(request, 'main/SignIn.html')     
 
 
+            
 def sign_up(request):
     if request.method == 'POST':
         errors = User.objects.user_validator(request.POST)
