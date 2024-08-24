@@ -291,7 +291,7 @@
                         <tbody>
                             {% for order in orders %}
                             <tr>
-                                <td>{{ order.id }}</td>
+                                <td><a href="{% url 'admin_tracking_order_view' order.id %}" style="color: #d38808">{{ order.id }}</a></td>
                                 <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
                                 <td>{{ order.Total }}</td>
                                 <td>{{ order.created_at }}</td>

@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse , JsonResponse
 import bcrypt
+import requests
 from django.urls import reverse
 from django.db.models import Count
 from datetime import timedelta
 from django.utils import timezone
-from .models import User, Customer, Company, Delivery, Order, Notification
+from .models import User, Customer, Company, Delivery, Order, Notification, Location
+from .utils import get_coordinates  # Import the function from utils
+
 
 # Create your views here.
 
@@ -609,28 +612,35 @@ def company_delete_driver_view(request, driver_id):
 def company_drivers(request):
     return render(request , 'company/company_drivers.html')          
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Tracting Order On Google Map:
 def admin_tracking_order(request):
     return render(request, 'admin/AdminTrackingPage.html') 
+
+def get_coordinates(address):
+    api_key = 'AAA_MAPS_API'  
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}'
+    response = requests.get(url)
+    results = response.json().get('results')
+    if results:
+        location = results[0].get('geometry', {}).get('location', {})
+        return location.get('lat'), location.get('lng')
+    return None, None 
+
+def admin_tracking_order_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    pickup_lat, pickup_lng = get_coordinates(order.pickup_location)
+    dropoff_lat, dropoff_lng = get_coordinates(order.pickoff_location)
+
+    context = {
+        'order': order,
+        'pickup_lat': pickup_lat,
+        'pickup_lng': pickup_lng,
+        'dropoff_lat': dropoff_lat,
+        'dropoff_lng': dropoff_lng,
+    }
+
+    return render(request, 'admin/AdminTrackingPage.html', context)
+
 
 def company_tracking_order(request):
     return render(request, 'company/CompanyTrackingPage.html')        

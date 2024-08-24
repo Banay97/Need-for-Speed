@@ -75,8 +75,10 @@ urlpatterns = [
     
 
     #Tracking Order Map:
-    path('admin-tracking-order', views.admin_tracking_order, name="admin_tracking_order"),
-     path('company-tracking-order', views.company_tracking_order, name="company_tracking_order"),
+    path('admin-tracking-order', views.admin_tracking_order, name='admin_tracking_order'),
+    path('admin-tracking-order-view/<int:order_id>/', views.admin_tracking_order_view, name='admin_tracking_order_view'),
+
+    path('company-tracking-order', views.company_tracking_order, name="company_tracking_order"),
 
 
 
