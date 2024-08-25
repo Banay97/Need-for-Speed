@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+GOOGLE_API_KEY = os.environ.get('AAA_MAPS_API')
 
 LANGUAGE_CODE = 'en-us'
 
@@ -126,3 +127,5 @@ STATICFILES_DIR =[
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
