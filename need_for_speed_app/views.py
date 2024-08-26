@@ -2,18 +2,29 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse , JsonResponse
 import bcrypt
+import requests
 from django.urls import reverse
 from django.db.models import Count
 from datetime import timedelta
 from django.utils import timezone
-from .models import *
-
+from .models import User, Customer, Company, Delivery, Order, Notification, Location
+from .utils import get_coordinates
+from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 # Create your views here.
+
+
+#main project nav pages
 def home(request):
-    return render(request, 'store/home.html')
+    return render(request, 'main/home.html')
 
 def about_us(request):
-    return render(request, 'store/AboutUs.html')
+    return render(request, 'main/AboutUs.html')
+
+def services(request):
+    return render(request, 'main/Services.html')   
 
 def contact_us(request):
     if request.method == 'POST':
@@ -30,29 +41,38 @@ def contact_us(request):
             'comment': comment
         }
 
-    return render(request, 'store/ContactUs.html', {}) 
+    return render(request, 'main/ContactUs.html', {}) 
 
+
+#Sign in , Sign up, and Sign out Functions
 def sign_in(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
         user = User.objects.filter(email=email).first()
+        
     
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['email'] = email
+            request.session['user_id'] = user.id  # Store the user_id in the session
+
             if user.role == 'admin':
+               
                 messages.success(request, 'Welcome!')
-                return render(request, 'AdminDashboard.html', {'user': user})
+                return redirect('admin_dashboard')
+                # return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
                 messages.success(request, 'Welcome!')
-                return render(request, 'CompanyDashboard.html', {'user': user})
+                return redirect('company_dashboard')
+                # return render(request, 'company/CompanyDashboard.html', {'user': user})
         else:
             messages.error(request, 'Invalid email or password', extra_tags='sign_in')
             return redirect('sign_in')
         
-    return render(request, 'store/SignIn.html')     
+    return render(request, 'main/SignIn.html')     
 
 
+            
 def sign_up(request):
     if request.method == 'POST':
         errors = User.objects.user_validator(request.POST)
@@ -80,12 +100,12 @@ def sign_up(request):
             user.save()
             if user.role == 'admin':
                 messages.success(request, 'Registration successful! Please log in.')
-                return render(request, 'AdminDashboard.html', {'user': user})
+                return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
                 messages.success(request, 'Registration successful! Please log in.')
-                return render(request, 'CompanyDashboard.html', {'user': user})
+                return render(request, 'company/CompanyDashboard.html', {'user': user})
     else:
-        return render(request, 'store/SignUp.html') 
+        return render(request, 'main/SignUp.html') 
 
 def sign_out(request):
     if request.method == 'POST':
@@ -95,23 +115,34 @@ def sign_out(request):
     return redirect('home')     
     
 
-def services(request):
-    return render(request, 'store/Services.html')   
 
 
+def admin_dashboard(request):
+    return render(request, 'AdminDashboard.html')
 
 def  create_company(request):
-     return render(request, 'store/CreateComapny.html')
+    return render(request, 'CreateComapny.html')
 
 def  update_company(request):
-      return render(request, 'store/UpdateComapny.html')
+    return render(request, 'UpdateComapny.html')
 
 def  view_companies(request):
-    return render(request, 'store/ViewAllComapnies.html')
+    return render(request, 'ViewAllComapnies.html')
 
 
 def company_dashboard(request):
-    return render(request, 'store/CompanyDashboard.html')
+    customers = Customer.objects.all()
+    orders = Order.objects.all()
+    drivers = Delivery.objects.all()
+
+    context = {
+        'customers': customers,
+        'drivers': drivers,
+        'orders': orders,
+    }
+    return render(request, 'company/CompanyDashboard.html')
+
+
 def create_order(request):
     if request.method == 'POST':
         # Validate the input data (assuming you have a user_validator in User model)
@@ -144,7 +175,7 @@ def create_order(request):
                 order_code_number=order_code_number,
                 pickup_location=pickup_location,
                 pickoff_location=pickoff_location,
-                Total=total,  # Correct field name
+                Total=total,  
                 customer=customer  # Assuming there's a relationship to the customer
             )
 
@@ -152,17 +183,14 @@ def create_order(request):
             messages.success(request, 'Your order has been created successfully')
             return redirect('create_order')
     else:
-        return render(request, 'store/CreateOrder.html')
-    
+        return render(request, 'admin/CreateOrder.html')
+
 def update_order(request):
-    return render(request, 'store/UpdateOrder.html') 
+    return render(request, 'admin/UpdateOrder.html') 
 
 def view_orders(request):
-    return render(request, 'store/ViewAllOrders.html') 
+    return render(request, 'admin/ViewAllOrders.html') 
 
-def admin_dashboard(request):
-    return render(request, 'admin/index.html')
-#############admindashboard
 
 # Admin Dashboard View
 def admin_dashboard_view(request):
@@ -175,6 +203,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
+    
     return render(request, 'admin/AdminDashboard.html', context)
 
 # User Management Views
@@ -184,11 +213,12 @@ def admin_users_view(request):
 
 def admin_user_edit_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
+
     if request.method == 'POST':
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
-        user.email = request.POST.get('email')
-        user.role = request.POST.get('role')
+        user.adress = request.POST.get('address')
+        user.phone_number = request.POST.get('phone_number')
         user.save()
         return redirect('admin_users')
 
@@ -221,6 +251,30 @@ def admin_company_delete_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)
     company.delete()
     return redirect('admin_companies')
+
+# Order Management Views
+def admin_orders_view(request):
+    orders = Order.objects.all()
+    return render(request, 'admin/admin_order.html', {'orders': orders})
+
+
+def admin_order_detail_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    
+    # Print the order object to the console for debugging
+    print(order)
+    print(f"Order ID: {order.id}")
+    print(f"Customer: {order.customer.first_name} {order.customer.last_name}")
+    print(f"Order Status: {order.order_status}")
+    print(f"Total: {order.Total}")
+    
+    return render(request, 'admin/admin_order_detail.html', {'order': order})
+
+def admin_order_delete_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delete()
+    return redirect('admin_orders')
+
 
 # Order Management Views
 def admin_orders_view(request):
@@ -280,9 +334,375 @@ def sales_data(request):
         "datasets": [{
             "label": "Order Distribution by Status",
             "data": data,
-            "backgroundColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
-            "borderColor": ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
+            "backgroundColor": ["#D74F28 ", "#FF6F00 ", "#F5A623 ", "#8C5E3C ", "#6D4C41 "],
+            "borderColor": ["#D74F28 ", "#FF6F00 ", "#F5A623 ", "#8C5E3C ", "#6D4C41 "],
             "borderWidth": 1
         }]
     }
-    return JsonResponse(response_data)
+    return JsonResponse(response_data)    
+
+#Admin Create Company Function:
+def admin_create_comapny(request):
+    if request.method == 'POST':
+         # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='admin_create_comapny')
+            return redirect('admin_create_comapny')
+        else:
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            number_of_workers = request.POST['number_of_workers']
+            email= request.POST['email']
+
+            # Create a company
+            
+            company = Company.objects.create(first_name=first_name, last_name=last_name, address=address,company_name=company_name, phone_number=phone_number, number_of_workers =number_of_workers, email= email )
+
+             # Send a success message and redirect
+            messages.success(request, 'Your Company has been created successfully')
+            return redirect('admin_create_comapny')
+    else:
+        return render(request, 'admin/admin_create_comapny.html')
+
+#Admin Create Customer Function:
+def admin_create_customer(request):
+    if request.method == 'POST':
+         # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='admin_create_comapny')
+            return redirect('admin_create_comapny')
+        else:
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            status = request.POST['status']
+
+            # Create a customer
+            
+            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number, status=status )
+
+             # Send a success message and redirect
+            messages.success(request, 'Your Company has been created successfully')
+            return redirect('admin_create_customer')
+    else:
+        return render(request, 'admin/admin_create_customer.html')
+
+
+
+# Company Dashboard View
+def company_dashboard_view(request):
+    customers = Customer.objects.all()
+    orders = Order.objects.all()
+    drivers = Delivery.objects.all()
+
+    context = {
+        'customers': customers,
+        'drivers': drivers,
+        'orders': orders,
+    }
+    return render(request, 'company/CompanyDashboard.html', context)
+
+#Company order Functions:
+
+def company_create_order(request): 
+    if request.method == 'POST':
+        # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_order')
+            return redirect('company_create_order')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            company_name = request.POST['company_name']
+            order_name = request.POST['order_name']
+            order_code_number = request.POST['order_code_number']
+            total = request.POST['Total']  
+            pickup_location = request.POST['pickup_location']
+            pickoff_location = request.POST['pickoff_location']
+
+            # Create the customer and company
+            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+
+            # Create the order and associate it with the customer and company
+            order = Order.objects.create(
+                order_name=order_name,
+                company=company,
+                order_code_number=order_code_number,
+                pickup_location=pickup_location,
+                pickoff_location=pickoff_location,
+                Total=total,  
+                customer=customer  
+            )
+
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('company_orders')
+    else:
+        return render(request, 'company/company_create_order.html')
+
+def company_orders_view(request):
+    orders = Order.objects.all()
+    return render(request, 'company/company_orders.html', {'orders': orders})
+
+def company_edit_order(request, order_id):
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        messages.error(request, 'Order not found.')
+        return redirect('company_orders')
+
+    if request.method == 'POST':
+        # errors = Order.objects.order_validator(request.POST)
+        # if errors:
+        #     for key, value in errors.items():
+        #         messages.error(request, value, extra_tags='company_edit_order')
+        #     return redirect('company_edit_order', order_id=order_id)
+
+        customer_name = request.POST.get('customer_name', '')
+        total_amount = request.POST.get('total_amount', 0)
+        pickup_location = request.POST.get('pickup_location', '')
+        pickoff_location = request.POST.get('pickoff_location', '')
+        order_status = request.POST.get('order_status', order.order_status)
+        
+
+        # Update the related customer object
+        if order.customer:
+            name_parts = customer_name.split(' ', 1)
+            if len(name_parts) == 2:
+                order.customer.first_name, order.customer.last_name = name_parts
+            else:
+                order.customer.first_name = name_parts[0]
+                order.customer.last_name = ''
+                order.customer.save()
+        
+        # Update the order object
+        order.order_status = order_status
+        order.Total = int(total_amount) 
+        order.pickup_location = pickup_location
+        order.pickoff_location = pickoff_location
+
+        order.save()
+
+        messages.success(request, 'Order updated successfully')
+        return redirect('company_orders')
+
+    return render(request, 'company/company_edit_order.html', {'order': order})
+
+
+def company_delete_order_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order.delete()
+    return redirect('company_orders')    
+
+def company_orders(request):
+    return render(request , 'company/company_orders.html')  
+
+ 
+
+
+#Company customer Functions:
+def company_create_customer(request): 
+    if request.method == 'POST':
+        # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_customer')
+            return redirect('company_create_customer')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+           
+
+            # Create the customer and company
+            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+
+            customer.save()
+            # Send a success message and redirect
+            messages.success(request, 'Your order has been created successfully')
+            return redirect('company_customers')
+    else:
+        return render(request, 'company/company_create_customer.html')
+
+def company_customers_view(request):
+    customers = Customer.objects.all()
+    return render(request, 'company/company_customers.html', {'customers': customers}) 
+
+
+def company_edit_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+
+    if request.method == 'POST':
+        customer.first_name = request.POST.get('first_name')
+        customer.last_name = request.POST.get('last_name')
+        customer.address = request.POST.get('address')
+        customer.phone_number = request.POST.get('phone_number')
+        customer.save()
+        return redirect('company_customers')
+    return render(request , 'company/company_edit_customer.html', {'customer':customer})
+
+def company_delete_customer_view(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    customer.delete()
+    return redirect('company_customers')     
+
+def company_customers(request):
+    
+    return render(request , 'company/company_customers.html')  
+
+#Company driver Functions:
+
+def company_create_driver(request): 
+    if request.method == 'POST':
+        # Validate the input data 
+        errors = User.objects.user_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='company_create_driver')
+            return redirect('company_create_driver')
+        else:
+            # Get the data from the POST request
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            address = request.POST['address']
+            phone_number = request.POST['phone_number']
+            license =request.POST['license']
+            status =request.POST['status']
+            worklocation = request.POST['worklocation']
+
+            # Create the Delivery Driver
+            driver = Delivery.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number, license=license, status=status,worklocation=worklocation)
+
+
+            # Send a success message and redirect
+            messages.success(request, 'Your Delivery Driver has been created successfully')
+            return redirect('company_drivers')
+    else:
+        return render(request, 'company/company_create_driver.html')
+
+def company_drivers_view(request):
+    drivers = Delivery.objects.all()
+    return render(request, 'company/company_drivers.html', {'drivers': drivers}) 
+
+
+def company_edit_driver(request, driver_id):
+    driver = get_object_or_404(Delivery, id=driver_id)
+
+    if request.method == 'POST':
+        driver.first_name = request.POST.get('first_name')
+        driver.last_name = request.POST.get('last_name')
+        driver.address = request.POST.get('address')
+        driver.phone_number = request.POST.get('phone_number')
+        driver.license = request.POST.get('license')
+        driver.status = request.POST.get('status')
+        driver.worklocation = request.POST.get('worklocation')
+
+        driver.save()
+        return redirect('company_drivers')
+    return render(request , 'company/company_edit_driver.html', {'driver': driver})
+
+def company_delete_driver_view(request, driver_id):
+    driver = get_object_or_404(Delivery, id=driver_id)
+    driver.delete()
+    return redirect('company_drivers')        
+
+def company_drivers(request):
+    return render(request , 'company/company_drivers.html')          
+
+#Tracting Order On Google Map:
+def admin_tracking_order(request):
+    return render(request, 'admin/AdminTrackingPage.html') 
+
+def get_coordinates(address):
+    api_key = 'AAA_MAPS_API'  
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}'
+    response = requests.get(url)
+    results = response.json().get('results')
+    if results:
+        location = results[0].get('geometry', {}).get('location', {})
+        return location.get('lat'), location.get('lng')
+    return None, None 
+
+def admin_tracking_order_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    pickup_lat, pickup_lng = get_coordinates(order.pickup_location)
+    dropoff_lat, dropoff_lng = get_coordinates(order.pickoff_location)
+
+    context = {
+        'order': order,
+        'pickup_lat': pickup_lat,
+        'pickup_lng': pickup_lng,
+        'dropoff_lat': dropoff_lat,
+        'dropoff_lng': dropoff_lng,
+    }
+
+    return render(request, 'admin/AdminTrackingPage.html', context)
+
+
+def company_tracking_order(request):
+    return render(request, 'company/CompanyTrackingPage.html')        
+
+
+#Notifications Part:
+def fetch_notifications(request):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        print("User is not authenticated. No user_id in session.")
+        return JsonResponse({'status': 'error', 'message': 'Unauthorized'}, status=401)
+    
+    print(f"User is authenticated with user_id: {user_id}")
+    notifications = Notification.objects.filter(user_id=user_id).order_by('-created_at')
+    data = [{
+        'id': notification.id,
+        'message': notification.content_type,
+        'read': notification.is_read,
+        'link': notification.link
+    } for notification in notifications]
+    return JsonResponse(data, safe=False)
+
+def notification_list(request):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        return redirect('sign_in')  # Ensure 'login' points to your actual sign-in view name
+    
+    notifications = Notification.objects.filter(user_id=user_id).order_by('-created_at')
+    unread_count = notifications.filter(is_read=False).count()  # Ensure this field name matches your model
+    
+    return render(request, 'admin_dashboard.html', {
+        'notifications': notifications,
+        'unread_count': unread_count
+    })
+
+def mark_notification_as_read(request, notification_id):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        return JsonResponse({'status': 'error', 'message': 'Unauthorized'}, status=401)
+    
+    try:
+        notification = Notification.objects.get(id=notification_id, user_id=user_id)
+        notification.read = True
+        notification.save()
+        return JsonResponse({'status': 'success'})
+    except Notification.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Notification not found'}, status=404)
+    
