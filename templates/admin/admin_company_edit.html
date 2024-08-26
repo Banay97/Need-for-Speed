@@ -50,13 +50,13 @@
             flex: 2;
             display: flex;
             justify-content: center;
-            position: relative; /* Required for dropdown positioning */
+            position: relative; 
         }
         .nav-center ul {
             display: flex;
             align-items: center;
             list-style: none;
-            position: relative; /* Required for dropdown positioning */
+            position: relative; 
         }
         .nav-center ul li {
             position: relative;
@@ -174,9 +174,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_comapny' %}">Create a Company</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_companies' %}">View All Companies</a>
                         </li>
@@ -190,9 +187,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_customer'%}">Create a Customer</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{%url 'admin_users' %}">View All Customers</a>
                         </li>
@@ -206,9 +200,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
                         </li>
@@ -267,7 +258,7 @@
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{ company.email }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" id="notify" class="btn btn-primary" onclick="notification()">Save Changes</button>
                 </form>
             </div>
         </div>
@@ -284,11 +275,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-          // Handle form submission
           const form = document.querySelector('form');
           
           form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); 
         
             Swal.fire({
               title: 'Do you want to save the changes?',
@@ -298,26 +288,26 @@
               denyButtonText: `Don't save`
             }).then(async (result) => {
               if (result.isConfirmed) {
-                // Collect form data
+               
                 const formData = new FormData(form);
                 
-                // Use fetch API to submit the form asynchronously
+               
                 try {
                   const response = await fetch(form.action, {
                     method: form.method,
                     body: formData,
                     headers: {
-                      'X-Requested-With': 'XMLHttpRequest', // To handle the request properly in Django
+                      'X-Requested-With': 'XMLHttpRequest', 
                     },
                   });
                   
                   if (response.ok) {
-                    // Show success alert
+                 
                     Swal.fire('Saved!', '', 'success').then(() => {
-                      window.location.href = '{% url "admin_companies" %}'; // Redirect to orders page
+                      window.location.href = '{% url "admin_companies" %}'; 
                     });
                   } else {
-                    // Handle errors if necessary
+                   
                     Swal.fire('Error', 'There was a problem saving your changes.', 'error');
                   }
                 } catch (error) {
@@ -327,18 +317,19 @@
         
               } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info');
-                // Redirect to orders page if changes are not saved
+               
                 window.location.href = '{% url "admin_company_edit" company.id %}';
               }
             });
           });
         
-          // Handle cancel button click
+          
           document.querySelector('.btn-secondary').addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default action
-            window.location.href = '{% url "admin_companies" %}'; // Redirect to orders page
+            event.preventDefault(); 
+            window.location.href = '{% url "admin_companies" %}'; 
           });
         });
         </script>
+        
 </body>
 </html>
