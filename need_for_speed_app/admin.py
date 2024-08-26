@@ -24,8 +24,8 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('first_name','last_name', 'phone_number','email', 'status')
-    search_fields = ('first_name','last_name' ,'name', 'phone_number' ,'email')
+    list_display = ('first_name','last_name', 'phone_number', 'status')
+    search_fields = ('first_name','last_name' ,'name', 'phone_number' )
     ordering = ('first_name','last_name',)
 
 @admin.register(Delivery)
@@ -46,9 +46,9 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'context', 'link', 'created_at')
-    search_fields = ('user', 'context')
-    list_filter = ('status',)
+    list_display = ('user', 'content_type', 'link', 'action', 'object_id', 'message','is_read', 'created_at' )
+    search_fields = ('user', 'message')
+    list_filter = ('is_read',)
     ordering = ('-created_at',)
 
 @admin.register(Location)

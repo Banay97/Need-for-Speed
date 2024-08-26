@@ -80,7 +80,8 @@ urlpatterns = [
 
     path('company-tracking-order', views.company_tracking_order, name="company_tracking_order"),
 
-
+    #notifications path:
+    
 
 
 

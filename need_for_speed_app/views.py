@@ -8,7 +8,10 @@ from django.db.models import Count
 from datetime import timedelta
 from django.utils import timezone
 from .models import User, Customer, Company, Delivery, Order, Notification, Location
-from .utils import get_coordinates  # Import the function from utils
+from .utils import get_coordinates
+from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 # Create your views here.
@@ -199,6 +202,7 @@ def admin_dashboard_view(request):
         'companies': companies,
         'orders': orders,
     }
+    
     return render(request, 'admin/AdminDashboard.html', context)
 
 # User Management Views
@@ -644,3 +648,8 @@ def admin_tracking_order_view(request, order_id):
 
 def company_tracking_order(request):
     return render(request, 'company/CompanyTrackingPage.html')        
+
+
+#Notifications Part:
+
+      

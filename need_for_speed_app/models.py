@@ -1,5 +1,6 @@
 from django.db import models
 import re
+from django.utils import timezone
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -63,6 +64,9 @@ class User(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+    class Meta:
+        ordering = ['-created_at']    
+
 class Customer(User):
 
     status = models.CharField(max_length=50, default='active') 
@@ -111,6 +115,7 @@ class Company(User):
 
         return self.company_name
 
+
 class Location(models.Model):
     house = models.CharField(max_length =500, null=True)
     name = models.CharField(max_length=500)
@@ -144,14 +149,16 @@ class Order(models.Model):
 
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
-    status = models.BooleanField()
-    context = models.TextField()
-    link = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True) 
+    content_type = models.CharField(max_length=100, default='Post')  
+    link = models.CharField(max_length=255, default='/') 
+    action = models.CharField(max_length=50, default='created')  
+    object_id = models.IntegerField(default=0)  
+    message = models.TextField()  
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.company_name  
-
+        return f"{self.user.first_name} {self.user.last_name} {self.action} {self.content_type} (ID: {self.object_id})"
 
 
 

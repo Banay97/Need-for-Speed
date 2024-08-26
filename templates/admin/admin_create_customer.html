@@ -51,13 +51,13 @@
             flex: 2;
             display: flex;
             justify-content: center;
-            position: relative; /* Required for dropdown positioning */
+            position: relative;
         }
         .nav-center ul {
             display: flex;
             align-items: center;
             list-style: none;
-            position: relative; /* Required for dropdown positioning */
+            position: relative; 
         }
         .nav-center ul li {
             position: relative;
@@ -193,9 +193,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_comapny' %}">Create a Company</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_companies' %}">View All Companies</a>
                         </li>
@@ -209,9 +206,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_customer'%}">Create a Customer</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{%url 'admin_users' %}">View All Customers</a>
                         </li>
@@ -225,9 +219,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
                         </li>
