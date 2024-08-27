@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+GOOGLE_API_KEY = os.environ.get('AAA_MAPS_API')
 
 LANGUAGE_CODE = 'en-us'
 
@@ -120,9 +121,27 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
 
 STATICFILES_DIR =[
-    os.path.join(BASE_DIR, 'static'),  # Add your static files here
+     os.path.join(BASE_DIR, 'static'),  
+
 ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email settings for contact us form
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'needforspeedexpress13@gmail.com'
+EMAIL_HOST_PASSWORD = 'NeedForSpeed13'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+CONTACT_EMAIL = 'needforspeedexpress13@gmail.com'
+
+
+
+
+
