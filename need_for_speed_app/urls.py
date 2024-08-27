@@ -67,7 +67,7 @@ urlpatterns = [
 
     path('salesdata/', views.sales_data, name='sales_data'),
 
-    path('admin-reports', views.admin_reports, name='admin_reports'),
+  
 
     #create company and customer from the admin side:
     path('admin-create-company', views.admin_create_comapny , name="admin_create_comapny"),
@@ -89,7 +89,8 @@ urlpatterns = [
     path('chatbot', views.chatbot_page, name='chatbot_page'),
     path('get-response', views.get_response, name='get_response'),
     
-   
+    #Report and download pdf file path
+    path('admin-reports', views.admin_reports, name='admin_reports'),
 
 
 

@@ -12,7 +12,8 @@ from .utils import get_coordinates
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.conf import settings
+from django.core.mail import send_mail
 
 # from chatterbot import ChatBot
 
@@ -35,15 +36,23 @@ def contact_us(request):
         email = request.POST.get('email')
         service_type = request.POST.get('service_type')
         comment = request.POST.get('comment')
-        data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'service_type': service_type,
-            'comment': comment
-        }
 
-    return render(request, 'main/ContactUs.html', {}) 
+        if not first_name or not last_name or not email:
+            return JsonResponse({'status': 'error', 'message': 'Please fill in all required fields'})
+
+        subject = f"Contact Us Form Submission from {first_name} {last_name}"
+        message = f"Service Type: {service_type}\n\nComment:\n{comment}"
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [settings.CONTACT_EMAIL]  
+
+        try:
+            send_mail(subject, message, from_email, recipient_list)
+            return JsonResponse({'status': 'success', 'message': 'Your message has been sent successfully!'})
+        except Exception as e:
+            print(e)  
+            return JsonResponse({'status': 'error', 'message': 'An error occurred while sending your message.'})
+
+    return render(request, 'main/ContactUs.html')
 
 
 #Sign in , Sign up, and Sign out Functions
@@ -733,8 +742,22 @@ def get_response(request):
 
 
 def admin_reports(request):
+    customers = Customer.objects.all()
+    orders = Order.objects.all()
+    drivers = Delivery.objects.all()
+    company =Company.objects.all()
 
-    return render(request, 'admin/AdminReports.html')    
+    context = {
+        'customers': customers,
+        'drivers': drivers,
+        'orders': orders,
+        'company':company,
+    }
+
+
+    return render(request, 'admin/AdminReports.html', context)    
+
+
 
      
 

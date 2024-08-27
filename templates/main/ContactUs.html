@@ -6,6 +6,8 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
      <!-- Bootstrap CSS -->
      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <!-- SweetAlert2 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <title>Contact Us Page</title>
      <style>
          * {
@@ -220,7 +222,7 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url ' home' %}">Need For Speed Express</a></h1>
+            <h1><a href="#">Need For Speed Express</a></h1>
         </div>
         <div class="nav-center">
             <ul>
@@ -239,33 +241,36 @@
     <section>
         <main>
             <div class="form-container">
-            <form method="post" action="{% url 'contact_us' %}" class="form-card">
-                {%csrf_token%}
-                <fieldset>
-                    <legend>Contact Us Form</legend>
-                    <div>
-                        <label for="first_name">First Name:</label>
-                        <input type="text" id="first_name" name="first_name" required>
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" required>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                        <label for="service">Service Type:</label>
-                        <select id="service" name="service_type" required>
-                            <option value="" disabled selected>Select a service...</option>
-                            <option value="create_account">How to create an account?</option>
-                            <option value="create_order">How to create an order?</option>
-                            <option value="update_order">How to update an order?</option>
-                        </select>
-                        <label for="comment">Comment:</label>
-                        <textarea id="comment" placeholder="Comment here ..." name="comment"></textarea>
-                        <button type="submit">Submit</button>
-                    </div>
-                </fieldset>
-            </form>
+                <form id="contact-form" method="post" action="{% url 'contact_us' %}" class="form-card">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>Contact Us Form</legend>
+                        <div>
+                            <label for="first_name">First Name:</label>
+                            <input type="text" id="first_name" name="first_name" required>
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" id="last_name" name="last_name" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="service">Service Type:</label>
+                            <select id="service" name="service_type" required>
+                                <option value="" disabled selected>Select a service...</option>
+                                <option value="create_account">How to create an account?</option>
+                                <option value="create_order">How to create an order?</option>
+                                <option value="update_order">How to update an order?</option>
+                                <option value="what-service">What services do you have?</option>
+                                <option value="explain">Why should I choose you, explain your website benifits?</option>
+                            </select>
+                            <label for="comment">Comment:</label>
+                            <textarea id="comment" placeholder="Comment here ..." name="comment"></textarea>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </main>
     </section>
+
 
     <footer class="bg-custom text-custom text-center text-lg-start">
         <h3 class="p-3 h3">Need For Speed</h3>
@@ -291,7 +296,7 @@
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Social Media</h5>
                 <ul class="list-unstyled mb-0">
-                    <li><a href="https://facebook.com"><iclass="fab fa-facebook-f"></i> Facebook</a>
+                    <li><a href="https://facebook.com"><iclass="fab fa-facebook-f"></i> Facebook</a></li>
                     </li><li><a href="https://twitter.com"><iclass="fab fa-twitter"></i> Twitter</a></li>
                     <li><a href="https://instagram.com"><iclass="fab fa-instagram"></i> Instagram</a></li>
                 </ul>
@@ -309,5 +314,69 @@
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- <script>
+        function sendEmail(){
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "needforspeedexpress13@gmail.com",
+                Password: "NeedForSpeed13",
+                To: 'needforspeedexpress13@gmail.com',
+                From: document.getElementById('email').value,
+                Subject: "Sending Email using javascript",
+                Body: "Name:" + document.getElementById('first_name') + document.getElementById('last_name').value
+                + "<br> Email:" + document.getElementById('email').value
+                + "<br> service:" + document.getElementById('service').value
+                + "<br> explain:" + document.getElementById('explain').value 
+            })
+                .then(function (message) {
+                    alert("mail sent successfully")
+                });
+        }
+    </script> -->
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': form.querySelector('[name="csrfmiddlewaretoken"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.message
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'An unexpected error occurred.'
+                });
+            });
+        });
+
+    </script>
 </body>
 </html>
