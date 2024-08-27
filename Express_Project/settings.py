@@ -132,14 +132,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email settings for contact us form
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.example.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'needforspeedexpress13@gmail.com'
-EMAIL_HOST_PASSWORD = 'NeedForSpeed13'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-CONTACT_EMAIL = 'needforspeedexpress13@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'needforspeedexpress13@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# CONTACT_EMAIL = 'needforspeedexpress13@gmail.com'
 
 
 
