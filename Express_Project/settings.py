@@ -121,7 +121,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
 
 STATICFILES_DIR =[
-    os.path.join(BASE_DIR, 'static'),  
+     os.path.join(BASE_DIR, 'static'),  
 
 ]
 
@@ -129,5 +129,10 @@ STATICFILES_DIR =[
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ROOT_URLCONF = 'chatgpt.urls'
+
+
+
 
 

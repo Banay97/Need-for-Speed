@@ -67,7 +67,7 @@ urlpatterns = [
 
     path('salesdata/', views.sales_data, name='sales_data'),
 
-
+    path('admin-reports', views.admin_reports, name='admin_reports'),
 
     #create company and customer from the admin side:
     path('admin-create-company', views.admin_create_comapny , name="admin_create_comapny"),
@@ -81,7 +81,17 @@ urlpatterns = [
     path('company-tracking-order', views.company_tracking_order, name="company_tracking_order"),
 
     #notifications path:
+    path('notifications/', views.fetch_notifications, name='fetch_notifications'),
+    path('notifications/<int:notification_id>/read/', views.mark_notification_as_read, name='mark_notification_as_read'),
+
+
+    #chatbot path
+    path('chatbot', views.chatbot_page, name='chatbot_page'),
+    path('get-response', views.get_response, name='get_response'),
     
+   
+
+
 
 
 
