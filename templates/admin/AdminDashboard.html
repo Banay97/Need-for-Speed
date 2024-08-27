@@ -324,7 +324,7 @@
                                 <td>{{ order.pickoff_location }}</td>
                                 <td>{{ order.order_status }}</td>
 
-                                <td><a href="{% url 'admin_orders' %}" class="btn btn-primary">View</a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a></td>
+                                <td><a href="{% url 'admin_orders' %}" class="btn btn-primary">View</a> |  <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -358,7 +358,7 @@
                                 <td>{{ user.address }}</td>
                                 <td>{{ user.phone_number }}</td>
                                 <td>
-                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a>
+                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -395,7 +395,7 @@
                                 <td>{{ company.phone_number }}</td>
                                 <td>{{ company.email }}</td>
                                 <td>
-                                    <a href="{% url 'admin_companies' %}" class="btn btn-primary">View</a>
+                                    <a href="{% url 'admin_companies' %}" class="btn btn-primary">View </a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a>
                                     <!-- <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a> -->
                                 </td>
                             </tr>
