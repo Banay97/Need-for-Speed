@@ -50,13 +50,13 @@
             flex: 2;
             display: flex;
             justify-content: center;
-            position: relative; /* Required for dropdown positioning */
+            position: relative; 
         }
         .nav-center ul {
             display: flex;
             align-items: center;
             list-style: none;
-            position: relative; /* Required for dropdown positioning */
+            position: relative; 
         }
         .nav-center ul li {
             position: relative;
@@ -169,9 +169,9 @@
         }
         /* notfication nav style */
         .notification-item {
-    padding: 10px;
-    cursor: pointer;
-        }
+            padding: 10px;
+            cursor: pointer;
+                }
 
         .notification-item:hover {
             background-color: #f8f9fa;
@@ -281,6 +281,63 @@
     
 
     <div class="main-content container">
+        <!-- All Data Table Section -->
+        <section id="orders" class="mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>All Orders Data</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Order Name</th>
+                                <th>Order Serial Number</th>
+                                <th>Pick up </th>
+                                <th>Drop off </th>
+                                <th>Total</th>
+                                <th>Customer Name</th>
+                                <!-- <th>Delivery Driver Name</th> -->
+                                <th>Company Name</th>
+                                <th>Order status</th>
+                                <th>Created at</th>
+                                <th>Updated at</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td><a href="{% url 'admin_tracking_order_view' order.id %}">{{ order.id }}</a></td>
+                                <td>{{order.order_name}}</td>
+                                <td>{{order.order_code_number}}</td>
+                                <td>{{ order.pickup_location }}</td>
+                                <td>{{ order.pickoff_location }}</td>
+                                <td>{{ order.Total }}</td>
+                                <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                                <!-- <td>{{order.delivery.first_name}} {{order.delivery.last_name}}</td> -->
+                                <td>{{order.company.company_name}}</td>
+                                <td>{{ order.order_status }}</td>
+                                <td>{{order.created_at}}</td>
+                                <td>{{order.updated_at}}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="11" class="text-center">
+                                    <button type="submit" class="btn btn-dark">
+                                        <img src="https://cdn-icons-png.freepik.com/256/4270/4270476.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" alt="download img" width="30">
+                                        Download Report
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
        
     </div>
 
@@ -292,53 +349,8 @@
 
 <!-- Include Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('ordersChart').getContext('2d');
-        
-        // Fetch data from the Django backend
-        fetch('/salesdata/')
-            .then(response => response.json())
-            .then(data => {
-                const chart = new Chart(ctx, {
-                    type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
-                    data: {
-                        labels: data.labels,
-                        datasets: [{
-                            label: data.datasets[0].label,
-                            data: data.datasets[0].data,
-                            backgroundColor: data.datasets[0].backgroundColor,
-                            borderColor: data.datasets[0].borderColor,
-                            borderWidth: data.datasets[0].borderWidth
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.label || '';
-                                        if (context.parsed !== null) {
-                                            label += `: ${context.parsed}`;
-                                        }
-                                        return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
-
-
+   
+    <!-- notifications script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
         const notificationMenu = document.getElementById('notification-menu');
