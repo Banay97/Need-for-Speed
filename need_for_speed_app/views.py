@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponse , JsonResponse
+from django.http import HttpResponse , JsonResponse, FileResponse
 import bcrypt
 import requests
 from django.urls import reverse
@@ -14,11 +14,50 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.mail import send_mail
+import io 
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
 
-# from chatterbot import ChatBot
+
 
 # Create your views here.
 
+def download_pdf(request):
+    buf = io.BytesIO()
+    canv = canvas.Canvas(buf, pagesize=letter, bottomup = 0)
+    textob = canv.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    lines = []
+
+    orders = Order.objects.all()
+
+    for order in orders:
+        lines.append(f"Order ID: {order.id}")
+        lines.append(f"Order Name: {order.order_name}")
+        lines.append(f"Order Serial Number: {order.order_code_number}")
+        lines.append(f"Pick Up Location: {order.pickup_location}")
+        lines.append(f"Drop Off Location: {order.pickoff_location}")
+        lines.append(f"Total: {order.Total}")
+        lines.append(f"Customer Name: {order.customer.first_name} {order.customer.last_name}")
+        lines.append(f"Company Name: {order.company.company_name}")
+        lines.append(f"Order Status: {order.order_status}")
+        lines.append(f"Created At: {order.created_at}")
+        lines.append(f"Updated At: {order.updated_at}")
+        lines.append(" ")  # Empty line for spacing
+
+    for line in lines:
+        textob.textLine(line)   
+
+
+    canv.drawText(textob)
+    canv.showPage() 
+    canv.save()
+    buf.seek(0)   
+
+    return FileResponse(buf, as_attachment =True, filename= 'all-orders.pdf')
 #main project nav pages
 def home(request):
     return render(request, 'main/home.html')
@@ -34,7 +73,7 @@ def contact_us(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
-        service_type = request.POST.get('service_type')
+        # service_type = request.POST.get('service_type')
         comment = request.POST.get('comment')
 
         if not first_name or not last_name or not email:
