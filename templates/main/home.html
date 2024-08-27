@@ -331,20 +331,15 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="#">Need For Speed Express</a></h1>
+            <h1><a href="{% url ' home' %}">Need For Speed Express</a></h1>
         </div>
         <div class="nav-center">
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
-                <li><a href="{% url 'services' %}">Services</a>
-                    <!-- <ul>
-                        <li><a href="#">Online Ordering System</a></li>
-                        <li><a href="#">Real-Time Tracking</a></li>
-                        <li><a href="#">Customer Support</a></li>
-                    </ul> -->
-                </li>
+                <li><a href="{% url 'services' %}">Services</a></li>
                 <li><a href="{% url 'contact_us'%}">Contact Us</a></li>
+                <li><a href="{% url 'chatbot_page'%}">ChatBot</a></li>
             </ul>
         </div>
         <div class="nav-right">
@@ -359,7 +354,7 @@
                 you’re craving a late-night snack or need urgent documents delivered, we’ve got you covered with our
                 ultra-speedy service.</p>
             <div class="text-center mb-4">
-                <a href="{% url 'sign_in'%}" class="{btn btn-primary mr-2}">Order Now</a>
+                <a href="{% url 'sign_in'%}" class="btn btn-primary mr-2">Order Now</a>
                 <a href="{% url 'sign_in'%}" class="btn btn-primary">Track Your Delivery</a>
             </div>
             <hr>

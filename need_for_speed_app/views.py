@@ -11,11 +11,12 @@ from .models import User, Customer, Company, Delivery, Order, Notification, Loca
 from .utils import get_coordinates
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 
-
+# from chatterbot import ChatBot
 
 # Create your views here.
-
 
 #main project nav pages
 def home(request):
@@ -651,5 +652,91 @@ def company_tracking_order(request):
 
 
 #Notifications Part:
+def fetch_notifications(request):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        print("User is not authenticated. No user_id in session.")
+        return JsonResponse({'status': 'error', 'message': 'Unauthorized'}, status=401)
+    
+    print(f"User is authenticated with user_id: {user_id}")
+    notifications = Notification.objects.filter(user_id=user_id).order_by('-created_at')
+    data = [{
+        'id': notification.id,
+        'message': notification.content_type,
+        'read': notification.is_read,
+        'link': notification.link
+    } for notification in notifications]
+    return JsonResponse(data, safe=False)
+
+def notification_list(request):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        return redirect('sign_in')  # Ensure 'login' points to your actual sign-in view name
+    
+    notifications = Notification.objects.filter(user_id=user_id).order_by('-created_at')
+    unread_count = notifications.filter(is_read=False).count()  # Ensure this field name matches your model
+    
+    return render(request, 'admin_dashboard.html', {
+        'notifications': notifications,
+        'unread_count': unread_count
+    })
+
+def mark_notification_as_read(request, notification_id):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        return JsonResponse({'status': 'error', 'message': 'Unauthorized'}, status=401)
+    
+    try:
+        notification = Notification.objects.get(id=notification_id, user_id=user_id)
+        notification.read = True
+        notification.save()
+        return JsonResponse({'status': 'success'})
+    except Notification.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Notification not found'}, status=404)
+
+
+
+
+
+# chatbot functions:
+
+def chatbot_page(request):
+    return render(request, 'main/chatbot.html')
+
+# def get_response(request):
+#     userMessage = request.GET.get('userMessage')
+#     return HttpResponse(userMessage)
+
+def get_response(request):
+    user_message = request.GET.get('userMessage', '').strip().lower()
+
+    # Define predefined responses
+    responses = {
+        "hello": "Hello! How can I assist you today?",
+        "hi": "Hi there! How can I help you today?",
+        "i want to ask you few questions about your website": "Sure! Here are some questions you can ask:\n1. What areas do you serve?\n2. How can I place an order?\n3. How do I track my delivery?\n4. Can I schedule a delivery for a specific time?\n5. How do I update my delivery address?",
+        "what areas do you serve?": "We currently provide delivery services in [List of Areas or Cities]. If you’re unsure whether we deliver to your location, please enter your address on our website or contact our customer support team for assistance.",
+        "how can i place an order?": "You can place an order by visiting our website or mobile app. Simply choose your items, select your delivery options, and complete the checkout process. If you need any help, feel free to reach out to our customer support.",
+        "how do i track my delivery?": "Once your order is placed, you will receive a tracking link via email or SMS. You can use this link to monitor the real-time status and location of your delivery.",
+        "can i schedule a delivery for a specific time?": "Yes, you can schedule your delivery for a specific time and date during the checkout process. Please ensure to place your order well in advance to accommodate your preferred delivery window.",
+        "how do i update my delivery address?": "If you need to update your delivery address, please do so through your account on our website or app before finalizing your order. If your order has already been placed, contact our customer support team as soon as possible to make changes."
+    }
+
+    # Get the response based on the user message
+    response_message = responses.get(user_message, "Sorry, I didn't understand that. Can you please rephrase your question?")
+
+    return JsonResponse(response_message, safe=False)
+
+
+
+def admin_reports(request):
+
+    return render(request, 'admin/AdminReports.html')    
+
+     
+
 
       
