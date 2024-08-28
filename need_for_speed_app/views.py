@@ -408,7 +408,7 @@ def admin_company_edit_view(request, company_id):
         company.save()
         return redirect('admin_companies')
 
-    return render(request, 'admin/admin_company_edit.html', {'company': company})
+    return render(request, 'admin/admin_company_edit.html', {'company': company, 'users': users})
 
 def admin_company_delete_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)
