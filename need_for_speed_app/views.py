@@ -398,12 +398,13 @@ def admin_companies_view(request):
 
 def admin_company_edit_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)
+    users = User.objects.all()
 
     if request.method == 'POST':
         company.company_name = request.POST.get('company_name')
         company.address = request.POST.get('address')
         company.phone_number = request.POST.get('phone_number')
-        company.email = request.POST.get('email')
+        users.company.email = request.POST.get('email')
         company.save()
         return redirect('admin_companies')
 
