@@ -808,7 +808,23 @@ def admin_tracking_order_view(request, order_id):
 
 
 def company_tracking_order(request):
-    return render(request, 'company/CompanyTrackingPage.html')        
+    return render(request, 'company/CompanyTrackingPage.html')
+
+def company_tracking_order_view(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    pickup_lat, pickup_lng = get_coordinates(order.pickup_location)
+    dropoff_lat, dropoff_lng = get_coordinates(order.pickoff_location)
+
+    context = {
+        'order': order,
+        'pickup_lat': pickup_lat,
+        'pickup_lng': pickup_lng,
+        'dropoff_lat': dropoff_lat,
+        'dropoff_lng': dropoff_lng,
+    }
+
+    return render(request, 'company/CompanyTrackingPage.html', context)     
+           
 
 
 #Notifications Part:
