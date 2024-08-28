@@ -17,47 +17,154 @@ from django.core.mail import send_mail
 import io 
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import landscape, A4
+from django.http import FileResponse
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
 
 
 
 # Create your views here.
 
+# def download_pdf(request):
+#     buf = io.BytesIO()
+#     canv = canvas.Canvas(buf, pagesize=letter, bottomup = 0)
+#     textob = canv.beginText()
+#     textob.setTextOrigin(inch, inch)
+#     textob.setFont("Helvetica", 14)
+
+#     lines = []
+
+#     orders = Order.objects.all()
+
+#     for order in orders:
+#         lines.append(f"Order ID: {order.id}")
+#         lines.append(f"Order Name: {order.order_name}")
+#         lines.append(f"Order Serial Number: {order.order_code_number}")
+#         lines.append(f"Pick Up Location: {order.pickup_location}")
+#         lines.append(f"Drop Off Location: {order.pickoff_location}")
+#         lines.append(f"Total: {order.Total}")
+#         lines.append(f"Customer Name: {order.customer.first_name} {order.customer.last_name}")
+#         lines.append(f"Company Name: {order.company.company_name}")
+#         lines.append(f"Order Status: {order.order_status}")
+#         lines.append(f"Created At: {order.created_at}")
+#         lines.append(f"Updated At: {order.updated_at}")
+#         lines.append(" ")  # Empty line for spacing
+
+#     for line in lines:
+#         textob.textLine(line)   
+
+
+#     canv.drawText(textob)
+#     canv.showPage() 
+#     canv.save()
+#     buf.seek(0)   
+
+#     return FileResponse(buf, as_attachment =True, filename= 'all-orders.pdf')
 def download_pdf(request):
     buf = io.BytesIO()
-    canv = canvas.Canvas(buf, pagesize=letter, bottomup = 0)
-    textob = canv.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
+    
+    # Use landscape A4 page size
+    doc = SimpleDocTemplate(buf, pagesize=landscape(A4))
+    elements = []
 
-    lines = []
+    data = [
+        ["Order Name", "Order Serial Number", "Pick Up Location", "Drop Off Location", "Total", "Customer Name", "Company Name", "Company Email", "Order Status"]
+    ]
 
     orders = Order.objects.all()
-
+    
     for order in orders:
-        lines.append(f"Order ID: {order.id}")
-        lines.append(f"Order Name: {order.order_name}")
-        lines.append(f"Order Serial Number: {order.order_code_number}")
-        lines.append(f"Pick Up Location: {order.pickup_location}")
-        lines.append(f"Drop Off Location: {order.pickoff_location}")
-        lines.append(f"Total: {order.Total}")
-        lines.append(f"Customer Name: {order.customer.first_name} {order.customer.last_name}")
-        lines.append(f"Company Name: {order.company.company_name}")
-        lines.append(f"Order Status: {order.order_status}")
-        lines.append(f"Created At: {order.created_at}")
-        lines.append(f"Updated At: {order.updated_at}")
-        lines.append(" ")  # Empty line for spacing
+        data.append([
+            # order.id,
+            order.order_name,
+            order.order_code_number,
+            order.pickup_location,
+            order.pickoff_location,
+            order.Total,
+            f"{order.customer.first_name} {order.customer.last_name}",
+            order.company.company_name,
+            order.company.email,
+            order.order_status,
+            # order.created_at,
+            # order.updated_at
+        ])
 
-    for line in lines:
-        textob.textLine(line)   
+    table = Table(data)
+    
+    style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkorange),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ])
+    
+    table.setStyle(style)
+    
+    elements.append(table)
+
+    doc.build(elements)
+    
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='all-orders.pdf')
 
 
-    canv.drawText(textob)
-    canv.showPage() 
-    canv.save()
-    buf.seek(0)   
+def users_download_pdf(request):
+    buf = io.BytesIO()
 
-    return FileResponse(buf, as_attachment =True, filename= 'all-orders.pdf')
+    # Set the page size to A4 
+    doc = SimpleDocTemplate(buf, pagesize=A4)
+    elements = []
+
+    # Define table data and headers
+    data = [
+        ["User ID", "First Name", "Last Name", "Address", "Phone Number", "Created At"]
+    ]
+
+    # Fetch users from the database
+    users = User.objects.all()
+
+    for user in users:
+        data.append([
+            user.id,
+            user.first_name,
+            user.last_name,
+            user.address,
+            user.phone_number,
+            user.created_at,
+            # user.updated_at
+        ])
+
+    # Create a Table object
+    table = Table(data)
+
+    # Define the table style
+    style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkorange),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ])
+
+    table.setStyle(style)
+
+    # Add the table to the PDF elements list
+    elements.append(table)
+
+    # Build the PDF
+    doc.build(elements)
+
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='all-users.pdf')
+
 #main project nav pages
 def home(request):
     return render(request, 'main/home.html')
@@ -785,16 +892,33 @@ def admin_reports(request):
     orders = Order.objects.all()
     drivers = Delivery.objects.all()
     company =Company.objects.all()
+    users = User.objects.all()
 
     context = {
         'customers': customers,
         'drivers': drivers,
         'orders': orders,
         'company':company,
+        'users':users,
     }
 
 
     return render(request, 'admin/AdminReports.html', context)    
+
+ 
+def company_reports(request):
+    customers = Customer.objects.all()
+    orders = Order.objects.all()
+    drivers = Delivery.objects.all()
+
+    context = {
+        'customers': customers,
+        'drivers': drivers,
+        'orders': orders,
+    }
+
+
+    return render(request, 'company/CompanyReports.html', context)     
 
 
 

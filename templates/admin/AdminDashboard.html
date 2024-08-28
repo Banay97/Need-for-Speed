@@ -171,7 +171,7 @@
         .notification-item {
             padding: 10px;
             cursor: pointer;
-                }
+        }
 
         .notification-item:hover {
             background-color: #f8f9fa;
@@ -241,15 +241,15 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png" width="20" alt="Notifications"> Notifications <span id="notification-count" class="badge badge-danger">{{ unread_count }}</span>
+                        Notifications <span id="notification-count" class="badge badge-danger">{{ unread_count }}</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notification-menu">
                         {% for notification in notifications %}
                             <a class="dropdown-item" href="{{ notification.link }}">
                                 {% if not notification.is_read %}
-                                    <strong>{{ notification.message }}</strong>
+                                    <strong>{{ notification.content_type }}</strong>
                                 {% else %}
-                                    {{ notification.message }}
+                                    {{ notification.content_type }}
                                 {% endif %}
                             </a>
                         {% empty %}

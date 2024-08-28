@@ -298,8 +298,9 @@
                                 <th>Drop off </th>
                                 <th>Total</th>
                                 <th>Customer Name</th>
-                                <!-- <th>Delivery Driver Name</th> -->
+                               
                                 <th>Company Name</th>
+                                <th>Company Email</th>
                                 <th>Order status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
@@ -315,8 +316,9 @@
                                 <td>{{ order.pickoff_location }}</td>
                                 <td>{{ order.Total }}</td>
                                 <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                                <!-- <td>{{order.delivery.first_name}} {{order.delivery.last_name}}</td> -->
                                 <td>{{order.company.company_name}}</td>
+                                <td>{{order.company.email}} </td>
+
                                 <td>{{ order.order_status }}</td>
                                 <td>{{order.created_at}}</td>
                                 <td>{{order.updated_at}}</td>
@@ -330,6 +332,52 @@
                                     <button type="submit" class="btn btn-dark">
                                         <img src="https://cdn-icons-png.freepik.com/256/4270/4270476.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" alt="download img" width="30">
                                         <a href="{% url 'download_pdf' %}">Download Report</a>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+         <!-- Users Section -->
+         <section id="users" class="mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>All Users Data </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Customer Address</th>
+                                <th>Customer Phone</th>
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                <td>{{ user.address }}</td>
+                                <td>{{ user.phone_number }}</td>
+                                <!-- <td>
+                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a>
+                                </td> -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="11" class="text-center">
+                                    <button type="submit" class="btn btn-dark">
+                                        <img src="https://cdn-icons-png.freepik.com/256/4270/4270476.png?ga=GA1.1.209331547.1723160267&semt=ais_hybrid" alt="download img" width="30">
+                                        <a href="{% url 'users_download_pdf' %}">Download Report</a>
                                     </button>
 
                                 </td>

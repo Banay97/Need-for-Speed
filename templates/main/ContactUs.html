@@ -6,8 +6,9 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
      <!-- Bootstrap CSS -->
      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-     <!-- SweetAlert2 CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+     
+      <!-- SweetAlert2 CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <title>Contact Us Page</title>
      <style>
          * {
@@ -222,7 +223,7 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="#">Need For Speed Express</a></h1>
+            <h1><a href="{% url 'home' %}">Need For Speed Express</a></h1>
         </div>
         <div class="nav-center">
             <ul>
@@ -262,6 +263,7 @@
             </div>
         </main>
     </section>
+    
     <footer class="bg-custom text-custom text-center text-lg-start">
         <h3 class="p-3 h3">Need For Speed</h3>
         <div class="container p-4 footer-content">
@@ -303,5 +305,61 @@
       <!-- SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+  
+     <!-- SweetAlert2 JavaScript -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+     <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         const form = document.getElementById('contact-form');
+         const formSubmitted = sessionStorage.getItem('formSubmitted');
+ 
+         if (formSubmitted) {
+             form.reset();
+             sessionStorage.removeItem('formSubmitted');
+         }
+ 
+         form.addEventListener('submit', function(event) {
+             event.preventDefault(); // Prevent the default form submission
+             const formData = new FormData(form);
+ 
+             fetch(form.action, {
+                 method: 'POST',
+                 body: formData
+             })
+             .then(response => {
+                 if (response.ok) {
+                     form.reset(); // Clear the form fields
+                     sessionStorage.setItem('formSubmitted', 'true'); // Set the flag
+ 
+                     // SweetAlert2 success alert
+                     Swal.fire({
+                         title: 'Success!',
+                         text: 'Your message has been sent successfully.',
+                         icon: 'success',
+                         confirmButtonText: 'OK'
+                     });
+                 } else {
+                     // SweetAlert2 error alert
+                     Swal.fire({
+                         title: 'Error!',
+                         text: 'There was an error sending your message.',
+                         icon: 'error',
+                         confirmButtonText: 'OK'
+                     });
+                 }
+             })
+             .catch(error => {
+                 console.error('Error:', error);
+                 // SweetAlert2 error alert
+                 Swal.fire({
+                     title: 'Error!',
+                     text: 'There was an error sending your message.',
+                     icon: 'error',
+                     confirmButtonText: 'OK'
+                 });
+             });
+         });
+     });
+     </script>
 </body>
 </html>
