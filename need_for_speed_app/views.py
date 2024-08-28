@@ -6,6 +6,7 @@ import requests
 from django.urls import reverse
 from django.db.models import Count
 from datetime import timedelta
+from datetime import datetime
 from django.utils import timezone
 from .models import User, Customer, Company, Delivery, Order, Notification, Location
 from .utils import get_coordinates
@@ -127,15 +128,16 @@ def users_download_pdf(request):
 
     # Fetch users from the database
     users = User.objects.all()
-
-    for user in users:
+    for user in users: 
+        created_at_formatted = user.created_at.strftime('%d-%m-%Y') 
+        
         data.append([
             user.id,
             user.first_name,
             user.last_name,
             user.address,
             user.phone_number,
-            user.created_at,
+            created_at_formatted,
             # user.updated_at
         ])
 
@@ -211,6 +213,7 @@ def sign_in(request):
     
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
             request.session['email'] = email
+            request.session['user_id'] = user.id 
             if user.role == 'admin':
                
                 messages.success(request, 'Welcome!')
@@ -837,6 +840,19 @@ def notification_list(request):
         'notifications': notifications,
         'unread_count': unread_count
     })
+def company_notification_list(request):
+    user_id = request.session.get('user_id')
+    
+    if not user_id:
+        return redirect('sign_in')  # Ensure 'login' points to your actual sign-in view name
+    
+    notifications = Notification.objects.filter(user_id=user_id).order_by('-created_at')
+    unread_count = notifications.filter(is_read=False).count()  # Ensure this field name matches your model
+    
+    return render(request, 'company_dashboard.html', {
+        'notifications': notifications,
+        'unread_count': unread_count
+    })    
 
 def mark_notification_as_read(request, notification_id):
     user_id = request.session.get('user_id')

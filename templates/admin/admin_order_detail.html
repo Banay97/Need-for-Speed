@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="User Management - Need For Speed Admin">
+    <meta name="description" content="Order Management - Need For Speed Admin">
     <meta name="keywords" content="HTML, CSS, JavaScript, Bootstrap">
-    <title>User Management - Need For Speed Admin</title>
-
+    <title>Order Management - Need For Speed Admin</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-     <!-- SweetAlert Bootstrap and JS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert Bootstrap and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         * {
@@ -20,7 +19,7 @@
         }
       
         body {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
         }
         nav {
@@ -75,7 +74,7 @@
             display: block;
         }
         .nav-center ul li a:hover, .nav-right a:hover {
-            background-color: #55371e;
+            background-color:  #55371e;
             color: #1A4862;
         }
         .nav-right {
@@ -90,8 +89,8 @@
             font-size: 17px;
             font-weight: bold;
         }
-        /* Ensure dropdown menus are hidden by default */
-        .nav-center ul .sub-menu {
+         /* Ensure dropdown menus are hidden by default */
+         .nav-center ul .sub-menu {
             display: none;
             position: absolute;
             background: #C04000;
@@ -149,9 +148,10 @@
             font-weight: bold;
         }
         .btn-primary:hover {
-            background-color: #E25822;
+            background-color:  #E25822;
             color: #FFE5B4;
         }
+
         .btn-danger {
             background-color: #dc3545;
             border-color: #dc3545;
@@ -159,7 +159,7 @@
         }
         .btn-danger:hover {
             background-color: #c82333;
-            color: #fff;
+            color: #FFE5B4;
         }
 
         .footer-bottom {
@@ -235,34 +235,21 @@
                         <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png" width="20" alt="Notifications"> Notifications <span id="notification-count" class="badge badge-danger">{{ unread_count }}</span>
+                <li class="nav-item">
+                    <a class="nav-link" href="#notifications">
+                        <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Notifications"> Notifications
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notification-menu">
-                        {% for notification in notifications %}
-                            <a class="dropdown-item" href="{{ notification.link }}">
-                                {% if not notification.is_read %}
-                                    <strong>{{ notification.message }}</strong>
-                                {% else %}
-                                    {{ notification.message }}
-                                {% endif %}
-                            </a>
-                        {% empty %}
-                            <a class="dropdown-item">No notifications</a>
-                        {% endfor %}
-                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_reports' %}">
+                    <a class="nav-link" href="#reports">
                         <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
                     </a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="#settings">
                         <img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Settings
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
         <div class="nav-right">
@@ -275,10 +262,10 @@
     </nav>
 
     <main class="container mt-4">
-        <h1>Order Management</h1>
+        <h1>Notifications Order Management</h1>
         <div class="card">
             <div class="card-header">
-                <h3>Orders List</h3>
+                <h3>Orders</h3>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped">
@@ -286,6 +273,7 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Customer</th>
+                            <th>Total</th>
                             <th>Created Date</th>
                             <th>Pick Up</th>
                             <th>Drop Off</th>
@@ -294,11 +282,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for order in orders %}
                         <tr>
                             <td>{{ order.id }}</td>
                             <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                            <td>{{ order.created_date }}</td>
+                            <td>{{ order.Total }}</td>
+                            <td>{{ order.created_at }}</td>
                             <td>{{ order.pickup_location }}</td>
                             <td>{{ order.pickoff_location }}</td>
                             <td>{{ order.order_status }}</td>
@@ -307,7 +295,6 @@
                                 <a href="{% url 'admin_order_delete' order.id %}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -316,11 +303,54 @@
     
 
     <footer class="footer-bottom">
-        <small>&copy; Need For Speed - User Management. All rights reserved.</small>
+        <small>&copy; Need For Speed - Order Management. All rights reserved.</small>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to handle the delete button click
+        function handleDeleteClick(event) {
+          event.preventDefault(); // Prevent the default link behavior
+      
+          const deleteUrl = this.getAttribute('href'); // Get the URL from the href attribute
+      
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+      
+          swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Redirect to the delete URL if confirmed
+              window.location.href = deleteUrl;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+              });
+            }
+          });
+        }
+      
+        // Attach the click event handler to all delete buttons
+        document.querySelectorAll('.btn-danger').forEach(button => {
+          button.addEventListener('click', handleDeleteClick);
+        });
+      </script>
 </body>
 </html>
