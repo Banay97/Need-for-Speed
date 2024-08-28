@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'Express_Project.wsgi.application'
 #         'PASSWORD': '1234',
 #         'HOST': 'localhost',
 #         'PORT': '5432'
-#     }
+# }
 # }
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = { 
