@@ -17,7 +17,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-      
+
         body {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
@@ -194,9 +194,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_comapny' %}">Create a Company</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_companies' %}">View All Companies</a>
                         </li>
@@ -210,9 +207,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_create_customer'%}">Create a Customer</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#update-customer">Update a Customer</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{%url 'admin_users' %}">View All Customers</a>
                         </li>
@@ -226,9 +220,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="{% url 'update_order' %}">Update an Order</a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
                         </li>
@@ -258,42 +249,40 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_reports'%}">
+                    <a class="nav-link" href="#reports">
                         <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
                     </a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="#settings">
                         <img src="https://cdn-icons-png.freepik.com/256/11186/11186705.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Settings
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
         <div class="nav-right">
             <li class="nav-item" style="list-style: none;">
                 <a class="nav-link" href="{% url 'sign_out'%}">
-                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Sign Out
+                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Sign Out"> Sign Out
                 </a>
             </li>
         </div>
     </nav>
     
-    
-
     <div class="main-content container">
-       <!-- Chart Section -->
-    <section id="orders" class="mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h3>Orders Management Chart</h3>
-            </div>
-            <div class="card-body">
-                <div id="chart-container" style="width: 100%; height: 200px;">
-                    <canvas id="ordersChart"></canvas>
+        <!-- Chart Section -->
+        <section id="orders" class="mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Orders Management Chart</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-container" style="width: 100%; height: 200px;">
+                        <canvas id="ordersChart"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <!-- Orders Section -->
         <section id="orders" class="mt-4">
@@ -323,8 +312,7 @@
                                 <td>{{ order.pickup_location }}</td>
                                 <td>{{ order.pickoff_location }}</td>
                                 <td>{{ order.order_status }}</td>
-
-                                <td><a href="{% url 'admin_orders' %}" class="btn btn-primary">View</a> |  <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a></td>
+                                <td><a href="{% url 'admin_orders' %}" class="btn btn-primary">View</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -358,7 +346,7 @@
                                 <td>{{ user.address }}</td>
                                 <td>{{ user.phone_number }}</td>
                                 <td>
-                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a>
+                                    <a href="{% url 'admin_users' %}" class="btn btn-primary">View</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -395,8 +383,7 @@
                                 <td>{{ company.phone_number }}</td>
                                 <td>{{ company.email }}</td>
                                 <td>
-                                    <a href="{% url 'admin_companies' %}" class="btn btn-primary">View </a> | <a href="{% url 'admin_reports' %}" class="btn btn-primary">Report</a>
-                                    <!-- <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger">Delete</a> -->
+                                    <a href="{% url 'admin_companies' %}" class="btn btn-primary">View</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -408,97 +395,110 @@
     </div>
 
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<!-- jQuery (make sure this is loaded first) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Include Bootstrap JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('ordersChart').getContext('2d');
-        
-        // Fetch data from the Django backend
-        fetch('/salesdata/')
-            .then(response => response.json())
-            .then(data => {
-                const chart = new Chart(ctx, {
-                    type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
-                    data: {
-                        labels: data.labels,
-                        datasets: [{
-                            label: data.datasets[0].label,
-                            data: data.datasets[0].data,
-                            backgroundColor: data.datasets[0].backgroundColor,
-                            borderColor: data.datasets[0].borderColor,
-                            borderWidth: data.datasets[0].borderWidth
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.label || '';
-                                        if (context.parsed !== null) {
-                                            label += `: ${context.parsed}`;
-                                        }
-                                        return label;
+<!-- Popper.js (required for Bootstrap) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    
+    // Fetch data from the Django backend
+    fetch('/salesdata/')
+        .then(response => response.json())
+        .then(data => {
+            const chart = new Chart(ctx, {
+                type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: data.datasets[0].label,
+                        data: data.datasets[0].data,
+                        backgroundColor: data.datasets[0].backgroundColor,
+                        borderColor: data.datasets[0].borderColor,
+                        borderWidth: data.datasets[0].borderWidth
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (context.parsed !== null) {
+                                        label += `: ${context.parsed}`;
                                     }
+                                    return label;
                                 }
                             }
                         }
                     }
-                });
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+</script>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const notificationMenu = document.getElementById('notification-menu');
+    const notificationCount = document.getElementById('notification-count');
+
+    function fetchNotifications() {
+        fetch('/notifications/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
             })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
+            .then(data => {
+                console.log("Notifications fetched:", data); // Log the fetched data
+                notificationMenu.innerHTML = '';  // Clear existing notifications
+                let unreadCount = 0;
 
+                data.forEach(notification => {
+                    console.log("Processing notification:", notification);
+                    const item = document.createElement('a');
+                    item.className = 'dropdown-item notification-item';
+                    item.href = notification.link;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const notificationMenu = document.getElementById('notification-menu');
-        const notificationCount = document.getElementById('notification-count');
+                    console.log("Notification content_type:", notification.content_type);
+                    console.log("Notification is_read status:", notification.is_read);
 
-        function fetchNotifications() {
-            fetch('/notifications/')
-                .then(response => response.json())
-                .then(data => {
-                    notificationMenu.innerHTML = '';
-                    let unreadCount = 0;
-
-                    data.forEach(notification => {
-                        const item = document.createElement('a');
-                        item.className = 'dropdown-item notification-item';
-                        if (!notification.read) {
-                            item.classList.add('unread');
-                            unreadCount++;
-                        }
+                    if (!notification.is_read) {
+                        item.classList.add('unread');
+                        item.innerHTML = `<strong>${notification.message}</strong>`;
+                        unreadCount++;
+                    } else {
                         item.textContent = notification.message;
-                        item.addEventListener('click', () => markAsRead(notification.id));
-                        notificationMenu.appendChild(item);
-                    });
+                    }
 
-                    notificationCount.textContent = unreadCount;
+                    notificationMenu.appendChild(item);
                 });
-        }
 
-        function markAsRead(notificationId) {
-            fetch(`/notifications/${notificationId}/read/`, { method: 'POST' })
-                .then(() => fetchNotifications());
-        }
+                console.log("Unread count:", unreadCount); // Log the unread count
+                notificationCount.textContent = unreadCount;
+            })
+            .catch(error => console.error('Error fetching notifications:', error));
+    }
 
-        fetchNotifications();
-    });
-    </script>
+    fetchNotifications();
+});
 
-
+   </script>
 </body>
 </html>
