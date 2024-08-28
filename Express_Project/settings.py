@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'Express_Project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'PostgreSQL 16',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
