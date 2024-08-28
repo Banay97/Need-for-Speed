@@ -32,8 +32,12 @@ ALLOWED_HOSTS = [
 "http://35.171.160.124/",
 "localhost",
 "127.0.0.1",
+"http://0.0.0.0:8000/",
+"0.0.0.0",
+
 ]
-CSRF_TRUSTED_ORIGINS = ["http://35.171.160.124/", "http://localhost/", "http://127.0.0.1/"]
+CSRF_TRUSTED_ORIGINS = ["http://35.171.160.124/", "http://localhost/", "http://127.0.0.1/", "http://0.0.0.0:8000/"]
+
 # Application definition
 
 INSTALLED_APPS = [
