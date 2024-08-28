@@ -297,9 +297,7 @@
                             <td>{{ company.company_name }}</td>
                             <td>{{ company.address }}</td>
                             <td>{{ company.phone_number }}</td>
-                        {%endfor%} 
-                        {% for user in users %}   
-                            <!-- <td>{{ company.email }}</td> -->
+                            <td>{{ company.user.email }}</td>
                             <td>
                                 <a href="{% url 'admin_company_edit' company.id %}" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="{% url 'admin_company_delete' company.id %}" class="btn btn-danger btn-sm">Delete</a>
