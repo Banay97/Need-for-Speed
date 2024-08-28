@@ -86,24 +86,24 @@ WSGI_APPLICATION = 'Express_Project.wsgi.application'
 #     'default': dj_database_url.config( default='postgresql://postgres:postgres@localhost:5432/The Wall ',        
 #                 conn_max_age=600    
 # )}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
-# Replace the SQLite DATABASES configuration with PostgreSQL:
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default='postgresql://postgres:postgres@localhost:5432/Express_Project',
-#         conn_max_age=600
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
 # }
+# Replace the SQLite DATABASES configuration with PostgreSQL:
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/Express_Project',
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
