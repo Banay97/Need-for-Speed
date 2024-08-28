@@ -181,7 +181,7 @@
 <body>
     <nav>
         <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></h1>
+            <h1><a href="{% url 'admin_dashboard'%}">Admin Dashboard</a></h1>
         </div>
         <div class="nav-center">
             <ul>
@@ -235,13 +235,26 @@
                         <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#notifications">
-                        <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Notifications"> Notifications
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://cdn-icons-png.freepik.com/256/3308/3308948.png" width="20" alt="Notifications"> Notifications <span id="notification-count" class="badge badge-danger">{{ unread_count }}</span>
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notification-menu">
+                        {% for notification in notifications %}
+                            <a class="dropdown-item" href="{{ notification.link }}">
+                                {% if not notification.is_read %}
+                                    <strong>{{ notification.message }}</strong>
+                                {% else %}
+                                    {{ notification.message }}
+                                {% endif %}
+                            </a>
+                        {% empty %}
+                            <a class="dropdown-item">No notifications</a>
+                        {% endfor %}
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reports">
+                    <a class="nav-link" href="{% url 'admin_reports' %}">
                         <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
                     </a>
                 </li>
@@ -254,8 +267,8 @@
         </div>
         <div class="nav-right">
             <li class="nav-item" style="list-style: none;">
-                <a class="nav-link" href="{% url 'sign_out' %}">
-                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Sign Out"> Sign Out
+                <a class="nav-link" href="{% url 'sign_out'%}">
+                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Settings"> Sign Out
                 </a>
             </li>
         </div>

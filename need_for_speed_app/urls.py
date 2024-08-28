@@ -91,10 +91,13 @@ urlpatterns = [
     
     #Report and download pdf file path
     path('admin-reports', views.admin_reports, name='admin_reports'),
+    path('company-reports', views.company_reports, name='company_reports'),
 
 
     #pdf file:
     path('download-pdf', views.download_pdf, name= 'download_pdf'),
+    path('users-download-pdf', views.users_download_pdf, name= 'users_download_pdf'),
+
     
 
 
