@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-# import dj_database_url
 from pathlib import Path
 
 
@@ -91,14 +90,25 @@ WSGI_APPLICATION = 'Express_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'need_for_speed',
+        'USER': 'root',
+        'PASSWORD': 'Bayan123',
+        'HOST': '127.0.0.1',
+        'PORT': '3307',
+    }
 }
-}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+# }
+# }
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 # DATABASES = { 
 #     'default': dj_database_url.config( default='postgresql://postgres:postgres@localhost:5432/Express_Project', 
