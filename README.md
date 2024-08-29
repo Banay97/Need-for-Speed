@@ -60,7 +60,6 @@ C.5: Chatbot Page: A simple chatbot is available to assist users visiting our si
 1. Stay informed about critical events such as new orders, driver issues, and customer feedback.
 2. Ensure timely responses to important tasks and inquiries.
 
-
 ## Technical Details<br>
 ### Front-End Technologies:<br>
 
