@@ -255,15 +255,19 @@ def sign_up(request):
                 email=email,
                 password=hashed_password
                 )
+
             user.save()
+            if user and bcrypt.checkpw(password.encode(), user.password.encode()):
+            request.session['email'] = email
+            request.session['user_id'] = user.id 
+            
             if user.role == 'admin':
-                request.session['user_id'] = user.id 
+                
                 messages.success(request, 'Registration successful! Please log in.')
                 return redirect('admin_dashboard')
 
                 # return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
-                request.session['user_id'] = user.id 
                 messages.success(request, 'Registration successful! Please log in.')
                 return redirect('company_dashboard')
 
