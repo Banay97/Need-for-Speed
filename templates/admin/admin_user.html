@@ -292,12 +292,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for customer in customers %}
                         <tr>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.address }}</td>
-                            <td>{{ user.phone_number }}</td>
+                            <td>{{ customer.first_name }}</td>
+                            <td>{{ customer.last_name }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>{{ customer.phone_number }}</td>
                             <td>
                                 <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
                                 <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>

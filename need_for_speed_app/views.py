@@ -257,8 +257,9 @@ def sign_up(request):
                 )
 
             user.save()
+           
             request.session['user_id'] = user.id 
-            
+
             if user.role == 'admin':
                 
                 messages.success(request, 'Registration successful! Please log in.')
@@ -377,8 +378,8 @@ def admin_dashboard_view(request):
 
 # User Management Views
 def admin_users_view(request):
-    users = User.objects.all()
-    return render(request, 'admin/admin_user.html', {'users': users})
+    customers = Customer.objects.all()
+    return render(request, 'admin/admin_user.html', {'customers': customers})
 
 def admin_user_edit_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
