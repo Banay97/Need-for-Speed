@@ -272,6 +272,16 @@
                             <input type="text" id="company_name" name="company_name" class="form-control" required>
                         </div>
                         <div class="form-group">
+                        <label for="email">Company Email:</label>
+                        <select name="email" id="address">
+                            <option value="select">Select Company Email</option>
+                            {% for company in companies %}
+                            <option value="email">{{company.email}}</option>
+                            {%endfor%}
+                        </select>
+                        <!-- <input type="email" id="email" name="email" class="form-control" required> -->
+                        </div>
+                        <div class="form-group">
                             <label for="phone_number">Company Phone Number:</label>
                             <input type="text" id="phone_number" name="phone_number" class="form-control" required>
                         </div>
