@@ -257,8 +257,6 @@ def sign_up(request):
                 )
 
             user.save()
-            if user and bcrypt.checkpw(password.encode(), user.password.encode()):
-            # request.session['email'] = email
             request.session['user_id'] = user.id 
             
             if user.role == 'admin':
