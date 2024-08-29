@@ -336,6 +336,9 @@ def create_order(request):
             customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number, email=email, address=address)
 
+            companies = Company.objects.all()
+
+
             # Create the order and associate it with the customer and company
             order = Order.objects.create(
                 order_name=order_name,
@@ -348,10 +351,12 @@ def create_order(request):
             )
 
             # Send a success message and redirect
+            companies = Company.objects.all()
             messages.success(request, 'Your order has been created successfully')
             return redirect('create_order')
     else:
-        return render(request, 'admin/CreateOrder.html')
+        
+        return render(request, 'admin/CreateOrder.html', {'companies': companies})
 
 def update_order(request):
     return render(request, 'admin/UpdateOrder.html') 
