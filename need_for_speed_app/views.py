@@ -351,11 +351,11 @@ def create_order(request):
             )
 
             # Send a success message and redirect
-            companies = Company.objects.all()
+            
             messages.success(request, 'Your order has been created successfully')
             return redirect('create_order')
     else:
-        
+        companies = Company.objects.all()
         return render(request, 'admin/CreateOrder.html', {'companies': companies})
 
 def update_order(request):
