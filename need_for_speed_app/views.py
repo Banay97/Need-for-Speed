@@ -339,7 +339,6 @@ def create_order(request):
             order = Order.objects.create(
                 order_name=order_name,
                 company=company,
-                address=address,
                 order_code_number=order_code_number,
                 pickup_location=pickup_location,
                 pickoff_location=pickoff_location,
