@@ -331,12 +331,15 @@ def create_order(request):
             total = request.POST['Total']  # Use 'Total' instead of 'order_price'
             pickup_location = request.POST['pickup_location']
             pickoff_location = request.POST['pickoff_location']
+            company_id = request.POST.get('email')
+
 
             # Create the customer and company
+            company = Company.objects.get(id=company_id)
             customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number, email=email, address=address)
 
-            companies = Company.objects.all()
+            # companies = Company.objects.all()
 
 
             # Create the order and associate it with the customer and company
