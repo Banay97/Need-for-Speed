@@ -306,15 +306,15 @@
                         <label for="company_name">Company Name:</label>
                         <input type="text" id="company_name" name="company_name" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="emailSelect">Company Email:</label>
-                        <select name="email" id="emailSelect" class="form-control" required>
-                            <option value="">Select Company Email</option>
-                            {% for company in company %}
-                            <option value="{{ company.email }}">{{ company.email }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                     <div class="form-group">
+                        <label for="email">Company Email:</label>
+                        <select id="email" name="email" required>
+                          <option value="">Select Company Email</option>  
+                          {% for company in companies %}
+                          <option value="{{ company.id }}">{{ company.email }}</option>
+                          {% endfor %}
+                        </select> 
+                      </div>
                     <div class="form-group">
                         <label for="company_phone_number">Company Phone Number:</label>
                         <input type="text" id="company_phone_number" name="company_phone_number" class="form-control" required>
