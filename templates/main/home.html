@@ -7,6 +7,15 @@
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <meta name="description" content="Need For Speed Website">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <!-- Bootstrap CSS -->
@@ -25,6 +34,9 @@
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
 
         }
+        
+       
+
 
         /* navigation part */
         nav {
@@ -141,6 +153,75 @@
             color: #1A4862;
 
         }
+         /* Responsive Adjustments */
+         @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .nav-left, .nav-right {
+                flex: none;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-center {
+                flex: none;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-center ul {
+                flex-direction: column;
+            }
+
+            .nav-center ul li {
+                margin-bottom: 10px;
+            }
+
+            .nav-center ul li ul {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-left h1 {
+                font-size: 24px;
+            }
+
+            .nav-center ul li a {
+                font-size: 14px;
+            }
+
+            .nav-right a {
+                font-size: 14px;
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .wrapper-card {
+                width: 90%;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper-card .info h2 {
+                font-size: 1.5rem;
+            }
+
+            .wrapper-card .info p {
+                font-size: 1rem;
+            }
+        }
+
 
         /* body parts*/
 
@@ -213,6 +294,23 @@
         a {
             color: #FFE5B4 !important;
         }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .footer-content {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content a {
+                font-size: 14px;
+            }
+
+            .footer-bottom small {
+                font-size: 12px;
+            }
+        }
+
         /* card part */
         .wrapper {
             display: flex;
@@ -329,7 +427,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav class="navbar navbar-expand-lg ">
         <div class="nav-left">
             <h1><a href="{% url 'home' %}">Need For Speed Express</a></h1>
         </div>
