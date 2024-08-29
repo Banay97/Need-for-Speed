@@ -394,22 +394,22 @@ def admin_delete_user_view(request, user_id):
 # Company Management Views
 def admin_companies_view(request):
     companies = Company.objects.all()
-    users = User.objects.all()
-    return render(request, 'admin/admin_company.html', {'companies': companies, 'users':users})
+    # users = User.objects.all()
+    return render(request, 'admin/admin_company.html', {'companies': companies})
 
 def admin_company_edit_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)
-    users = User.objects.all()
+    
 
     if request.method == 'POST':
         company.company_name = request.POST.get('company_name')
         company.address = request.POST.get('address')
         company.phone_number = request.POST.get('phone_number')
-        users.company.email = request.POST.get('email')
+        company.email = request.POST.get('email')
         company.save()
         return redirect('admin_companies')
 
-    return render(request, 'admin/admin_company_edit.html', {'company': company, 'users': users})
+    return render(request, 'admin/admin_company_edit.html', {'company': company})
 
 def admin_company_delete_view(request, company_id):
     company = get_object_or_404(Company, id=company_id)
