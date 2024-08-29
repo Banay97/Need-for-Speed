@@ -91,6 +91,7 @@ C.7: Sign In Page:<br>
 
 ### Back-End Technologies:<br>
 
-Python-Django: Framework for building the server-side application.<br>
-API: Interface for communication between front-end and back-end.<br>
+![image](https://github.com/user-attachments/assets/c6902435-515e-405b-9fa0-c5d5ab98a6a4) Python: Back-end code
+![image](https://github.com/user-attachments/assets/8769dfb5-d412-4990-ac28-e0162a851cc5) Django: Framework for building the server-side application.<br>
+![image](https://github.com/user-attachments/assets/9721ad16-4d57-4c14-9d14-070b3245ff7e) API: Interface for communication between front-end and back-end.<br>
 AJAX: Asynchronous requests for dynamic content updates.<br>
