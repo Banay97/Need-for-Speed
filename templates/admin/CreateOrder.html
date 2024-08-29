@@ -307,12 +307,21 @@
                         <input type="text" id="company_name" name="company_name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Company Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="emailSelect">Company Email:</label>
+                        <select name="email" id="emailSelect" class="form-control" required>
+                            <option value="">Select Company Email</option>
+                            {% for company in companies %}
+                            <option value="{{ company.email }}">{{ company.email }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="company_phone_number">Company Phone Number:</label>
                         <input type="text" id="company_phone_number" name="company_phone_number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Company Address:</label>
+                        <input type="text" id="address" name="address" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="order_name">Order Name:</label>
