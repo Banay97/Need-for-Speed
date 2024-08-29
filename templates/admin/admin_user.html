@@ -299,8 +299,8 @@
                             <td>{{ customer.address }}</td>
                             <td>{{ customer.phone_number }}</td>
                             <td>
-                                <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-primary">Edit</a>
-                                <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'admin_user_edit' customer.id %}" class="btn btn-primary">Edit</a>
+                                <a href="{% url 'admin_delete_user' customer.id %}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
