@@ -364,11 +364,13 @@ def admin_dashboard_view(request):
     users = User.objects.all()
     companies = Company.objects.all()
     orders = Order.objects.all()
+    customers = Customer.objects.all()
 
     context = {
         'users': users,
         'companies': companies,
         'orders': orders,
+        'customers':customers
     }
     
     return render(request, 'admin/AdminDashboard.html', context)
