@@ -25,84 +25,56 @@
         nav {
             width: 100%;
             background: #C04000;
-            height: 75px;
-            display: flex;
-            align-items: center;
             padding: 0 20px;
-            justify-content: space-between;
         }
-        .nav-left {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding-top: 15px;
-        }
-        .nav-left h1 {
+        .navbar-brand h1 {
             font-size: 32px;
             color: white;
             text-transform: uppercase;
         }
-        .nav-left h1 a {
+        .navbar-brand h1 a {
             color: #FFE5B4;
             text-decoration: none;
         }
-        .nav-center {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            position: relative; /* Required for dropdown positioning */
-        }
-        .nav-center ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            position: relative; /* Required for dropdown positioning */
-        }
-        .nav-center ul li {
-            position: relative;
-        }
-        a {
+        .navbar-nav a {
             color: #FFE5B4;
-        }
-        .nav-center ul li a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #FFE5B4;
-            padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
-            display: block;
         }
-        .nav-center ul li a:hover, .nav-right a:hover {
+        .navbar-nav a:hover {
             background-color:  #55371e;
             color: #1A4862;
         }
-        .nav-right {
-            display: flex;
-            align-items: center;
-        }
-        .nav-right a {
-            text-decoration: none;
-            font-family: sans-serif;
-            color: #FFE5B4;
-            padding: 0 16px;
-            font-size: 17px;
+        .btn-primary {
+            background-color: #C04000;
+            border-color: #C04000;
             font-weight: bold;
         }
-
-        .container {
-            margin-top: 40px;
-            padding-bottom: 40px;
+        .btn-primary:hover {
+            background-color:  #E25822;
+            color: #FFE5B4;
         }
-
-        h1 {
+        .footer-bottom {
+            background-color: #FFE5B4;
+            color: #C04000;
+            padding: 15px;
             text-align: center;
+            margin-top: 50px;
+        }
+        h1, h3 {
+            text-shadow: #FF6347 3px 0 15px;
+        }
+        h1 {
             font-size: 85px;
             color: #C04000;
-            text-shadow: #FF6347 3px 0 15px;
             margin-bottom: 40px;
         }
-
+        h3 {
+            color: #b97350;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
         table th, table td {
             font-weight: bold;
             color: #d38808;
@@ -113,128 +85,61 @@
             background-color: #FFE5B4;
             color: #C04000;
         }
-
-        .btn-primary {
-            background-color: #C04000;
-            border-color: #C04000;
-            font-weight: bold;
-        }
-        .btn-primary:hover {
-            background-color:  #E25822;
-            color: #FFE5B4;
-        }
-
-        .footer-bottom {
-            background-color: #FFE5B4;
-            color: #C04000;
-            padding: 15px;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        /* Ensure dropdown menus are hidden by default */
-        .nav-center ul .sub-menu {
-            display: none;
-            position: absolute;
-            background: #C04000;
-            border: 1px solid #C04000;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000; /* Ensure dropdown appears above other content */
-        }
-
-        /* Show dropdown menus when hovering over parent item */
-        .nav-center ul li:hover .sub-menu {
-            display: block;
-        }
-
-        /* Style for dropdown items */
-        .sub-menu .nav-link {
-            color: #FFE5B4;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .sub-menu .nav-link:hover {
-            background-color: #55371e;
-            color: #1A4862;
-        }
-        h3{
-            color: #b97350;
-            text-shadow: #FF6347 3px 0 15px;
-            font-size: 50px;
-            font-weight: bold;
-            text-align: center;
-        }
-        /* notfication nav style */
         .notification-item {
             padding: 10px;
             cursor: pointer;
         }
-
         .notification-item:hover {
             background-color: #f8f9fa;
         }
-
         .notification-item.unread {
             font-weight: bold;
         }
     </style>
 </head>
 <body>   
-    <nav>
-        <div class="nav-left">
-            <h1><a href="{% url 'admin_dashboard'%}">Admin Dashboard</a></h1>
-        </div>
-        <div class="nav-center">
-            <ul>
-                <li><a href="#"><img src="https://cdn-icons-png.freepik.com/256/746/746914.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Companies"> Companies</a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_create_comapny' %}">Create a Company</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_companies' %}">View All Companies</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#customers">
-                        <img src="https://cdn-icons-png.freepik.com/256/2673/2673061.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Customers"> Customers
-                    </a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_create_customer'%}">Create a Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'admin_users' %}">View All Customers</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#orders">
-                        <img src="https://cdn-icons-png.freepik.com/256/7345/7345729.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Orders"> Orders
-                    </a>
-                    <ul class="nav flex-column ms-3 sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_order' %}">Create an Order</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_orders' %}">View All Orders</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_tracking_order'%}">
-                        <img src="https://cdn-icons-png.freepik.com/256/14624/14624183.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Tracking"> Tracking
-                    </a>
-                </li>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{% url 'admin_dashboard'%}"><h1>Admin Dashboard</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Companies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'admin_create_comapny' %}">Create a Company</a>
+                        <a class="dropdown-item" href="{% url 'admin_companies' %}">View All Companies</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCustomers" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Customers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCustomers">
+                        <a class="dropdown-item" href="{% url 'admin_create_customer'%}">Create a Customer</a>
+                        <a class="dropdown-item" href="{% url 'admin_users' %}">View All Customers</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOrders" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Orders
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownOrders">
+                        <a class="dropdown-item" href="{% url 'create_order' %}">Create an Order</a>
+                        <a class="dropdown-item" href="{% url 'admin_orders' %}">View All Orders</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_tracking_order'%}">Tracking</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNotifications" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Notifications <span id="notification-count" class="badge badge-danger">{{ unread_count }}</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notification-menu">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownNotifications" id="notification-menu">
                         {% for notification in notifications %}
                             <a class="dropdown-item" href="{{ notification.link }}">
                                 {% if not notification.is_read %}
@@ -249,22 +154,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_reports' %}">
-                        <img src="https://cdn-icons-png.freepik.com/256/1055/1055644.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Reports"> Reports
-                    </a>
+                    <a class="nav-link" href="{% url 'admin_reports' %}">Reports</a>
                 </li>
-                
             </ul>
         </div>
-        <div class="nav-right">
-            <li class="nav-item" style="list-style: none;">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'sign_out'%}">
-                    <img src="https://cdn-icons-png.freepik.com/256/4790/4790927.png?ga=GA1.2.209331547.1723160267&semt=ais_hybrid" width="20" alt="Sign Out"> Sign Out
+                    Sign Out
                 </a>
             </li>
-        </div>
+        </ul>
     </nav>
-    
+
     <div class="main-content container">
         <!-- Chart Section -->
         <section id="orders" class="mt-4">
@@ -321,7 +223,7 @@
         <section id="users" class="mt-5">
             <div class="card">
                 <div class="card-header">
-                    <h3>customers</h3>
+                    <h3>Customers</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -351,7 +253,7 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- Companies Section -->
         <section id="companies" class="mt-5">
             <div class="card">
@@ -393,108 +295,101 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-<!-- jQuery (make sure this is loaded first) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Popper.js (required for Bootstrap) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('ordersChart').getContext('2d');
 
-<!-- Bootstrap JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('ordersChart').getContext('2d');
-    
-    // Fetch data from the Django backend
-    fetch('/salesdata/')
-        .then(response => response.json())
-        .then(data => {
-            const chart = new Chart(ctx, {
-                type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: data.datasets[0].label,
-                        data: data.datasets[0].data,
-                        backgroundColor: data.datasets[0].backgroundColor,
-                        borderColor: data.datasets[0].borderColor,
-                        borderWidth: data.datasets[0].borderWidth
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
+            // Fetch data from the Django backend
+            fetch('/salesdata/')
+                .then(response => response.json())
+                .then(data => {
+                    const chart = new Chart(ctx, {
+                        type: 'pie',  // You can use 'doughnut', 'bar', etc., based on your preference
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: data.datasets[0].label,
+                                data: data.datasets[0].data,
+                                backgroundColor: data.datasets[0].backgroundColor,
+                                borderColor: data.datasets[0].borderColor,
+                                borderWidth: data.datasets[0].borderWidth
+                            }]
                         },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (context.parsed !== null) {
-                                        label += `: ${context.parsed}`;
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.label || '';
+                                            if (context.parsed !== null) {
+                                                label += `: ${context.parsed}`;
+                                            }
+                                            return label;
+                                        }
                                     }
-                                    return label;
                                 }
                             }
                         }
-                    }
-                }
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
-</script>
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const notificationMenu = document.getElementById('notification-menu');
-    const notificationCount = document.getElementById('notification-count');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationMenu = document.getElementById('notification-menu');
+            const notificationCount = document.getElementById('notification-count');
 
-    function fetchNotifications() {
-        fetch('/notifications/')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Notifications fetched:", data); // Log the fetched data
-                notificationMenu.innerHTML = '';  // Clear existing notifications
-                let unreadCount = 0;
+            function fetchNotifications() {
+                fetch('/notifications/')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Notifications fetched:", data); // Log the fetched data
+                        notificationMenu.innerHTML = '';  // Clear existing notifications
+                        let unreadCount = 0;
 
-                data.forEach(notification => {
-                    console.log("Processing notification:", notification);
-                    const item = document.createElement('a');
-                    item.className = 'dropdown-item notification-item';
-                    item.href = notification.link;
+                        data.forEach(notification => {
+                            console.log("Processing notification:", notification);
+                            const item = document.createElement('a');
+                            item.className = 'dropdown-item notification-item';
+                            item.href = notification.link;
 
-                    console.log("Notification content_type:", notification.content_type);
-                    console.log("Notification is_read status:", notification.is_read);
+                            console.log("Notification content_type:", notification.content_type);
+                            console.log("Notification is_read status:", notification.is_read);
 
-                    if (!notification.is_read) {
-                        item.classList.add('unread');
-                        item.innerHTML = `<strong>${notification.message}</strong>`;
-                        unreadCount++;
-                    } else {
-                        item.textContent = notification.message;
-                    }
+                            if (!notification.is_read) {
+                                item.classList.add('unread');
+                                item.innerHTML = `<strong>${notification.message}</strong>`;
+                                unreadCount++;
+                            } else {
+                                item.textContent = notification.message;
+                            }
 
-                    notificationMenu.appendChild(item);
-                });
+                            notificationMenu.appendChild(item);
+                        });
 
-                console.log("Unread count:", unreadCount); // Log the unread count
-                notificationCount.textContent = unreadCount;
-            })
-            .catch(error => console.error('Error fetching notifications:', error));
-    }
+                        console.log("Unread count:", unreadCount); // Log the unread count
+                        notificationCount.textContent = unreadCount;
+                    })
+                    .catch(error => console.error('Error fetching notifications:', error));
+            }
 
-    fetchNotifications();
-});
-
-   </script>
+            fetchNotifications();
+        });
+    </script>
 </body>
 </html>
