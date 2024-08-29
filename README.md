@@ -94,4 +94,4 @@ C.7: Sign In Page:<br>
 ![image](https://github.com/user-attachments/assets/c6902435-515e-405b-9fa0-c5d5ab98a6a4) Python: Back-end code<br>
 ![image](https://github.com/user-attachments/assets/8769dfb5-d412-4990-ac28-e0162a851cc5) Django: Framework for building the server-side application.<br>
 ![image](https://github.com/user-attachments/assets/9721ad16-4d57-4c14-9d14-070b3245ff7e) API: Interface for communication between front-end and back-end.<br>
-AJAX: Asynchronous requests for dynamic content updates.<br>
+![image](https://github.com/user-attachments/assets/ee29eef2-04e6-42af-8510-db57cee43f85) AJAX: Asynchronous requests for dynamic content updates.<br>
