@@ -332,7 +332,7 @@ def create_order(request):
             pickoff_location = request.POST['pickoff_location']
 
             # Create the customer and company
-            customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
+            customer = Customer.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
             company = Company.objects.create(company_name=company_name, phone_number=phone_number, email=email)
 
             # Create the order and associate it with the customer and company
