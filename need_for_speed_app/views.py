@@ -318,6 +318,7 @@ def create_order(request):
             address = request.POST['address']
             phone_number = request.POST['phone_number']
             company_name = request.POST['company_name']
+            email = request.POST['email']
             order_name = request.POST['order_name']
             order_code_number = request.POST['order_code_number']
             total = request.POST['Total']  # Use 'Total' instead of 'order_price'
@@ -326,7 +327,7 @@ def create_order(request):
 
             # Create the customer and company
             customer = User.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number)
-            company = Company.objects.create(company_name=company_name, phone_number=phone_number)
+            company = Company.objects.create(company_name=company_name, phone_number=phone_number, email=email)
 
             # Create the order and associate it with the customer and company
             order = Order.objects.create(
