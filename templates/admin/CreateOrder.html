@@ -310,7 +310,7 @@
                         <label for="emailSelect">Company Email:</label>
                         <select name="email" id="emailSelect" class="form-control" required>
                             <option value="">Select Company Email</option>
-                            {% for company in companies %}
+                            {% for company in company %}
                             <option value="{{ company.email }}">{{ company.email }}</option>
                             {% endfor %}
                         </select>
