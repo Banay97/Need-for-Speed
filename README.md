@@ -84,6 +84,7 @@ C.7: Sign In Page:<br>
 ## Technical Details<br>
 ### Front-End Technologies:<br>
 
+ ![image](https://github.com/user-attachments/assets/447dc590-0af3-4a92-a8ac-578b1837d09f)
 HTML: Structure and content of the web pages.<br>
 CSS: Styling and visual presentation.<br>
 JavaScript: Interactive elements and dynamic content.<br>
