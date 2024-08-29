@@ -1,28 +1,76 @@
-# Need-for-Speed<br>
+# Need for Speed Delivery Management <br>
 
 ## Description:<br>
-Need for Speed Delivery Management provides businesses with a robust platform to streamline order tracking and management. This website is set to transform the delivery service industry in Palestine by offering a comprehensive, easy-to-use solution for overseeing all aspects of delivery operations. With an intuitive interface, businesses can effortlessly perform CRUD operations (create, read, update, and delete orders), granting them complete control over their order processes. Our platform is designed to enhance operational efficiency and customer satisfaction, featuring a wide array of tools tailored to meet the specific needs of both administrators and customers. 
+Welcome to the Need for Speed Delivery Management project! Our platform is designed to revolutionize the delivery service industry in Palestine by offering an advanced, user-friendly solution for managing and tracking delivery operations. This comprehensive system enables businesses to streamline order processing, enhance operational efficiency, and improve customer satisfaction.
+<br>
+<br>
+With a focus on ease of use and powerful functionality, our platform offers separate interfaces for admins and users, real-time delivery tracking, and a robust notification system.
 <br>
  
 
-### Requirements: <br>
+## Features <br>
+## 1. Separate Interfaces<br>
+### A. Admin Dashboard:<br>
+<br>
+A.1: Centralized Management: A comprehensive interface for overseeing all company operations.<br>
+A.2: Order Management: Create, read, update, and easily delete orders.<br>
+A.3: Customer Management: Create, read, update, and easily delete customers.<br>
+A.4: Company Management: Create, read, update, and easily delete company<br>
+A.5: Order Performance: Track and evaluate order performance on Google's map.<br>
 
-#### Separate Interfaces for Admins and Users <br>
+<br>
 
-Admin Dashboard: Provides a centralized interface for managing all company operations. Admins can manage inventory, track deliveries, and monitor driver performance. Includes tools for processing orders, managing customer feedback, and analyzing business performance. <br>
-User Interface: Allows customers to place orders, track their deliveries, and manage their accounts. Users can browse available delivery services, view pricing, and select delivery options. Features a seamless and intuitive checkout process.  
+### B. Company Dashboard:<br>
+B.1: Centralized Management: A comprehensive interface for overseeing all company operations.<br>
+B.2: Order Management: Create, read, update, and easily delete orders.<br>
+B.3: Order Placement: Easily place orders with a straightforward checkout process.<br>
+B.4: Order Tracking: Track delivery status in real-time.<br>
+B.5: Customer Management: Create, read, update, and easily delete customers.<br>
+B.6: Service Browsing: Explore available delivery services and pricing options.<br>
+B.7: Real-time Delivery Tracking and Management<br>
  <br>
-#### Real-time Delivery Tracking and Management <br>
 
-Order Management: Enables admins to assign orders to drivers based on location, availability, and delivery type. Provides real-time updates on delivery status to both admins and customers. <br>
-Driver Management: Admins can monitor driver availability, assign vehicles, and track delivery routes. Includes features for managing driver schedules, routes, and performance metrics.  <br>
- 
+### C. Website Main Pages:<br>
+C.1: Home Page: A simple home page providing essential information about the website's goals.<br>
+C.2: About Us Page:  A simple About Us page provides essential information about the website's story, mission, and values.<br>
+C.3: Services Page: A simple services page providing essential information about the website's services<br>
+C.4: Contact Us Page: Customer Feedback -> Manage and review feedback from customers.<br>
+C.5: Chatbot Page: A simple chatbot is available to assist users visiting our site and answer common questions.<br>
 
-#### Notification System <br>
+### Order Management:<br>
+1. Assign orders to drivers based on various criteria such as location and availability.<br>
+2. Provide real-time status updates to both admins and customers.<br>
+<br>
+<br>
 
-User Notifications: Customers receive real-time notifications about their order status, including confirmations, dispatch updates, and delivery completion. Notifications are sent via email, SMS, or in-app messages, depending on user preferences.<br>
-Admin Notifications: Admins are notified of critical events such as new orders, driver issues, and customer feedback. Notifications help ensure timely responses to important tasks and customer inquiries. <br>
+### Driver Management:<br>
+1. Monitor driver availability and performance.<br>
+2. Assign orders and manage delivery routes.<br>
+3. Oversee driver schedules and performance metrics.<br>
+<br>
 
-## Front End and Back End:
-#### For the front-end side, we used HTML, CSS, Javascript, and Bootstrap.
-#### For the back-end side, we used Python-Django framework, API, and AJAX.
+### Notification System <br>
+#### User Notifications:<br>
+
+1. Receive real-time updates on order status via website notification.<br>
+2. Notifications include order confirmations, dispatch updates, and delivery completions.<br>
+
+#### Admin Notifications:<br>
+
+1. Stay informed about critical events such as new orders, driver issues, and customer feedback.
+2. Ensure timely responses to important tasks and inquiries.
+
+
+## Technical Details<br>
+### Front-End Technologies:<br>
+
+HTML: Structure and content of the web pages.<br>
+CSS: Styling and visual presentation.<br>
+JavaScript: Interactive elements and dynamic content.<br>
+Bootstrap: Responsive design and UI components.<br>
+
+### Back-End Technologies:<br>
+
+Python-Django: Framework for building the server-side application.<br>
+API: Interface for communication between front-end and back-end.<br>
+AJAX: Asynchronous requests for dynamic content updates.<br>
