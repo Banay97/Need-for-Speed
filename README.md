@@ -51,6 +51,13 @@ C.5: Chatbot Page: A simple chatbot is available to assist users visiting our si
 
 https://github.com/user-attachments/assets/cafd4f69-adc6-4c32-ae5b-8f4e4ac70b8f
 
+Sign Up Page:<br>
+![Sign-up](https://github.com/user-attachments/assets/8950c05e-05d0-46f1-8100-7b8d82577346)
+
+Sign In Page:<br>
+![Sign-in](https://github.com/user-attachments/assets/0ad97280-3a4e-4ee8-b231-496f1b775415)
+
+
 ### Order Management:<br>
 1. Assign orders to drivers based on various criteria such as location and availability.<br>
 2. Provide real-time status updates to both admins and customers.<br>
