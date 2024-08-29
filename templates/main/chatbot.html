@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <!-- mobile metas -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Need For Speed Website">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <meta name="keywords" content="Need For Speed">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <meta name="description" content="Need For Speed Website">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -24,8 +28,8 @@
             background: linear-gradient(to left, #FAFAFA, #FFE5B4);
         }
 
-        /* navigation part */
-        nav {
+         /* navigation part */
+         nav {
             width: 100%;
             background: #C04000;
             height: 75px;
@@ -33,16 +37,19 @@
             align-items: center;
             padding: 0 20px;
             justify-content: space-between;
+
         }
 
         .nav-left {
             flex: 1;
             display: flex;
             align-items: center;
+
         }
 
         .nav-left h1 {
             font-size: 32px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: white;
             text-transform: uppercase;
         }
@@ -62,18 +69,25 @@
             display: flex;
             align-items: center;
             list-style: none;
+
         }
 
         .nav-center ul li {
             position: relative;
         }
 
+        a {
+            color: #FFE5B4;
+        }
+
         .nav-center ul li a {
             text-decoration: none;
+            font-family: sans-serif;
             color: #FFE5B4;
             padding: 0 16px;
             font-size: 17px;
             font-weight: bold;
+            display: block;
         }
 
         .nav-center ul li a:hover {
@@ -86,6 +100,14 @@
             display: none;
             background: #1A4862;
             border-radius: 0 0 5px 5px;
+        }
+
+        .nav-center ul li ul li {
+            line-height: 1;
+            width: 190px;
+            border-radius: 5px;
+            padding: 6px;
+
         }
 
         .nav-center ul li ul li a {
@@ -104,10 +126,12 @@
         .nav-right {
             display: flex;
             align-items: center;
+
         }
 
         .nav-right a {
             text-decoration: none;
+            font-family: sans-serif;
             color: #FFE5B4;
             padding: 0 16px;
             font-size: 17px;
@@ -117,7 +141,54 @@
         .nav-right a:hover {
             background-color: #55371e;
             color: #1A4862;
+
         }
+         /* Responsive Adjustments */
+         @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .nav-left, .nav-right {
+                flex: none;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-center {
+                flex: none;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-center ul {
+                flex-direction: column;
+            }
+
+            .nav-center ul li {
+                margin-bottom: 10px;
+            }
+
+            .nav-center ul li ul {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-left h1 {
+                font-size: 24px;
+            }
+
+            .nav-center ul li a {
+                font-size: 14px;
+            }
+
+            .nav-right a {
+                font-size: 14px;
+            }
+        }
+
 
         /* body parts */
         .btn-primary {
@@ -162,6 +233,22 @@
 
         a {
             color: #FFE5B4 !important;
+        }
+          /* Responsive Adjustments */
+          @media (max-width: 768px) {
+            .footer-content {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content a {
+                font-size: 14px;
+            }
+
+            .footer-bottom small {
+                font-size: 12px;
+            }
         }
 
         /* Chatbot design */
@@ -267,7 +354,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav class="navbar navbar-expand-lg ">
         <div class="nav-left">
             <h1><a href="{% url 'home' %}">Need For Speed Express</a></h1>
         </div>
