@@ -32,6 +32,11 @@ B.7: Real-time Delivery Tracking and Management<br>
 
 ### C. Website Main Pages:<br>
 C.1: Home Page: A simple home page providing essential information about the website's goals.<br>
+
+
+https://github.com/user-attachments/assets/496d962a-9023-4c3d-a699-b29c5011363b
+
+
 C.2: About Us Page:  A simple About Us page provides essential information about the website's story, mission, and values.<br>
 C.3: Services Page: A simple services page providing essential information about the website's services<br>
 C.4: Contact Us Page: Customer Feedback -> Manage and review feedback from customers.<br>
