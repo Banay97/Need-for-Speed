@@ -259,11 +259,15 @@ def sign_up(request):
             if user.role == 'admin':
                 request.session['user_id'] = user.id 
                 messages.success(request, 'Registration successful! Please log in.')
-                return render(request, 'admin/AdminDashboard.html', {'user': user})
+                return redirect('admin_dashboard')
+
+                # return render(request, 'admin/AdminDashboard.html', {'user': user})
             else:
                 request.session['user_id'] = user.id 
                 messages.success(request, 'Registration successful! Please log in.')
-                return render(request, 'company/CompanyDashboard.html', {'user': user})
+                return redirect('company_dashboard')
+
+                # return render(request, 'company/CompanyDashboard.html', {'user': user})
     else:
         return render(request, 'main/SignUp.html') 
 
