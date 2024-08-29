@@ -33,14 +33,23 @@ B.7: Real-time Delivery Tracking and Management<br>
 ### C. Website Main Pages:<br>
 C.1: Home Page: A simple home page providing essential information about the website's goals.<br>
 
-
 https://github.com/user-attachments/assets/496d962a-9023-4c3d-a699-b29c5011363b
 
-
 C.2: About Us Page:  A simple About Us page provides essential information about the website's story, mission, and values.<br>
+
+https://github.com/user-attachments/assets/dda82a8e-a1b7-414f-94dc-61a1b878e0a2
+
 C.3: Services Page: A simple services page providing essential information about the website's services<br>
+
+https://github.com/user-attachments/assets/886a8591-a56d-4ba7-84c6-e292db7912d3
+
 C.4: Contact Us Page: Customer Feedback -> Manage and review feedback from customers.<br>
+
+https://github.com/user-attachments/assets/80847b4c-ea7f-4078-a9ce-f6403f4af3f2
+
 C.5: Chatbot Page: A simple chatbot is available to assist users visiting our site and answer common questions.<br>
+
+https://github.com/user-attachments/assets/cafd4f69-adc6-4c32-ae5b-8f4e4ac70b8f
 
 ### Order Management:<br>
 1. Assign orders to drivers based on various criteria such as location and availability.<br>
